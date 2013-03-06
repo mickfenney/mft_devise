@@ -24,6 +24,19 @@ gem "figaro", ">= 0.5.3"
 gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
 group :development do
   gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
+  gem 'guard-spork'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'growl'
+  gem 'ruby_gntp'
 end
 gem "letter_opener", ">= 1.1.0",  :group => :development
 gem 'will_paginate', '> 3.0'
+group :test do
+  gem 'rspec'
+  gem 'growl'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'spork-rails'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+end
