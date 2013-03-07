@@ -1,12 +1,16 @@
 <h3>Users</h3>
 <div class="span8">
-<table class="table table-condensed">
+  
+<%= pagination_links(@users) %>
+
+<table class="table table-striped table-bordered table-condensed">
   <thead>
     <tr>
+      <th></th>
       <th>Username</th>
       <th>Email</th>
       <th>Registered</th>
-      <th>Role</th>
+      <th>Roles</th>
       <th></th>
       <th></th>
     </tr>
@@ -14,17 +18,23 @@
   <tbody>
   <% @users.each do |user| %>
     <tr>
-      <td><%= link_to user.name, user %></td>
+      <td><div class="middle"><%= image_tag avatar_url(user), :class => 'round' %></div></td>
+      <td id="hint"><%= link_to user.name, user, :title => [user.name, user.email].join(" - "), :'data-placement' => 'right' %></td>
       <td><%= user.email %></td>
       <td><%= user.created_at.to_date %></td>
-      <td><%= user.roles.first.name.titleize unless user.roles.first.nil? %></td>
+      <td><% user.roles.each do |role| %><%= role.name.titleize %> <% end %></td>
       <td>
-        <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini" type="button">Change role</a>
+        <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini btn-primary" type="button">Change roles</a>
         <%= render user %>
       </td>
-      <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
+      <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini btn-primary') unless user == current_user %></td>
     </tr>
   <% end %>
   </tbody>
 </table>
 </div>
+</div>
+
+<script>
+$("#hint a").tooltip()
+</script>

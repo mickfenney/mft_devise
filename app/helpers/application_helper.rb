@@ -12,4 +12,10 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def active_css current
+    if current_page?(current)
+      html = 'class="active"'.html_safe
+    end
+  end 
+
 end
