@@ -5,10 +5,12 @@
       <%= render 'layouts/messages' %>
       <h3>Users</h3>
 
-      <%= simple_form_for(:users, :url => users_path, :method => :get) do |f| %>
-        <div class="form-inputs"> Search by Username or Email
-          <%= text_field_tag :search, params[:search] %>
-        </div> 
+      <%= simple_form_for(:users, :url => users_path, :method => :get, :html => {:class => 'form-horizontal'}) do |f| %>
+        <div class="form-inputs">
+        <div class="control-group search optional user_search">
+        <label class="search optional control-label" for="user_email">Username Or Email </label>
+        <div class="controls"><div class="input-prepend">
+        <span class="add-on"><i class="icon-search"></i></span><%= text_field_tag :search, params[:search] %></div></div></div>
         <div class="form-actions">
           <%= f.button :submit, "Search", :name => nil, :class => 'btn btn-primary' %>
         </div>   
@@ -31,7 +33,7 @@
         <% @users.each do |user| %>
           <tr>
             <td><div class="middle"><%= image_tag avatar_url(user), :class => 'round' %></div></td>
-            <td id="hint"><%= link_to user.name, user, :title => [user.name, user.email].join(" - "), :'data-placement' => 'right' %></td>
+            <td id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
             <td><a href="mailto:<%= user.email %>"><%= user.email %></a></td>
             <td><%= user.created_at.to_date %></td>
             <td><% user.roles.each do |role| %><%= role.name.titleize %> <% end %></td>

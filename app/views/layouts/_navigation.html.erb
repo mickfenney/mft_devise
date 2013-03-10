@@ -6,12 +6,12 @@
       </li>
     <% else %>
       <li <%= active_css(new_user_session_path) %>>
-      <%= link_to 'Login', new_user_session_path %>
+      <%= link_to 'Sign In', new_user_session_path %>
       </li>
     <% end %>
     <% if user_signed_in? %>
       <li <%= active_css(edit_user_registration_path) %>>
-      <%= link_to 'Edit account', edit_user_registration_path %>
+      <%= link_to 'Edit Account', edit_user_registration_path %>
       </li>
       <% if current_user.has_role? :admin %>
       <li <%= active_css(users_path) %>>
