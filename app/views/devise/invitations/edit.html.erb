@@ -5,14 +5,24 @@
       <%= render 'layouts/messages' %>
       <h3><%= t 'devise.invitations.edit.header' %></h3>
 
-      <%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
-        <%= devise_error_messages! %>
+      <%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' } do |f| %>
+      <%= f.error_notification %>
+
         <%= f.hidden_field :invitation_token %>
-
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
-
-        <%= f.submit t("devise.invitations.edit.submit_button") %>
+        <div class="form-inputs">
+          <%= f.input :name, :wrapper => :prepend do %>
+           <span class="add-on"><i class="icon-user"></i></span><%= f.input_field :name, :required => true, :autofocus => true, :size => '' %>
+          <% end %>
+          <%= f.input :password, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password %>
+          <% end %>
+          <%= f.input :password_confirmation, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password_confirmation %>
+          <% end %>
+        </div>
+        <div class="form-actions">
+           <%= f.submit t("devise.invitations.edit.submit_button"), :class => 'btn btn-primary' %>
+        </div>
       <% end %>
 
     </div>

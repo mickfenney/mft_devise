@@ -5,19 +5,23 @@
       <%= render 'layouts/messages' %>
       <h3>Change your password</h3>
 
-      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
         <%= f.error_notification %>
 
         <%= f.input :reset_password_token, :as => :hidden %>
         <%= f.full_error :reset_password_token %>
 
         <div class="form-inputs">
-          <%= f.input :password, :label => "New password", :required => true, :autofocus => true %>
-          <%= f.input :password_confirmation, :label => "Confirm your new password", :required => true %>
+          <%= f.input :password, :label => "New password", :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password, :required => true, :autofocus => true %>
+          <% end %>
+          <%= f.input :password_confirmation, :label => "Confirm your new password", :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password_confirmation, :required => true %>
+          <% end %>
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Change my password" %>
+          <%= f.button :submit, "Change my password", :class => 'btn btn-primary' %>
         </div>
       <% end %>
 

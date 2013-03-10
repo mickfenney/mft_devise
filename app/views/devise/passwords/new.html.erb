@@ -5,15 +5,17 @@
       <%= render 'layouts/messages' %>
       <h3>Forgot your password?</h3>
 
-      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+      <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'form-horizontal' }) do |f| %>
         <%= f.error_notification %>
 
         <div class="form-inputs">
-          <%= f.input :email, :required => true, :autofocus => true %>
+          <%= f.input :email, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.input_field :email, :required => true, :autofocus => true, :size => '' %>
+          <% end %>
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Send me reset password instructions" %>
+          <%= f.button :submit, "Send me reset password instructions", :class => 'btn btn-primary' %>
         </div>
       <% end %>
 

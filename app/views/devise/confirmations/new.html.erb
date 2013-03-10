@@ -5,16 +5,18 @@
       <%= render 'layouts/messages' %>
       <h3>Resend confirmation instructions</h3>
 
-      <%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
+      <%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, :class => 'form-horizontal' }) do |f| %>
         <%= f.error_notification %>
         <%= f.full_error :confirmation_token %>
 
         <div class="form-inputs">
-          <%= f.input :email, :required => true, :autofocus => true %>
+          <%= f.input :email, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.input_field :email, :required => true, :size => '', :autofocus => true %>
+          <% end %>
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Resend confirmation instructions" %>
+          <%= f.button :submit, "Resend confirmation instructions", :class => 'btn btn-primary' %>
         </div>
       <% end %>
 

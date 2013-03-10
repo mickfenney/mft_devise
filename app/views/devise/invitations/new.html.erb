@@ -5,14 +5,20 @@
       <%= render 'layouts/messages' %>
       <h3><%= t "devise.invitations.new.header" %></h3>
 
-      <%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f| %>
-        <%= devise_error_messages! %>
+      <%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post, :class => 'form-horizontal'} do |f| %>
+      <%= f.error_notification %>
 
       <% resource.class.invite_key_fields.each do |field| -%>
-        <%= f.input field %>
+        <div class="form-inputs">
+          <%= f.input :email, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.input_field field %>
+          <% end %>
+        </div>
       <% end -%>
 
-      <%= f.submit t("devise.invitations.new.submit_button") %>
+      <div class="form-actions">
+        <%= f.submit t("devise.invitations.new.submit_button"), :class => 'btn btn-primary' %>
+      </div>
       <% end %>
 
     </div>
