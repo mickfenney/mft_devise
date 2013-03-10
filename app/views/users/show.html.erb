@@ -4,8 +4,10 @@
 
       <%= render 'layouts/messages' %>
       <h3>User</h3>
+      <p><%= image_tag avatar_url(@user, 100), :class => 'round' %></p>
       <p>User: <%= @user.name %></p>
       <p>Email: <%= @user.email if @user.email %></p>
+      <p>Phone: <%= @user.phone if @user.phone %></p>
 
     </div>
   </div>
