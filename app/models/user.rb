@@ -20,7 +20,15 @@ class User < ActiveRecord::Base
 
   after_create :assign_default_role
   after_save :assign_default_role
-  
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ? or email LIKE ?', "%#{search}%", "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
+
   private
 
     def assign_default_role

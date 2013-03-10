@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     #@users = User.all
-    @users = User.order("created_at DESC").page(params[:page]).per_page(10)
+    @users = User.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
+    #@users = User.order("name ASC").page(params[:page]).per_page(2)
+    unless @users.size > 0 
+      redirect_to users_path, :alert => "Unable to find user '" + params[:search] + "'"
+    end
   end
 
   def show

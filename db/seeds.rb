@@ -13,7 +13,50 @@ YAML.load(ENV['ROLES']).each do |role|
   puts 'role: ' << role
 end
 puts 'DEFAULT USERS'
-user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+#user = User.find_or_create_by_email :name => ENV['ADMIN_NAME'].dup, :email => ENV['ADMIN_EMAIL'].dup, :password => ENV['ADMIN_PASSWORD'].dup, :password_confirmation => ENV['ADMIN_PASSWORD'].dup
+#puts 'user: ' << user.name
+#user.confirm!
+#user.save!
+
+user = User.new(
+  :name => ENV['ADMIN_NAME'].dup,
+  :email => ENV['ADMIN_EMAIL'].dup,
+  :password => ENV['ADMIN_PASSWORD'].dup,
+  :password_confirmation => ENV['ADMIN_PASSWORD'].dup,
+)
 puts 'user: ' << user.name
-user.confirm!
+user.skip_confirmation!
 user.add_role :admin
+user.save!
+
+user = User.new(
+  :name => 'user',
+  :email => 'user@example.com',
+  :password => 'password',
+  :password_confirmation => 'password',
+)
+puts 'user: ' << user.name
+user.skip_confirmation!
+user.add_role :admin
+user.save!
+
+user = User.new(
+  :name => 'test',
+  :email => 'test@example.com',
+  :password => 'password',
+  :password_confirmation => 'password',
+)
+puts 'user: ' << user.name
+user.skip_confirmation!
+user.save!
+
+user = User.new(
+  :name => 'docs',
+  :email => 'docs@example.com',
+  :password => 'password',
+  :password_confirmation => 'password',
+)
+puts 'user: ' << user.name
+user.skip_confirmation!
+user.add_role :docs
+user.save!
