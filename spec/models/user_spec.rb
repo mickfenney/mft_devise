@@ -11,6 +11,12 @@ describe User do
     }
   end
 
+  it { should respond_to(:name) }
+  it { should respond_to(:email) }
+  it { should respond_to(:phone) }
+  it { should respond_to(:password) }
+  it { should respond_to(:password_confirmation) }
+
   it "should create a new instance given a valid attribute" do
     User.create!(@attr)
   end
