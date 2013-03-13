@@ -3,6 +3,14 @@
     <div class="span12">
       
       <%= render 'layouts/messages' %>
+
+      <% if  @users.size == 0 %>
+        <div class="alert alert-info">
+          <a class="close" data-dismiss="alert">&#215;</a>
+          <%= content_tag :div, "You search for '<b>#{params[:search]}</b>' did not return any results".html_safe, :id => "flash_info" %>
+        </div>
+      <% end %>
+
       <h3>Users</h3>
 
       <%= simple_form_for(:users, :url => users_path, :method => :get, :html => {:class => 'form-horizontal'}) do |f| %>
@@ -16,36 +24,39 @@
         </div>   
       <% end %>
       
-      <%= pagination_links(@users) %>
-      <table class="table table-striped table-bordered table-condensed">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Registered</th>
-            <th>Roles</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td><div class="middle"><%= image_tag avatar_url(user), :class => 'round' %></div></td>
-            <td id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
-            <td><a href="mailto:<%= user.email %>"><%= user.email %></a></td>
-            <td><%= user.created_at.to_date %></td>
-            <td><% user.roles.each do |role| %><%= role.name.titleize %> <% end %></td>
-            <td>
-              <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini btn-primary" type="button">Change roles</a>
-              <%= render user %>
-            </td>
-            <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini btn-primary') unless user == current_user %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+      <% if  @users.size > 0 %>
+        <%= pagination_links(@users) %>
+        <table class="table table-striped table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Registered</th>
+              <th>Roles</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><div class="middle"><%= image_tag avatar_url(user), :class => 'round' %></div></td>
+              <td id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
+              <td><a href="mailto:<%= user.email %>"><%= user.email %></a></td>
+              <td><%= user.created_at.to_date %></td>
+              <td><% user.roles.each do |role| %><%= role.name.titleize %> <% end %></td>
+              <td>
+                <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini btn-primary" type="button">Change roles</a>
+                <%= render user %>
+              </td>
+              <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini btn-primary') unless user == current_user %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+      <% end %> 
 
     </div>
   </div>
