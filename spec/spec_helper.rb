@@ -64,6 +64,11 @@ Spork.each_run do
   FactoryGirl.reload
 end
 
+require "strip_attributes/matchers"
+RSpec.configure do |config|
+  config.include StripAttributes::Matchers
+end
+
 # --- Instructions ---
 # Sort the contents of this file into a Spork.prefork and a Spork.each_run
 # block.

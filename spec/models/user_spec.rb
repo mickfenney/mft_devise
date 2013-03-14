@@ -17,6 +17,12 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
 
+  it { should strip_attribute :name }
+  it { should strip_attribute :email }
+  it { should strip_attribute :phone }
+  it { should_not strip_attribute :password }
+  it { should_not strip_attribute :password_confirmation }
+
   it "should create a new instance given a valid attribute" do
     User.create!(@attr)
   end

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  strip_attributes :except => [:password, :password_confirmation]         
+
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me
