@@ -5,9 +5,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  strip_attributes :except => [:password, :password_confirmation]         
+         :recoverable, :rememberable, :trackable, :validatable         
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
@@ -16,6 +14,8 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   #validates_uniqueness_of :name
 
+  before_validation strip_attributes :except => [:phone, :password, :password_confirmation]
+
   validates :name, :length => { :maximum => 255 }
   validates :email, :length => { :maximum => 255 }
   validates :phone, :length => { :maximum => 16 }
@@ -23,6 +23,11 @@ class User < ActiveRecord::Base
 
   after_create :assign_default_role
   after_save :assign_default_role
+
+  def phone=(num)
+    num.gsub!(/\D/, '') if num.is_a?(String)
+    super(num)
+  end
 
   def self.search(search)
     if search

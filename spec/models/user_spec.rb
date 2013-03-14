@@ -19,7 +19,7 @@ describe User do
 
   it { should strip_attribute :name }
   it { should strip_attribute :email }
-  it { should strip_attribute :phone }
+  it { should_not strip_attribute :phone }
   it { should_not strip_attribute :password }
   it { should_not strip_attribute :password_confirmation }
 
