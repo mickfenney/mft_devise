@@ -8,6 +8,7 @@
       <% if user_signed_in? %>
         <p><%= image_tag avatar_url(current_user, 100), :class => 'round' %></p>
         <p>Signed in as user <%=link_to current_user.name, current_user %></p>
+        <p>Site theme set as <%= @css_theme %></p>
       <% end %>
       
     </div>
