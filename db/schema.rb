@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130310140727) do
+ActiveRecord::Schema.define(:version => 20130320113244) do
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.boolean  "is_map",         :default => true
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"

@@ -1,6 +1,6 @@
 <div class="content round">
   <div class="row">
-    <div class="span8">
+    <div class="span6">
 
       <%= render 'layouts/messages' %>
       <h3>User</h3>
@@ -8,6 +8,20 @@
       <p>User: <%= @user.name %></p>
       <p>Email: <%= @user.email if @user.email %></p>
       <p>Phone: <%= @user.phone if @user.phone %></p>
+
+    </div>
+    <div class="span6">
+
+      <p>
+        <% if @user.locations.any? %>
+        <b>Addresses:</b><br />
+          <% @user.locations.each do |location| %>
+            <%= location.name %><br />
+            <%= location.address %><br />
+            <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{location.latitude}%2C#{location.longitude}" %><br /><br/>
+          <% end %>
+        <% end %>
+      </p>
 
     </div>
   </div>

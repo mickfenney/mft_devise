@@ -41,3 +41,4 @@ group :test do
   gem 'guard-rspec'
 end
 gem "strip_attributes", ">= 1.2"
+gem 'geocoder'
