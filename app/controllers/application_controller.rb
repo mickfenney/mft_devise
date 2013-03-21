@@ -10,9 +10,9 @@ class ApplicationController < ActionController::Base
   private
   	def set_theme
       @css_theme = 'default'
-      # unless current_user.nil
-      # 	@css_theme = (current_user.theme.nil ? 'default' : current_user.theme)
-      # end
+      if user_signed_in?
+      	@css_theme = current_user.theme ? current_user.theme : 'default'
+      end
   	end
 
 end

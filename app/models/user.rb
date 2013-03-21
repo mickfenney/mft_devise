@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations
+  attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme
+
+  enum_attr :theme, %w(default amelia slate united)
 
   validates_presence_of :name
   #validates_uniqueness_of :name

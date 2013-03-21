@@ -5,3 +5,5 @@ require File.expand_path('../application', __FILE__)
 MftDevise::Application.initialize!
 
 require 'will_paginate'
+
+require "enumerated_attribute"
