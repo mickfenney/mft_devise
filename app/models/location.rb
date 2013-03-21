@@ -6,6 +6,15 @@ class Location < ActiveRecord::Base
   validates_presence_of :address
 
   geocoded_by :address
-  after_validation :geocode, :if => :address_changed?
+  after_validation :geocode, :if => :do_geocoding?
+
+  private
+    def do_geocoding?
+      if is_map?
+        return :address_changed?
+      else
+        return false
+      end
+    end # do_geocoding? method
   
 end

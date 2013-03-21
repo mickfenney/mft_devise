@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :as => :admin
-  attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme
+  attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :locations_attributes
 
   enum_attr :theme, %w(default amelia slate united)
 
@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
   #validates_uniqueness_of :name
 
   has_many :locations, :as => :locatable
+
+  accepts_nested_attributes_for :locations, allow_destroy: true
 
   before_validation strip_attributes :except => [:phone, :password, :password_confirmation]
 
