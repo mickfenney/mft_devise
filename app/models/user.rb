@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   enum_attr :theme, %w(default amelia slate united)
 
-  validates_presence_of :name
+  validates_presence_of :name, :theme
   #validates_uniqueness_of :name
 
   has_many :locations, :as => :locatable
@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   validates :name, :length => { :maximum => 255 }
   validates :email, :length => { :maximum => 255 }
-  validates :phone, :length => { :maximum => 16 }
+  validates :phone, :length => { :maximum => 15 }
   validates :password, :length => { :maximum => 255 }
 
   after_create :assign_default_role

@@ -2,13 +2,19 @@ require 'spec_helper'
 
 describe Location do
 ################################################################################
-  describe "Class Field Presence:" do
-    it { should respond_to(:name) }
-    it { should respond_to(:address) }
-    it { should respond_to(:is_map) }
-    it { should respond_to(:longitude) }
-    it { should respond_to(:latitude) }
-  end
+describe "Class Field Presence:" do
+  it { should respond_to(:name) }
+  it { should respond_to(:address) }
+  it { should respond_to(:is_map) }
+  it { should respond_to(:longitude) }
+  it { should respond_to(:latitude) }
+
+  it { should strip_attribute :name }
+  it { should strip_attribute :address }
+  it { should_not strip_attribute :is_map } 
+  it { should_not strip_attribute :longitude }
+  it { should_not strip_attribute :latitude } 
+end
 ################################################################################
   describe "Class Instantiation:" do
 
@@ -21,14 +27,16 @@ describe Location do
       location.should_not be_valid
     end
 
-    it "should populate the latitude field when given a valid address" do
-      location = FactoryGirl.create(:location, :latitude => nil)
-      location.latitude.should == @micks_house.latitude
-    end
+    unless `hostname`.strip.downcase.match(/^rav/)
+      it "should populate the latitude field when given a valid address" do
+        location = FactoryGirl.create(:location, :latitude => nil)
+        location.latitude.should == @micks_house.latitude
+      end
 
-    it "should populate the longitude field when given a valid address" do
-      location = FactoryGirl.create(:location, :longitude => nil)
-      location.longitude.should == @micks_house.longitude
+      it "should populate the longitude field when given a valid address" do
+        location = FactoryGirl.create(:location, :longitude => nil)
+        location.longitude.should == @micks_house.longitude
+      end
     end
 
     it "should not populate the latitude field when show google map is false" do
