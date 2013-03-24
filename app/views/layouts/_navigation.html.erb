@@ -17,9 +17,9 @@
       <li class="dropdown" id="preview-menu">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
       <ul class="dropdown-menu">
-        <li><%= link_to 'Users', users_path %></li>
+        <li><a href="<%= users_path %>"><i class="icon-search"></i> Users</a></li>
         <li class="divider"></li>
-        <li><%= link_to 'Send Invitation', '/users/invitation/new' %></li>
+        <li><a href="/users/invitation/new"><i class="icon-envelope"></i> Send Invitation</a></li>
       </ul>    
     <% end %>
     <% else %>
