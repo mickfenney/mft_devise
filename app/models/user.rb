@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :as => :admin
   attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :locations_attributes
 
-  enum_attr :theme, %w(default amelia slate united)
+  enum_attr :theme, ['default', 'amelia', 'slate', 'united'].sort
 
   validates_presence_of :name, :theme
   #validates_uniqueness_of :name
