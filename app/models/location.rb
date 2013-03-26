@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: locations
+#
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  address        :string(255)
+#  is_map         :boolean          default(TRUE)
+#  latitude       :float
+#  longitude      :float
+#  locatable_id   :integer
+#  locatable_type :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class Location < ActiveRecord::Base
 
   belongs_to :locatable, :polymorphic => true
