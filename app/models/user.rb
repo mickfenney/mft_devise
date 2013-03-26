@@ -35,14 +35,6 @@ class User < ActiveRecord::Base
     super(num)
   end
 
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name LIKE ? or email LIKE ?', "%#{search}%", "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
-
   private
 
     def assign_default_role
@@ -50,5 +42,13 @@ class User < ActiveRecord::Base
         add_role(:user)
       end
     end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ? or email LIKE ?', "%#{search}%", "%#{search}%"])
+    else
+      find(:all)
+    end
+  end    
 
 end
