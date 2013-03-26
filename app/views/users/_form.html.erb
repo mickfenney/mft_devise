@@ -3,6 +3,6 @@
 <%= f.fields_for :locations do |builder| %>
   <%= render 'users/location_fields', f: builder %>
 <% end %>
-<%= link_to_add_fields "Add Location", f, "users/", :locations %>
+<i class="icon-plus-sign"></i> <%= link_to_add_fields "Add Location", f, "users/", :locations %>
 
 <% end %>
