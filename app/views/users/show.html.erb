@@ -7,22 +7,22 @@
       <p><%= image_tag avatar_url(@user, 100), :class => 'round' %></p>
       <p>User: <%= @user.name %></p>
       <p>Email: <%= @user.email %></p>
-      <% if @user.phone != ''%><p>Phone: <%= @user.phone %></p> <% end %>
+      <% if @user.phone? %><p>Phone: <%= @user.phone %></p><% end %>
     </div>
-    <div class="span6">
 
-    <p>
-      <b>Addresses:</b><br />
-      <% if @user.locations.any? %>
-        <% @user.locations.each do |location| %>
-          <%= location.name %><% if location.name %>: <% end %><%= location.address %><br />
-          <% unless !location.is_map? || location.latitude.blank? || location.longitude.blank? %>
-            <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{location.latitude}%2C#{location.longitude}" %><br /><br/>
+    <div class="span6">
+      <p>
+        <b>Addresses:</b><br />
+        <% if @user.locations.any? %>
+          <% @user.locations.each do |location| %>
+            <%= location.name %><% if location.name %>: <% end %><%= location.address %><br />
+            <% unless !location.is_map? || location.latitude.blank? || location.longitude.blank? %>
+              <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{location.latitude}%2C#{location.longitude}" %><br /><br/>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
-    </p>
-
+      </p>
     </div>
+
   </div>
 </div>
