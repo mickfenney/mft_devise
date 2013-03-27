@@ -15,10 +15,10 @@
 
       <%= simple_form_for(:users, :url => users_path, :method => :get, :html => {:class => 'form-horizontal'}) do |f| %>
         <div class="form-inputs">
-        <div class="control-group search optional user_search">
-        <label class="search optional control-label" for="user_email">Username Or Email </label>
-        <div class="controls"><div class="input-prepend">
-        <span class="add-on"><i class="icon-search"></i></span><%= text_field_tag :search, params[:search] %></div></div></div>
+          <%= f.input 'Username Or Email', :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-search"></i></span><%= text_field_tag :search, params[:search] %>
+          <% end %>
+        </div>
         <div class="form-actions">
           <%= f.button :submit, "Search", :name => nil, :class => 'btn btn-primary' %>
         </div>   
