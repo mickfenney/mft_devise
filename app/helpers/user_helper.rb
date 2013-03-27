@@ -11,14 +11,4 @@ module UserHelper
     end
   end
 
-  def pagination_links(collection, options = {})
-   options[:renderer] ||= BootstrapPaginationHelper::LinkRenderer
-   options[:class] ||= 'pagination pagination-left'
-   options[:inner_window] ||= 2
-   options[:outer_window] ||= 1
-   options[:previous_label] ||= h("<< Previous")
-   options[:next_label] ||= h("Next >>")
-   will_paginate(collection, options)
- end
-
 end

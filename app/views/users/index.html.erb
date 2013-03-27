@@ -42,7 +42,7 @@
           <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><div class="middle"><%= image_tag avatar_url(user), :class => 'round' %></div></td>
+              <td><%= image_tag avatar_url(user), :class => 'round' %></td>
               <td id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
               <td data-title="Email"><a href="mailto:<%= user.email %>"><%= user.email %></a></td>
               <td data-title="Registered"><%= user.created_at.to_date %></td>
