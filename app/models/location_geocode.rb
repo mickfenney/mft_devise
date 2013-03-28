@@ -10,15 +10,23 @@ class LocationGeocode
   end
 
   def address_encode(address_input = @address)
-
-    # test west we have something to do
-
-    #result = Geocoder.search(address)
-
-    #@city = result.city
-
-    return address_input
-
+    unless address_input.nil?
+      @result = Geocoder.search(address_input)
+      @result.each do |a|
+        return @address = a.formatted_address
+      end
+    end
   end
+
+  def latitude_encode()
+    @result = Geocoder.search(@address)
+    unless @result.nil?
+      @result.each do |a|
+        a.geometry.each do |g|
+          return @latitude = g
+        end  
+      end
+    end
+  end  
 
 end
