@@ -21,10 +21,22 @@ class Location < ActiveRecord::Base
   attr_accessible :address, :latitude, :locatable_id, :locatable_type, :longitude, :name, :is_map
   validates_presence_of :address
 
-  before_validation strip_attributes :except => [:latitude, :longitude, :is_map]
+  before_validation strip_attributes :except => [:address, :latitude, :longitude, :is_map]
 
   geocoded_by :address
   after_validation :geocode, :if => :do_geocoding?
+
+  def address=(address_string)
+    if address_string.is_a?(String)
+      full_address = LocationGeocode.new(address_string)
+      if full_address.address.nil?
+        @is_map = false
+        super(address_string) 
+      else  
+        super(full_address.address)
+      end
+    end  
+  end
 
   private
     def do_geocoding?

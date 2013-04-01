@@ -26,7 +26,7 @@ describe "Class Field Presence:" do
   it { should respond_to(:latitude) }
 
   it { should strip_attribute :name }
-  it { should strip_attribute :address }
+  it { should_not strip_attribute :address }
   it { should_not strip_attribute :is_map } 
   it { should_not strip_attribute :longitude }
   it { should_not strip_attribute :latitude } 

@@ -1,6 +1,5 @@
-#require 'location_geocode'
-#require 'geocoder'
 require 'spec_helper'
+
 describe LocationGeocode do
 
   describe "Class Instantiation without Constructor Parameter:" do
@@ -16,32 +15,59 @@ describe LocationGeocode do
     end       
 
     it "should return the full address when given a valid google address" do
-      @converter.address_encode('Big Ben UK').should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK'
+      @converter.address_encode('Big Ben UK').should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK'   
+    end   
+
+    it "should return the address method full address when given a valid google address" do
+      @converter.address_encode('Big Ben UK')
+      @converter.address.should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
+      #@converter.latitude.should == '51.5007046' 
+      #@converter.longitude.should == '-0.1245748'
+    end     
+
+    it "should return the passed in address when given a non valid address" do
+      @converter.address_encode('Not a valid address').should == 'Not a valid address'
     end
 
-    it "should return the latitude when given a valid google address" do
-      pending
-      @converter.latitude_encode().should == '23525235'
+    it "should return the adress method passed in address when given a non valid address" do
+      @converter.address_encode('Not a valid address')
+      @converter.address.should == 'Not a valid address'
     end    
 
-    # it "should return a repaired address when given a valid, but not complete address" do
-    #   pending
-    #   @converter.address_encode('Big Ben UK').should == 'Westminster Bridge Rd, Parliament Square, London SW1A 0AA, United Kingdom'
-    # end
+    it "should return no address when given a no address" do
+      @converter.address_encode().should == nil
+    end
 
   end
 
-  # describe "Class Instantiation with Constructor Parameter:" do
+  ################################################################################
 
-  #   before(:each) do
-  #     @converter2 = LocationGeocode.new('Big Ben UK')
-  #   end    
+  describe "Class Instantiation with Constructor Parameter:" do
 
-  #   it "should whatever..." do
-  #     pending
-  #     @converter2.city.should == 'London'
-  #   end
+    before(:each) do
+      @converter2 = LocationGeocode.new('Big Ben UK')
+    end    
 
-  # end
+    it "should return the full address when given a valid google address in the constructor parameter" do
+      @converter2.address_encode().should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
+    end  
+
+    it "should return the address method full address when given a valid google address in the constructor parameter" do
+      @converter2.address.should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
+    end     
+
+    before(:each) do
+      @converter3 = LocationGeocode.new('Not a valid address')
+    end    
+
+    it "should return the passed in address when given a non valid address in the constructor parameter" do
+      @converter3.address_encode().should == 'Not a valid address'
+    end  
+
+    it "should return the address method passed in address when given a non valid address in the constructor parameter" do
+      @converter3.address.should == 'Not a valid address'
+    end          
+
+  end
 
 end
