@@ -4,6 +4,10 @@ class UsersController < ApplicationController
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
+    unless  @users.any?
+      flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
+    end  
+    render 'index'
   end
 
   def show
