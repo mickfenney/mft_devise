@@ -28,15 +28,19 @@ class Location < ActiveRecord::Base
 
   def address=(address_string)
     if address_string.is_a?(String)
-      full_address = LocationGeocode.new(address_string)
-      if full_address.address.nil?
+      locate_gecode = LocationGeocode.new(address_string)
+      if locate_gecode.address.nil?
         @is_map = false
         super(address_string) 
       else  
-        super(full_address.address)
+        super(locate_gecode.address)
       end
     end  
   end
+
+  def is_map=(is_map_input)
+    super(is_map_input)
+  end  
 
   private
     def do_geocoding?

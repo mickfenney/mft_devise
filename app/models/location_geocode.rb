@@ -1,6 +1,19 @@
 require 'geocoder'
 
-class LocationGeocode
+class LocationGeocode 
+
+  # Create on the fly getters for these data members
+  attr_reader :address, :latitude, :longitude
+
+  # Create on the fly setters for these data members
+  #attr_writer :address
+
+  def address=(address)
+    address_encode(address)
+  end
+
+  # Create on the fly setters for these data members
+  #attr_accessor :address
 
   def initialize(address_input = nil)
     unless address_input.nil?
@@ -9,38 +22,28 @@ class LocationGeocode
     end
   end
 
-  def address_encode(address_input = @address)
-    unless address_input.nil?
-      result = Geocoder.search(address_input)
-      result.each do |a|
-        @address = a.formatted_address
-        # a.geometry.each do |g|
-        #   g.each do |l|
-        #     @latitude = a.geometry
-        #     #@longitude
-        #   end 
-        # end         
-      end
+  protected
+
+    def address_encode(address_input = @address)
+      @address   = address_input
+      @latitude  = nil
+      @longitude = nil
+      unless address_input.nil?
+        # if `hostname`.strip.downcase.match(/^rav/)
+        #   Geocoder.configure(:http_proxy => 'fenneym:vysss444@equwsgateway.salmat.com.au:8080', :timeout => 5)
+        # end
+        result = Geocoder.search(address_input)
+        result.each do |a|
+          @address = a.formatted_address
+          # a.geometry.each do |g|
+          #   g.each do |l|
+          #     @latitude = a.geometry
+          #     #@longitude
+          #   end 
+          # end         
+        end
+      end     
+      return @address
     end
-    if @address.nil?
-      @address = address_input
-    end
-    if @latitude.nil?
-      @latitude = nil
-    end    
-    return @address
-  end
-
-  def address()
-    @address
-  end   
-
-  def latitude()
-    @latitude
-  end    
-
-  def longitude()
-    @longitude
-  end   
 
 end
