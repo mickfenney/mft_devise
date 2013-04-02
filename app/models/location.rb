@@ -38,10 +38,6 @@ class Location < ActiveRecord::Base
     end  
   end
 
-  def is_map=(is_map_input)
-    super(is_map_input)
-  end  
-
   private
     def do_geocoding?
       if is_map?

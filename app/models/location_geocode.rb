@@ -8,8 +8,11 @@ class LocationGeocode
   # Create on the fly setters for these data members
   #attr_writer :address
 
-  def address=(address)
-    address_encode(address)
+  def address=(address_input = nil)
+    unless address_input.nil?
+      @address = address_input
+      address_encode(@address)
+    end
   end
 
   # Create on the fly setters for these data members
@@ -30,7 +33,7 @@ class LocationGeocode
       @longitude = nil
       unless address_input.nil?
         # if `hostname`.strip.downcase.match(/^rav/)
-        #   Geocoder.configure(:http_proxy => 'fenneym:vysss444@equwsgateway.salmat.com.au:8080', :timeout => 5)
+        #   Geocoder.configure(:http_proxy => 'fenneym:xxxxxx@equwsgateway.salmat.com.au:8080', :timeout => 5)
         # end
         result = Geocoder.search(address_input)
         result.each do |a|
@@ -43,7 +46,7 @@ class LocationGeocode
           # end         
         end
       end     
-      return @address
+      #return @address
     end
 
 end

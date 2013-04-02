@@ -15,27 +15,20 @@ describe LocationGeocode do
     end       
 
     it "should return the full address when given a valid google address" do
-      @converter.address_encode('Big Ben UK').should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK'   
-    end   
-
-    it "should return the address method full address when given a valid google address" do
-      @converter.address_encode('Big Ben UK')
+      @converter.address('Big Ben UK')
       @converter.address.should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
       #@converter.latitude.should == '51.5007046' 
       #@converter.longitude.should == '-0.1245748'
     end     
 
     it "should return the passed in address when given a non valid address" do
-      @converter.address_encode('Not a valid address').should == 'Not a valid address'
+      @converter.address('Not a valid address')
+      @converter.address.should == 'Not a valid address'
     end
 
-    it "should return the adress method passed in address when given a non valid address" do
-      @converter.address_encode('Not a valid address')
-      @converter.address.should == 'Not a valid address'
-    end    
-
-    it "should return no address when given a no address" do
-      @converter.address_encode().should == nil
+    it "should return no address when given a noaddress_encode address" do
+      @converter.address()
+      @converter.address.should == nil
     end
 
   end
@@ -49,24 +42,16 @@ describe LocationGeocode do
     end    
 
     it "should return the full address when given a valid google address in the constructor parameter" do
-      @converter2.address_encode().should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
-    end  
-
-    it "should return the address method full address when given a valid google address in the constructor parameter" do
       @converter2.address.should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
-    end     
+    end  
 
     before(:each) do
       @converter3 = LocationGeocode.new('Not a valid address')
     end    
 
     it "should return the passed in address when given a non valid address in the constructor parameter" do
-      @converter3.address_encode().should == 'Not a valid address'
-    end  
-
-    it "should return the address method passed in address when given a non valid address in the constructor parameter" do
       @converter3.address.should == 'Not a valid address'
-    end          
+    end           
 
   end
 
