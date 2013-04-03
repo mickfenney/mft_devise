@@ -17,8 +17,8 @@ describe LocationGeocode do
     it "should return the full address when given a valid google address" do
       @converter.address = 'Big Ben UK'
       @converter.address.should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
-      @converter.latitude.should == '51.5007046' 
-      #@converter.longitude.should == '-0.1245748'
+      @converter.latitude.should == 51.5007046 
+      @converter.longitude.should == -0.1245748
     end     
 
     it "should return the passed in address when given a non valid address" do

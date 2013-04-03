@@ -60,9 +60,44 @@ end
       location.latitude.should be_nil
     end
 
-    it "should not populate the longitude field when no google map is false" do
+    it "should not populate the longitude field when show google map is false" do
       location = FactoryGirl.create(:location, :longitude => nil, :is_map => false)
       location.longitude.should be_nil
+    end 
+
+    it "should store full address when given a partial but valid address" do
+      raw_address = 'Big Ben UK'
+      wanted_address = 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK'
+      location = FactoryGirl.create(:location, :address => raw_address)
+      Location.first.address.should == wanted_address
+    end
+
+    it "should store the correct latitude when given a partial but valid address" do
+      location = FactoryGirl.create(:location, :address => @micks_house.address, :latitude => nil)
+      Location.first.latitude.should == @micks_house.latitude
+    end
+
+    it "should store the correct longitude when given a partial but valid address" do
+      location = FactoryGirl.create(:location, :address => @micks_house.address, :longitude => nil)
+      Location.first.longitude.should == @micks_house.longitude
+    end        
+
+    it "should reset the address, latitude and longitude fields to nil when updating an existing record with an invalid address" do
+      invalid_address = 'Not a valid address'
+      # insert mick factory into db (valid)
+      FactoryGirl.create(:location, :latitude => nil, :longitude => nil)
+      # update mick record to be invalid
+      mick = Location.first
+      mick.address = invalid_address
+      mick.save
+      # Make sure the database record count stays at 1
+      Location.count.should == 1
+      # query back mick record and check fileds are nil
+      mick_updated = Location.first
+      mick_updated.address.should == invalid_address
+      mick_updated.latitude.should be_nil
+      mick_updated.longitude.should be_nil
+      mick_updated.is_map.should be_false
     end 
     
   end

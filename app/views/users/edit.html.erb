@@ -1,0 +1,36 @@
+<div class="content round">
+  <div class="row">
+    <div class="span12">
+
+      <%= render 'layouts/messages' %>
+      <h3>Edit <%= @user.name %></h3>
+
+      <%= simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <%= f.input :name, :wrapper => :prepend do %>
+           <span class="add-on"><i class="icon-user"></i></span><%= f.input_field :name, :required => true, :autofocus => true, :size => '' %>
+          <% end %>
+          <%= f.input :email, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.input_field :email, :required => true, :size => '' %>
+          <% end %>
+          <%= f.input :phone, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-bell"></i></span><%= f.input_field :phone, :required => false, :size => '' %>
+          <% end %>
+
+          <%= f.input :theme, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-wrench"></i></span><%= f.enum_select :theme %> 
+          <% end %>
+
+          <%= render 'users/form' %>
+
+        </div>
+
+      <% end %>
+
+      <%= link_to "Back", :back %>
+
+    </div>
+  </div>
+</div>

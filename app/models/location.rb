@@ -23,28 +23,22 @@ class Location < ActiveRecord::Base
 
   before_validation strip_attributes :except => [:address, :latitude, :longitude, :is_map]
 
-  geocoded_by :address
-  after_validation :geocode, :if => :do_geocoding?
-
-  def address=(address_string)
-    if address_string.is_a?(String)
-      locate_gecode = LocationGeocode.new(address_string)
-      if locate_gecode.address.nil?
-        @is_map = false
-        super(address_string) 
-      else  
-        super(locate_gecode.address)
-      end
-    end  
-  end
+  after_validation :do_geocoding
 
   private
-    def do_geocoding?
-      if is_map?
-        return :address_changed?
-      else
-        return false
+    def do_geocoding
+      if is_map? and :address_changed?
+        locate_gecode = LocationGeocode.new(self[:address])
+        if locate_gecode.address.nil? or locate_gecode.latitude.nil? or locate_gecode.longitude.nil?
+          self[:is_map] = false
+          self[:latitude]  = nil
+          self[:longitude] = nil         
+        else  
+          self[:address]   = locate_gecode.address
+          self[:latitude]  = locate_gecode.latitude
+          self[:longitude] = locate_gecode.longitude
+        end
       end
-    end # do_geocoding? method
+    end # do_geocoding method
   
 end
