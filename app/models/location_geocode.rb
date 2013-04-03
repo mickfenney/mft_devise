@@ -33,17 +33,31 @@ class LocationGeocode
       @longitude = nil
       unless address_input.nil?
         if `hostname`.strip.downcase.match(/^rav/)
-          Geocoder.configure(:http_proxy => 'fenneym:xxxxxx@equwsgateway.salmat.com.au:8080', :timeout => 5)
+          Geocoder.configure(:http_proxy => 'fenneym:Vysss444@equwsgateway.salmat.com.au:8080', :timeout => 5)
         end
         result = Geocoder.search(address_input)
         result.each do |a|
           @address = a.formatted_address
-          # a.geometry.each do |g|
-          #   g.each do |l|
-          #     @latitude = a.geometry
-          #     #@longitude
-          #   end 
-          # end         
+
+          a.inspect
+
+          a.geometry.each do |key, value|
+
+            puts "Key  : #{key}"
+            puts "Value: #{value}"
+
+            if key.eql?('location')
+              lat = value['lat']
+              puts "Got the latitude: #{lat}"
+            end
+
+
+
+            #g.each do |l|
+              #@latitude = a
+              #@longitude
+            #end 
+          end         
         end
       end     
       #return @address
