@@ -1,19 +1,23 @@
 <div class="content round">
   <div class="row">
+
+    <%= render 'layouts/messages' %>
+
     <div class="span6">
 
-      <%= render 'layouts/messages' %>
       <h3>User</h3>
       <p><%= image_tag avatar_url(@user, 100), :class => 'round' %></p>
       <p>User: <%= @user.name %></p>
       <p>Email: <%= @user.email %></p>
       <% if @user.phone? %><p>Phone: <%= @user.phone %></p><% end %>
+      <%= link_to 'Edit', edit_user_path(@user) %> |
+      <%= link_to 'Back', users_path %> 
     </div>
 
     <div class="span6">
       <p>
-        <b>Addresses:</b><br />
         <% if @user.locations.any? %>
+        <b>Addresses:</b><br />
           <% @user.locations.each do |location| %>
             <%= location.name %><% if location.name %>: <% end %><%= location.address %><br />
             <% unless !location.is_map? || location.latitude.blank? || location.longitude.blank? %>
