@@ -31,10 +31,11 @@ class LocationGeocode
       @address   = address_input
       @latitude  = nil
       @longitude = nil
+      http_proxy_env = ENV['HTTP_PROXY'].gsub(/http:\/\//, "")
       unless @address.nil?
         @address.strip!
         if `hostname`.strip.downcase.match(/^rav/)
-          Geocoder.configure(:http_proxy => 'fenneym:xxxxxx@equwsgateway.salmat.com.au:8080', :timeout => 5)
+          Geocoder.configure(:http_proxy => http_proxy_env, :timeout => 5)
         end
         @geocoder_result = Geocoder.search(@address)
         begin
