@@ -43,16 +43,14 @@ end
       location.should_not be_valid
     end
 
-    unless `hostname`.strip.downcase.match(/^rav/)
-      it "should populate the latitude field when given a valid address" do
-        location = FactoryGirl.create(:location, :latitude => nil)
-        location.latitude.should == @micks_house.latitude
-      end
+    it "should populate the latitude field when given a valid address" do
+      location = FactoryGirl.create(:location, :latitude => nil)
+      location.latitude.should == @micks_house.latitude
+    end
 
-      it "should populate the longitude field when given a valid address" do
-        location = FactoryGirl.create(:location, :longitude => nil)
-        location.longitude.should == @micks_house.longitude
-      end
+    it "should populate the longitude field when given a valid address" do
+      location = FactoryGirl.create(:location, :longitude => nil)
+      location.longitude.should == @micks_house.longitude
     end
 
     it "should not populate the latitude field when show google map is false" do
