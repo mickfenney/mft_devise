@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable         
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :role_ids, :as => :admin
+  attr_accessible :role_ids, :name, :email, :phone, :password, :password_confirmation, :locations, :theme, :locations_attributes, :as => :admin
   attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :locations_attributes
 
   enum_attr :theme, ['default', 'amelia', 'slate', 'united'].sort
