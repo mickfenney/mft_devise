@@ -22,9 +22,25 @@ class UsersController < ApplicationController
     authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user], :as => :admin)
-      redirect_to users_path, :notice => "User updated."
+      params[:user].each do |key, value|
+        if key == 'password'
+          redirect_to users_path, :notice => "User #{@user.name} password updated."
+          break
+        else
+          redirect_to users_path, :notice => "User #{@user.name} updated."
+          break
+        end
+      end      
     else
-      redirect_to users_path, :alert => "Unable to update user."
+      params[:user].each do |key, value|
+        if key == 'password'
+          redirect_to users_path, :alert => "Unable to update user #{@user.name} password."
+          break
+        else
+          redirect_to users_path, :alert => "Unable to update #{@user.name} user."
+          break
+        end
+      end
     end
   end
     
