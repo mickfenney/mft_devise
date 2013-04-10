@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   validates :name, :length => { :maximum => 255 }
   validates :email, :length => { :maximum => 255 }
   validates :phone, :length => { :maximum => 15 }
-  validates :password, :length => { :maximum => 255 }
+  validates :password, :length => 8..128
 
   after_create :assign_default_role
   after_save :assign_default_role
