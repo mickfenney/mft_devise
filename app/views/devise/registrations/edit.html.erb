@@ -13,7 +13,7 @@
            <span class="add-on"><i class="icon-user"></i></span><%= f.input_field :name, :required => true, :autofocus => true, :size => '' %>
           <% end %>
           <%= f.input :email, :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-envelope"></i></span><%= f.input_field :email, :required => true, :size => '' %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :required => true, :size => '' %>
           <% end %>
           <%= f.input :phone, :wrapper => :prepend do %>
             <span class="add-on"><i class="icon-bell"></i></span><%= f.input_field :phone, :required => false, :size => '' %>

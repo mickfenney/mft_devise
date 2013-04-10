@@ -14,7 +14,7 @@
            <span class="add-on"><i class="icon-user"></i></span><%= f.input_field :name, :required => true, :autofocus => true, :size => '', :placeholder => 'Name' %>
           <% end %>
           <%= f.input :email, :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-envelope"></i></span><%= f.input_field :email, :required => true, :size => '', :placeholder => 'Email' %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :required => true, :size => '', :placeholder => 'Email' %>
           <% end %>
         </div>
       <% end -%>

@@ -10,7 +10,9 @@
         <%= f.full_error :unlock_token %>
 
         <div class="form-inputs">
-          <%= f.input :email, :required => true, :autofocus => true, :size => '' %>
+          <%= f.input :email, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :required => true, :size => '', :autofocus => true %>
+          <% end %>
         </div>
 
         <div class="form-actions">

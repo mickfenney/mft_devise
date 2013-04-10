@@ -8,7 +8,7 @@
       <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f| %>
         <div class="form-inputs">
           <%= f.input :email, :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-envelope"></i></span><%= f.input_field :email, :autofocus => true, :size => '', :placeholder => 'Email' %>
+            <span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :autofocus => true, :size => '', :placeholder => 'Email' %>
           <% end %>
           <%= f.input :password, :wrapper => :prepend do %>
             <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password, :size => '', :placeholder => 'Password' %>
