@@ -21,10 +21,12 @@ describe "Pages" do
 
   it "should have the right links on the layout" do
     visit root_path
+    click_link "Sign In"
+    page.should have_selector('h3', text: 'Sign In')    
+    click_link "Sign Up"
+    page.should have_selector('h3', text: 'Sign Up')      
     click_link "About"
     page.should have_selector('h3', text: 'About Us')
-    # click_link "Contact"
-    # page.should have_selector 'title', text: full_title('Contact')
   end
 
 end
