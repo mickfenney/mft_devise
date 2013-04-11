@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "mfTechnology" %></title>
+    <title><%= full_title(@page_title) %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "mfTechnology" %>">
     <%= stylesheet_link_tag @css_theme, :media => "all" %>
     <%= stylesheet_link_tag "no-more-tables", :media => "all" %>

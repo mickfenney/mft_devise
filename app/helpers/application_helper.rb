@@ -1,5 +1,15 @@
 module ApplicationHelper
 
+  # Returns the full title on a per-page basis.
+  def full_title(page_title = nil)
+    base_title = 'mfTechnology'
+    if page_title.nil?
+      base_title
+    else
+      "#{base_title} | #{page_title}"
+    end
+  end  
+
   def display_base_errors resource
     return '' if (resource.errors.empty?) or (resource.errors[:base].empty?)
     messages = resource.errors[:base].map { |msg| content_tag(:p, msg) }.join

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+    @page_title = 'Search User'
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
     unless  @users.any?
@@ -11,10 +12,12 @@ class UsersController < ApplicationController
   end
 
   def show
+    @page_title = 'Show User'
     @user = User.find(params[:id])
   end
 
   def edit
+    @page_title = 'Edit User'
     @user = User.find(params[:id])
   end
   
