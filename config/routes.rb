@@ -2,6 +2,8 @@ MftDevise::Application.routes.draw do
 
   get "sessions/new"
 
+  get "messages/new"
+
   match '/about', to: 'pages#about'
 
   authenticated :user do
@@ -11,6 +13,6 @@ MftDevise::Application.routes.draw do
   devise_for :users, :controllers => { :sessions      => "sessions", 
   	                                   :registrations => 'registrations', 
   	                                   :invitations   => 'invitations' }
-  resources :users
+  resources :users, :messages
 
 end

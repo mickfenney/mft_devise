@@ -44,3 +44,4 @@ gem "strip_attributes", ">= 1.2"
 gem 'geocoder'
 gem 'enumerated_attribute'
 gem 'rack-mini-profiler'
+gem 'active_attr'
