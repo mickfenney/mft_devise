@@ -1,4 +1,7 @@
 MftDevise::Application.routes.draw do
+
+  match '/about', to: 'pages#about'
+
   authenticated :user do
     root :to => 'home#index'
   end
