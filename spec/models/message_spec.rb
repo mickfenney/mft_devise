@@ -10,10 +10,6 @@ end
 ################################################################################
   describe "Class Instantiation:" do
 
-    before(:each) do
-      @message = FactoryGirl.build(:message)
-    end
-
     it "should not create a new instance given nil name attribute" do
       message = FactoryGirl.build(:message, :name => nil)
       message.should_not be_valid

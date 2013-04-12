@@ -27,8 +27,8 @@
       <%= link_to 'Sign Up', new_user_registration_path %>
       </li>
     <% end %>
-      <li <%= active_css('/message/new') %>>
-      <%= link_to 'Contact', '/messages/new' %>
+      <li <%= active_css(contact_path) %>>
+      <%= link_to 'Contact', contact_path %>
       </li>  
       <li <%= active_css(about_path) %>>
       <%= link_to 'About', about_path %>

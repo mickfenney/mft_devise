@@ -6,7 +6,7 @@ describe ContactMailer do
 
     message = FactoryGirl.build(:message)
     let(:mail) { ContactMailer.send_contact_message(message) }
- 
+
     #ensure that the subject is correct
     it 'renders the subject' do
       mail.subject.should == 'mfTechnology Contact Message'
