@@ -29,6 +29,7 @@ group :development do
   gem 'guard-rspec'
   gem 'growl'
   gem 'ruby_gntp'
+  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
 end
 gem "letter_opener", ">= 1.1.0",  :group => :development
 gem 'will_paginate', '> 3.0'
@@ -39,6 +40,7 @@ group :test do
   gem 'spork-rails'
   gem 'guard-spork'
   gem 'guard-rspec'
+  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
 end
 gem "strip_attributes", ">= 1.2"
 gem 'geocoder'
