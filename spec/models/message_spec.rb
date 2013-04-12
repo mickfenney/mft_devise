@@ -41,7 +41,7 @@ end
     end   
 
     it "should not create a new instance given content attribute more than 500 characters" do
-      message = FactoryGirl.build(:message, :content => Array.new(51, "abcdefghij").join)
+      message = FactoryGirl.build(:message, :content => Array.new(501, "a").join)
       message.should_not be_valid
     end      
 
