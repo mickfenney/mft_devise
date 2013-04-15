@@ -47,6 +47,11 @@ module ApplicationHelper
     will_paginate(collection, options)
   end  
 
+
+  def link_to_blank(body, url_options = {}, html_options = {})
+    link_to(body, url_options, html_options.merge(target: "_blank"))
+  end  
+
   def is_active_tab(arg1, arg2)
     if arg1 == arg2
       "active"
