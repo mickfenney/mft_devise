@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :message do
     name "From User"
     email "from@example.com"
-    content "This is a test message for mfTechnology"
+    content "This is a test message for "+ENV["SITE_NAME"]
   end
 end
