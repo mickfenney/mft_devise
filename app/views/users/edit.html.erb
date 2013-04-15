@@ -1,62 +1,75 @@
+<% params[:tab] ||= 'general' %>
+
 <div class="content round">
   <div class="row">    
-    <div class="span6">
+    <div class="span12">
 
       <%= render 'layouts/messages' %>
 
       <h3>Edit <%= @user.name %></h3>
 
-      <%= simple_form_for(@user, :html => { :class => 'form-horizontal' }) do |f| %>
-        <%= f.error_notification %>
+      <ul class="nav nav-tabs">
+        <li class="<%= is_active_tab('general', params[:tab]) %>"><a href="#general" data-toggle="tab">General</a></li>
+        <li class="<%= is_active_tab('locations', params[:tab]) %>"><a href="#locations" data-toggle="tab">Locations</a></li>       
+        <li class="<%= is_active_tab('password', params[:tab]) %>"><a href="#password" data-toggle="tab">Password</a></li>
+      </ul>
+      <div id="tabbed_profile" class="tab-content">
 
-        <div class="form-inputs">
-          <%= f.input :name, :wrapper => :prepend do %>
-           <span class="add-on"><i class="icon-user"></i></span><%= f.input_field :name, :required => true, :autofocus => true, :size => '' %>
+        <div id="general" class="tab-pane fade in <%= is_active_tab('general', params[:tab]) %>">      
+          <%= simple_form_for(@user, :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+            <%= f.error_notification %>
+            <div class="form-inputs">
+              <%= f.input :name, :wrapper => :prepend do %>
+               <span class="add-on"><i class="icon-user"></i></span><%= f.input_field :name, :required => true, :autofocus => true, :size => '' %>
+              <% end %>
+              <%= f.input :email, :wrapper => :prepend do %>
+                <span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :required => true, :size => '' %>
+              <% end %>
+              <%= f.input :phone, :wrapper => :prepend do %>
+                <span class="add-on"><i class="icon-bell"></i></span><%= f.input_field :phone, :required => false, :size => '' %>
+              <% end %>
+              <%= f.input :theme, :wrapper => :prepend do %>
+                <span class="add-on"><i class="icon-wrench"></i></span><%= f.enum_select :theme %> 
+              <% end %>
+              <div class="form-actions">
+                <%= f.button :submit, "Update", :class => 'btn btn-primary' %>
+              </div>
+            </div>
           <% end %>
-          <%= f.input :email, :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :required => true, :size => '' %>
-          <% end %>
-          <%= f.input :phone, :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-bell"></i></span><%= f.input_field :phone, :required => false, :size => '' %>
-          <% end %>
-          <%= f.input :theme, :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-wrench"></i></span><%= f.enum_select :theme %> 
-          <% end %>
-
-          <%= render 'users/form' %>
-
+          <%= link_to "Back", :back %>
         </div>
 
-      <% end %>
+        <div id="locations" class="tab-pane fade in <%= is_active_tab('locations', params[:tab]) %>">
+          <%= simple_form_for(@user, :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+            <%= f.error_notification %>
+            <input type='hidden' name='tab' value='locations' />
+            <div class="form-inputs">
+            <%= render 'users/form' %>
+            </div>
+          <% end %>
+          <%= link_to "Back", :back %>
+        </div>  
 
-      <%= link_to "Back", :back %>
+        <div id="password" class="tab-pane fade in <%= is_active_tab('password', params[:tab]) %>">
+          <%= simple_form_for(@user, :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+            <%= f.error_notification %>
+            <input type='hidden' name='tab' value='password' />
+            <div class="form-inputs">
+              <%= f.input :password, :label => "New password", :wrapper => :prepend do %>
+                <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password, :required => true, :autofocus => true, :size => '' %>
+              <% end %>
+              <%= f.input :password_confirmation, :label => "Confirm #{@user.name} new password", :wrapper => :prepend do %>
+                <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password_confirmation, :required => true, :size => '' %>
+              <% end %>
+            </div>
+            <div class="form-actions">
+              <%= f.button :submit, "Change password", :class => 'btn btn-primary' %>
+            </div>
+          <% end %>
+          <%= link_to "Back", :back %>
+        </div>  
+      </div>
 
     </div>
-
-    <div class="span6">
-
-      <h3>Change <%= @user.name %> password</h3>
-
-      <%= simple_form_for(@user, :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
-        <%= f.error_notification %>
-
-        <div class="form-inputs">
-          <%= f.input :password, :label => "New password", :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password, :required => true, :autofocus => true, :size => '' %>
-          <% end %>
-          <%= f.input :password_confirmation, :label => "Confirm #{@user.name} new password", :wrapper => :prepend do %>
-            <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password_confirmation, :required => true, :size => '' %>
-          <% end %>
-        </div>
-
-        <div class="form-actions">
-          <%= f.button :submit, "Change password", :class => 'btn btn-primary' %>
-        </div>
-      <% end %>
-
-      <%= link_to "Back", :back %>
-
-    </div>
-
   </div>
 </div>

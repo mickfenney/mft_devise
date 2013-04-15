@@ -57,7 +57,6 @@ class User < ActiveRecord::Base
   validates :name, :length => { :maximum => 255 }
   validates :email, :length => { :maximum => 255 }
   validates :phone, :length => { :maximum => 15 }
-  validates :password, :length => 8..128
 
   after_create :assign_default_role
   after_save :assign_default_role
@@ -75,16 +74,16 @@ class User < ActiveRecord::Base
       end
     end
 
-  def self.search(search)
-    if search
-      find(:all, 
-           :select => 'DISTINCT users.*', 
-           :joins => "LEFT JOIN locations ON locations.locatable_id = users.id AND locations.locatable_type = 'User'", 
-           :conditions => ['users.name LIKE ? or users.email LIKE ? or locations.address LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]
-      )
-    else
-      find(:all)
-    end
-  end    
+    def self.search(search)
+      if search
+        find(:all, 
+             :select => 'DISTINCT users.*', 
+             :joins => "LEFT JOIN locations ON locations.locatable_id = users.id AND locations.locatable_type = 'User'", 
+             :conditions => ['users.name LIKE ? or users.email LIKE ? or locations.address LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]
+        )
+      else
+        find(:all)
+      end
+    end    
 
 end

@@ -47,4 +47,12 @@ module ApplicationHelper
     will_paginate(collection, options)
   end  
 
+  def is_active_tab(arg1, arg2)
+    if arg1 == arg2
+      "active"
+    else
+      ""
+    end
+  end  
+
 end
