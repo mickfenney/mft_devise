@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # Returns the full title on a per-page basis.
   def full_title(page_title = nil)
-    base_title = 'mfTechnology'
+    base_title = ENV["SITE_NAME"]
     if page_title.nil?
       base_title
     else

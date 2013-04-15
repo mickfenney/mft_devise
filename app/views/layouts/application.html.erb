@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= full_title(@page_title) %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "mfTechnology" %>">
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : ENV["SITE_NAME"] %>">
     <%= stylesheet_link_tag @css_theme, :media => "all" %>
     <%= stylesheet_link_tag "no-more-tables", :media => "all" %>
     <%= javascript_include_tag "application" %>
@@ -19,7 +19,7 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </a>
-         <%= link_to "mfTechnology", root_path, :class => 'brand' %>
+         <%= link_to ENV["SITE_NAME"], root_path, :class => 'brand' %>
          <div class="nav-collapse collapse" id="main-menu">
             <%= render 'layouts/navigation' %>
          </div>

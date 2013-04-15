@@ -2,6 +2,6 @@
 
 <p>Email: <%= @message.email %></p>
 
-<p>Message: <%= @message.content %></p>
+<p>Message: <%= simple_format(@message.content) %></p>
 
-<p><%= link_to "mfTechnology", root_url %></p>
+<p><%= link_to ENV["SITE_NAME"], root_url %></p>

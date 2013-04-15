@@ -14,7 +14,7 @@ describe ContactMailer do
  
     #ensure that the receiver is correct
     it 'renders the receiver email' do
-      mail.to.should == [ENV["ADMIN_EMAIL"]]
+      mail.to.should == [ENV["SITE_EMAIL"]]
     end
  
     #ensure that the sender is correct
