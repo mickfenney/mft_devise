@@ -9,7 +9,7 @@ describe ContactMailer do
 
     #ensure that the subject is correct
     it 'renders the subject' do
-      mail.subject.should == 'mfTechnology Contact Message'
+      mail.subject.should == ENV["SITE_EMAIL"]+' Contact Message'
     end
  
     #ensure that the receiver is correct
