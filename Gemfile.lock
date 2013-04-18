@@ -34,9 +34,6 @@ GEM
     addressable (2.3.3)
     arel (3.0.2)
     bcrypt-ruby (3.0.1-x86-mingw32)
-    better_errors (0.8.0)
-      coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
     bootstrap-sass (2.3.0.1)
       sass (~> 3.2)
     builder (3.0.4)
@@ -84,7 +81,6 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
-    ffi (1.4.0)
     ffi (1.4.0-x86-mingw32)
     figaro (0.6.1)
       rails (>= 3, < 5)
@@ -233,7 +229,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_attr
-  better_errors (>= 0.6.0)
   binding_of_caller (>= 0.7.1)
   bootstrap-sass (>= 2.3.0.0)
   cancan (>= 1.6.8)

@@ -1,15 +1,27 @@
 require 'spec_helper'
  
-describe ContactMailer do
+describe Notification do
 
-  describe 'send_contact_message' do
+  describe "Responds to:" do
+
+    it { Notification.should respond_to :send_email }
+
+  end  
+
+  describe 'send_email' do
 
     message = FactoryGirl.build(:message)
-    let(:mail) { ContactMailer.send_contact_message(message) }
+    email_args = {
+      "subject" => ENV["SITE_NAME"]+" Contact Us Message",
+      "from" => message.email,
+      "to" => ENV["SITE_EMAIL"], 
+      "template_file" => '_templates/email/send_contact_us'
+    }      
+    let(:mail) { Notification.send_email(message, email_args) }
 
     #ensure that the subject is correct
     it 'renders the subject' do
-      mail.subject.should == ENV["SITE_NAME"]+' Contact Message'
+      mail.subject.should == ENV["SITE_NAME"]+' Contact Us Message'
     end
  
     #ensure that the receiver is correct

@@ -8,14 +8,12 @@ class MessagesController < ApplicationController
     @message = Message.new(params[:message])
     if @message.valid?
       email_args = {
-        template_data: @message, 
-        template_file: '_templates/email/send_contact_us', 
-        to: ENV["SITE_EMAIL"], 
-        subject: ENV["SITE_NAME"]+" Contact Us Message",
-        from: @message.email,
-        name: @message.name
+        "subject" => ENV["SITE_NAME"]+" Contact Us Message",
+        "from" => @message.email,
+        "to" => ENV["SITE_EMAIL"], 
+        "template_file" => '_templates/email/send_contact_us'
       }
-      Notification.send_email(email_args).deliver
+      Notification.send_email(@message, email_args).deliver
       redirect_to root_url, notice: "Message sent! Thank you for contacting us."
     else
       render "new"
