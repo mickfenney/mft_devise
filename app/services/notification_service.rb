@@ -1,20 +1,23 @@
 class NotificationService < ActionMailer::Base
 
-  default :to => "notifications@example.com"
+  # Set defaults...
+  default :to => ENV["SITE_EMAIL"]
+  default :from => ENV["SITE_EMAIL"]
+  default :subject => "Message from #{ENV["SITE_NAME"]}"
 
-  def send_email(message, email_args, template_file) 
+  def send_email(email_message, email_args, template_file)
 
-    #raise email_args[:template_data].inspect
+    if email_args.nil? or email_args == ''
+      email_args = {}
+    end
 
-    @email_message = message
-    # Set defaults...
-    #email_args.merge!(from: 'foo')
+    @email_message = email_message
 
     mail(email_args) do |format|
-    #mail(subject: email_args['subject'], from: email_args['from'], to: email_args['to']) do |format|
       format.html { render template_file }
       format.text { render template_file }
     end
+
   end  
 
 end

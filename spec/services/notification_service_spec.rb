@@ -8,6 +8,29 @@ describe NotificationService do
 
   end  
 
+  describe 'default send_email' do
+
+    email_message = FactoryGirl.build(:email_message_presenter)
+    template_file = '_templates/email/send_contact_us'     
+    let(:mail) { NotificationService.send_email(email_message, nil, template_file) }
+
+    #ensure that the subject is correct
+    it 'renders the subject' do
+      mail.subject.should == "Message from #{ENV["SITE_NAME"]}"
+    end    
+
+    #ensure that the default receiver is correct
+    it 'renders the default receiver email' do
+      mail.to.should == [ENV["SITE_EMAIL"]]
+    end
+ 
+    #ensure that the default sender is correct
+    it 'renders the default sender email' do
+      mail.from.should == [ENV["SITE_EMAIL"]]
+    end    
+
+  end  
+
   describe 'send_email' do
 
     email_message = FactoryGirl.build(:email_message_presenter)

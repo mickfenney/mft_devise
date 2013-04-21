@@ -10,7 +10,7 @@ class ContactUsController < ApplicationController
       email_args = {
         subject: "#{ENV["SITE_NAME"]} Contact Us Message",
         from: @email_message.email,
-        to: ENV["SITE_EMAIL"]
+        to: "#{ENV["SITE_NAME"]} <#{ENV["SITE_EMAIL"]}>"
       }
       template_file = '_templates/email/send_contact_us'
       NotificationService.send_email(@email_message, email_args, template_file).deliver

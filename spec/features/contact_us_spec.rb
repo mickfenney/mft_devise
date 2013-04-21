@@ -66,7 +66,10 @@ describe "Contact Us" do
     fill_in "Message", :with => @email_message.content
     click_button "Send Message"
     page.should have_content("Message sent! Thank you for contacting us.")
-    #last_email.body.should include(ENV["SITE_NAME"])
+    last_email.subject.should == "#{ENV["SITE_NAME"]} Contact Us Message"
+    last_email.from.should == [@email_message.email]
+    last_email.to.should == [ENV["SITE_EMAIL"]]
+    last_email.body.encoded.should include(ENV["SITE_NAME"])
   end    
 
 end

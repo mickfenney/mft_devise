@@ -2,6 +2,8 @@ From: <%= @email_message.name.strip %>
 
 Email: <%= @email_message.email.strip %>
 
-Message: <%= @email_message.content.strip %>
+Message: 
+
+<%= @email_message.content.strip %>
 
 <%= ENV["SITE_NAME"] %> - <%= root_url %>
