@@ -52,6 +52,8 @@ Spork.prefork do
 
     config.include Rails.application.routes.url_helpers
 
+    config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
+
     config.include(MailerMacros)
     #config.before(:each) { reset_email }
     
