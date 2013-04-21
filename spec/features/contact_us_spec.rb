@@ -10,7 +10,7 @@ describe "Contact Us" do
       to: ENV["SITE_EMAIL"]
     } 
     template_file = '_templates/email/send_contact_us'
-    Notification.send_email(@email_message, email_args, template_file)
+    NotificationService.send_email(@email_message, email_args, template_file)
   end
 
   it "should not email a contact us message with no attributes" do

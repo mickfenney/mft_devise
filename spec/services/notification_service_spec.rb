@@ -1,10 +1,10 @@
 require 'spec_helper'
  
-describe Notification do
+describe NotificationService do
 
   describe "Responds to:" do
 
-    it { Notification.should respond_to :send_email }
+    it { NotificationService.should respond_to :send_email }
 
   end  
 
@@ -17,7 +17,7 @@ describe Notification do
       to: ENV["SITE_EMAIL"]
     } 
     template_file = '_templates/email/send_contact_us'     
-    let(:mail) { Notification.send_email(email_message, email_args, template_file) }
+    let(:mail) { NotificationService.send_email(email_message, email_args, template_file) }
 
     #ensure that the subject is correct
     it 'renders the subject' do

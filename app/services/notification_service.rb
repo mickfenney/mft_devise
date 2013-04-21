@@ -1,4 +1,4 @@
-class Notification < ActionMailer::Base
+class NotificationService < ActionMailer::Base
 
   default :to => "notifications@example.com"
 
