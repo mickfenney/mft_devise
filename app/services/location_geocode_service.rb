@@ -1,6 +1,6 @@
 require 'geocoder'
 
-class LocationGeocode 
+class LocationGeocodeService 
 
   # Create on the fly getters for these data members
   attr_reader :address, :latitude, :longitude, :geocoder_result
