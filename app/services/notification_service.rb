@@ -13,11 +13,19 @@ class NotificationService < ActionMailer::Base
 
     @email_message = email_message
 
+    _send_email(email_args, template_file).deliver
+
+  end  
+
+  private
+
+   def _send_email(email_args, template_file)
+
     mail(email_args) do |format|
       format.html { render template_file }
       format.text { render template_file }
-    end
+    end 
 
-  end  
+   end
 
 end
