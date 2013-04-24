@@ -16,7 +16,7 @@ describe LocationGeocodeService do
 
     it "should return the full address when given a valid google address" do
       @converter.address = 'Big Ben UK'
-      @converter.address.should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
+      @converter.address.should == 'Big Ben, Westminster, London, Greater London SW1A 0AA, UK' 
       @converter.latitude.should == 51.5007046 
       @converter.longitude.should == -0.1245748
     end     
@@ -48,7 +48,7 @@ describe LocationGeocodeService do
     end        
 
     it "should return the full address when given a valid google address in the constructor parameter" do
-      @converter2.address.should == 'Big Ben, Westminster Bridge Road, Parliament Square, London, Greater London SW1A 0AA, UK' 
+      @converter2.address.should == 'Big Ben, Westminster, London, Greater London SW1A 0AA, UK' 
     end  
 
     #####
