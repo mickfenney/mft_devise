@@ -43,6 +43,9 @@ group :test do
   gem "rspec-rails", ">= 2.12.2"
   gem "factory_girl_rails", ">= 4.2.0"
 end
+group :production do
+  #gem 'pg'
+end
 gem 'will_paginate', '> 3.0'
 gem "strip_attributes", ">= 1.2"
 gem 'geocoder'
@@ -52,3 +55,5 @@ gem 'active_attr'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+gem 'therubyracer'
+gem 'libnotify'
