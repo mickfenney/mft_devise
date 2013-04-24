@@ -7,13 +7,15 @@ class NotificationService < ActionMailer::Base
 
   def send_email(email_message, email_args, template_file)
 
+    attachments.inline['logo.jpg'] = File.read('app/assets/images/logo.jpg')
+
     if email_args.nil? or email_args == ''
       email_args = {}
     end
 
     @email_message = email_message
 
-    _send_email(email_args, template_file).deliver
+   _send_email(email_args, template_file)
 
   end  
 

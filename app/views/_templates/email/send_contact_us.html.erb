@@ -5,3 +5,5 @@
 <p>Message: <%= simple_format(@email_message.content.strip) %></p>
 
 <p><%= link_to ENV["SITE_NAME"], root_url %></p>
+
+<p><%= image_tag attachments['logo.jpg'].url %></p>
