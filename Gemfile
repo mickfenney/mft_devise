@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
+unless RUBY_PLATFORM =~ /mingw/i
+  ruby "2.0.0"
+  gem 'therubyracer'
+  gem 'libnotify'  
+end
 gem 'rails', '3.2.13'
 gem 'sqlite3'
 gem 'jquery-rails'
@@ -44,7 +49,7 @@ group :test do
   gem "factory_girl_rails", ">= 4.2.0"
 end
 group :production do
-  #gem 'pg'
+  gem 'pg'
 end
 gem 'will_paginate', '> 3.0'
 gem "strip_attributes", ">= 1.2"
@@ -55,5 +60,3 @@ gem 'active_attr'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
-gem 'therubyracer'
-gem 'libnotify'

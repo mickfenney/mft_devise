@@ -65,7 +65,7 @@ end
 
     it "should store full address when given a partial but valid address" do
       raw_address = 'Big Ben UK'
-      wanted_address = 'Big Ben, Westminster, London, Greater London SW1A 0AA, UK'
+      wanted_address = 'Big Ben, City of Westminster, London SW1A, UK'
       location = FactoryGirl.create(:location, :address => raw_address)
       Location.first.address.should == wanted_address
     end

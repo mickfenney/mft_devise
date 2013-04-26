@@ -31,5 +31,7 @@ guard 'rspec', :cli => '--color --format nested', :all_on_start => true, :all_af
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$}) { |m| "spec/requests/#{m[1]}_spec.rb" }
 end
 
-#notification :notifysend
-notification :libnotify, :timeout => 3, :transient => false, :append => true, :urgency => :critical
+unless RUBY_PLATFORM =~ /mingw/i
+  #notification :notifysend
+  notification :libnotify, :timeout => 3, :transient => false, :append => true, :urgency => :critical
+end
