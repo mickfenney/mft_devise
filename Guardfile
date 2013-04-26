@@ -13,7 +13,8 @@ guard 'spork', :cucumber => false, :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch(%r{^spec/support/.+\.rb$})
 end
 
-guard 'rspec', :cli => '', :all_on_start => true, :all_after_pass => true do
+#--color --format nested --fail-fast
+guard 'rspec', :cli => '--color --format nested', :all_on_start => true, :all_after_pass => true do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$}) { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb') { "spec" }
@@ -28,4 +29,9 @@ guard 'rspec', :cli => '', :all_on_start => true, :all_after_pass => true do
   watch('app/controllers/application_controller.rb') { "spec/controllers" }
   # Capybara request specs
   watch(%r{^app/views/(.+)/.*\.(erb|haml)$}) { |m| "spec/requests/#{m[1]}_spec.rb" }
+end
+
+unless RUBY_PLATFORM =~ /mingw/i
+  #notification :notifysend
+  notification :libnotify, :timeout => 3, :transient => false, :append => true, :urgency => :critical
 end

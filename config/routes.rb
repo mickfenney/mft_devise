@@ -4,7 +4,8 @@ MftDevise::Application.routes.draw do
 
   match '/about', to: 'pages#about'
 
-  match '/contact', to: 'messages#new'
+  get  '/contact', to: 'contact_us#new'
+  post '/contact', to: 'contact_us#create', :as => :contact_us
 
   authenticated :user do
     root :to => 'home#index'
@@ -14,6 +15,8 @@ MftDevise::Application.routes.draw do
   devise_for :users, :controllers => { :sessions      => "sessions", 
   	                                   :registrations => 'registrations', 
   	                                   :invitations   => 'invitations' }
-  resources :users, :messages
+  resources :users
+
+  match "/delayed_job" => DelayedJobWeb, :anchor => false
 
 end

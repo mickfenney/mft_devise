@@ -1,4 +1,4 @@
-class Message
+class EmailMessagePresenter
 
   include ActiveAttr::Model
   

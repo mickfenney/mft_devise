@@ -29,7 +29,7 @@ class Location < ActiveRecord::Base
   private
     def do_geocoding
       if is_map? and :address_changed?
-        locate_gecode = LocationGeocode.new(self[:address])
+        locate_gecode = LocationGeocodeService.new(self[:address])
         if locate_gecode.address.nil? or locate_gecode.latitude.nil? or locate_gecode.longitude.nil?
           self[:is_map] = false
           self[:latitude]  = nil
