@@ -10,11 +10,11 @@ describe "Contact Us" do
       to: ENV["SITE_EMAIL"]
     } 
     template_file = '_templates/email/send_contact_us'
-    # delay_args = { 
-    #   queue: "email", 
-    #   priority: 100
-    # }
-    NotificationService.send_email(@email_message, email_args, template_file)
+    delay_args = { 
+      queue: "email", 
+      priority: 100
+    }
+    NotificationService.send_email(@email_message, email_args, template_file, delay_args)
   end
 
   it "should not email a contact us message with no attributes" do
