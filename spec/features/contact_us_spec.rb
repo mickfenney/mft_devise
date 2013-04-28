@@ -10,11 +10,14 @@ describe "Contact Us" do
       to: ENV["SITE_EMAIL"]
     } 
     template_file = '_templates/email/send_contact_us'
+    # delay_args = { 
+    #   queue: "email", 
+    #   priority: 100
+    # }
     NotificationService.send_email(@email_message, email_args, template_file)
   end
 
   it "should not email a contact us message with no attributes" do
-    reset_email
     visit contact_path
     fill_in "Name", :with => nil
     fill_in "Email", :with => nil
@@ -26,7 +29,6 @@ describe "Contact Us" do
   end  
 
   it "should not email a contact us message with no name attribute" do
-    reset_email
     visit contact_path
     fill_in "Name", :with => nil
     fill_in "Email", :with => @email_message.email
@@ -37,7 +39,6 @@ describe "Contact Us" do
   end  
 
   it "should not email a contact us message with invalid email attribute" do
-    reset_email
     visit contact_path
     fill_in "Name", :with => @email_message.name
     fill_in "Email", :with => 'invalid_email'
@@ -48,7 +49,6 @@ describe "Contact Us" do
   end  
 
   it "should not email a contact us message with content attribute having more than 500 characters" do
-    reset_email
     visit contact_path
     fill_in "Name", :with => @email_message.name
     fill_in "Email", :with => @email_message.email
@@ -64,12 +64,25 @@ describe "Contact Us" do
     fill_in "Name", :with => @email_message.name
     fill_in "Email", :with => @email_message.email
     fill_in "Message", :with => @email_message.content
-    #click_button "Send Message"
-    #page.should have_content("Message sent! Thank you for contacting us.")
-    #last_email.subject.should == "#{ENV["SITE_NAME"]} Contact Us Message"
-    #last_email.from.should == [@email_message.email]
-    #last_email.to.should == [ENV["SITE_EMAIL"]]
-    #last_email.body.encoded.should include(ENV["SITE_NAME"])
+    click_button "Send Message"
+    page.should have_content("Message sent! Thank you for contacting us.")
+    job = Delayed::Job.first
+    Delayed::Job.count.should == 1
+    job.attributes['handler'].should match("#{ENV["SITE_NAME"]} Contact Us Message")    
+    job.attributes['handler'].should match(@email_message.email)
+    job.attributes['handler'].should match(ENV["SITE_EMAIL"])
+    job.attributes['handler'].should match(ENV["SITE_NAME"])
+    #raise job.to_yaml
+    job.invoke_job
+    job.destroy
+    Delayed::Job.count.should == 0
+    count_email.should == 1
+    last_email.subject.should == "#{ENV["SITE_NAME"]} Contact Us Message"
+    last_email.from.should == [@email_message.email]
+    last_email.to.should == [ENV["SITE_EMAIL"]]
+    last_email.body.encoded.should include(ENV["SITE_NAME"])
+    reset_email
+    count_email.should == 0
   end    
 
 end

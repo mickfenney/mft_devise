@@ -35,6 +35,9 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     bcrypt-ruby (3.0.1-x86-mingw32)
+    better_errors (0.8.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     binding_of_caller (0.7.1)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (2.3.1.0)
@@ -130,6 +133,9 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.1.0)
       launchy (~> 2.2.0)
+    libnotify (0.8.0)
+      ffi (>= 1.0.11)
+    libv8 (3.11.8.17)
     listen (1.0.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -146,6 +152,7 @@ GEM
     nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
     orm_adapter (0.4.0)
+    pg (0.14.1)
     pg (0.14.1-x86-mingw32)
     polyglot (0.3.3)
     pry (0.9.12.1)
@@ -193,6 +200,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.4)
     rolify (3.2.0)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
@@ -236,6 +244,9 @@ GEM
     sqlite3 (1.3.7-x86-mingw32)
     strip_attributes (1.4.3)
       activemodel (>= 3.0, < 5.0)
+    therubyracer (0.11.4)
+      libv8 (~> 3.11.8.12)
+      ref
     thin (1.5.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -263,6 +274,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_attr
+  better_errors (>= 0.6.0)
   binding_of_caller (>= 0.7.1)
   bootstrap-sass (>= 2.3.0.0)
   cancan (>= 1.6.8)
@@ -285,6 +297,7 @@ DEPENDENCIES
   guard-spork
   jquery-rails
   letter_opener (>= 1.1.0)
+  libnotify
   pg
   quiet_assets (>= 1.0.1)
   rack-mini-profiler
@@ -298,6 +311,7 @@ DEPENDENCIES
   spork-rails
   sqlite3
   strip_attributes (>= 1.2)
+  therubyracer
   thin (>= 1.5.1)
   uglifier (>= 1.0.3)
   wdm

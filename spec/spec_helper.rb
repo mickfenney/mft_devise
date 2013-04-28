@@ -52,6 +52,9 @@ Spork.prefork do
 
     config.include Rails.application.routes.url_helpers
 
+    config.filter_run focus: true
+    config.run_all_when_everything_filtered = true
+
     config.include ActionView::TestCase::Behavior, example_group: {file_path: %r{spec/presenters}}
 
     config.include(MailerMacros)
