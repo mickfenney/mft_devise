@@ -1,6 +1,6 @@
-class NotificationService
+class EmailDeliveryService < ActionMailer::Base
 
-  def self.send_email(email_message, email_args, template_file)
+  def send_email(email_message, email_args, template_file)
 
     return unless email_args[:to].present?
     return unless email_args[:from].present?
