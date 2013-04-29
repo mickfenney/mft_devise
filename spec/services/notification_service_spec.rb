@@ -74,74 +74,131 @@ describe NotificationService do
       job = Delayed::Job.first
 
       Delayed::Job.count.should == qty
-
     end
 
   end  
 
-  describe 'send_email' do
+  describe 'send email with template file and delay args' do
 
-    email_message = FactoryGirl.build(:email_message_presenter)
-    email_args = {
-      subject: "#{ENV["SITE_NAME"]} Contact Us Message",
-      from: email_message.email,
-      to: ENV["SITE_EMAIL"]
-    } 
-    template_file = '_templates/email/send_contact_us'     
-    delay_args = { 
-      queue: "email", 
-      priority: 100
-    }
-    let(:mail) { NotificationService.send_email(email_message, email_args, template_file, delay_args) }
+    # email_message = FactoryGirl.build(:email_message_presenter)
+    # email_args = {
+    #   subject: "#{ENV["SITE_NAME"]} Contact Us Message",
+    #   from: email_message.email,
+    #   to: ENV["SITE_EMAIL"]
+    # } 
+    # template_file = '_templates/email/send_contact_us'     
+    # delay_args = { 
+    #   queue: "email", 
+    #   priority: 100
+    # }
+    # let(:mail) { NotificationService.send_email(email_message, email_args, template_file, delay_args) }
 
-    # before (:each) do
-    #   email_message = FactoryGirl.build(:email_message_presenter)
-    #   email_args = {
-    #     subject: "#{ENV["SITE_NAME"]} Contact Us Message",
-    #     from: email_message.email,
-    #     to: ENV["SITE_EMAIL"]
-    #   } 
-    #   template_file = '_templates/email/send_contact_us'     
-    #   delay_args = { 
-    #     queue: "email", 
-    #     priority: 100
-    #   }      
-    #   NotificationService.send_email(email_message, email_args, template_file, delay_args)
-    #   job = Delayed::Job.first
-    #   job.invoke_job
-    #   job.destroy
+    # #ensure that the subject is correct
+    # it 'renders the subject' do
+    #   mail.subject.should == "#{ENV["SITE_NAME"]} Contact Us Message"
     # end
+
+    before (:each) do
+      @email_message = FactoryGirl.build(:email_message_presenter)
+      email_args = {
+        subject: "#{ENV["SITE_NAME"]} - This is a Test Message",
+        from: @email_message.email,
+        to: ENV["SITE_EMAIL"]
+      } 
+      template_file = '_templates/email/send_contact_us'     
+      delay_args = { 
+        queue: "email", 
+        priority: 100
+      }      
+      NotificationService.send_email(@email_message, email_args, template_file, delay_args)
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy
+    end
 
     #ensure that the subject is correct
     it 'renders the subject' do
-      mail.subject.should == "#{ENV["SITE_NAME"]} Contact Us Message"
+      last_email.subject.should == "#{ENV["SITE_NAME"]} - This is a Test Message"
     end
  
     #ensure that the receiver is correct
     it 'renders the receiver email' do
-      mail.to.should == [ENV["SITE_EMAIL"]]
+      last_email.to.should == [ENV["SITE_EMAIL"]]
     end
  
     #ensure that the sender is correct
     it 'renders the sender email' do
-      mail.from.should == [email_message.email]
+      last_email.from.should == [@email_message.email]
     end
  
     #ensure that the @name variable appears in the email body
     it 'assigns @name' do
-      mail.body.encoded.should match(email_message.name)
+      last_email.body.encoded.should match(@email_message.name)
     end
 
     #ensure that the @content variable appears in the email body
     it 'assigns @content' do
-      mail.body.encoded.should match(email_message.content)
+      last_email.body.encoded.should match(@email_message.content)
     end    
  
     #ensure that the @root_url variable appears in the email body
     it 'assigns @root_url' do
-      mail.body.encoded.should match('example.com')
+      last_email.body.encoded.should match('example.com')
     end
 
+    #ensure that the site name variable appears in the email body
+    it 'assigns site name' do
+      last_email.body.encoded.should match(ENV["SITE_NAME"])
+    end  
+
+    #ensure that the inline attachmet variable appears in the email body
+    it 'assigns inline attachmet' do
+      last_email.body.encoded.should match('logo.jpg')
+    end     
+
+    #ensure that the inline attachmets variable appears in the email body
+    it 'assigns multipy inline attachmets' do
+      last_email.body.encoded.should match('logo.jpg')
+      #last_email.body.encoded.should match('logo2.jpg')
+    end       
+
   end
+
+  describe 'send email with no template file and no delay args' do
+
+    before (:each) do
+      @email_message = FactoryGirl.build(:email_message_presenter)
+      email_args = {
+        subject: "#{ENV["SITE_NAME"]} - This is a Test Message",
+        from: @email_message.email,
+        to: ENV["SITE_EMAIL"]
+      }   
+      NotificationService.send_email(@email_message, email_args, nil, nil)
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy
+    end
+
+    #ensure that the subject is correct
+    it 'renders the subject' do
+      last_email.subject.should == "#{ENV["SITE_NAME"]} - This is a Test Message"
+    end
+ 
+    #ensure that the receiver is correct
+    it 'renders the receiver email' do
+      last_email.to.should == [ENV["SITE_EMAIL"]]
+    end
+ 
+    #ensure that the sender is correct
+    it 'renders the sender email' do
+      last_email.from.should == [@email_message.email]
+    end
+ 
+    #ensure that the email body is blank
+    it 'assigns body' do
+      last_email.body.encoded.should be_blank
+    end  
+
+  end  
 
 end

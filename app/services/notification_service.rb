@@ -1,16 +1,12 @@
 class NotificationService
 
   def self.send_email(email_message, email_args, template_file, delay_args)
-
-    return unless email_args[:to].present?
-    return unless email_args[:from].present?
+    
     return unless email_args[:subject].present?
+    return unless email_args[:from].present?
+    return unless email_args[:to].present?
 
     @email_message = email_message
-
-    if email_args.nil? or email_args == ''
-      email_args = {}
-    end
 
     if delay_args.nil? or delay_args == ''
       delay_args = {}
