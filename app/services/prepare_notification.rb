@@ -10,12 +10,14 @@ class PrepareNotification
 
     template_file = '_templates/email/send_contact_us'
 
+    inline_attachments = 'app/assets/images/email/email_footer.jpg'
+
     delay_args = { 
       queue: "email", 
       priority: 100
     }
 
-    NotificationService.send_email(email_message, email_args, template_file, delay_args)
+    NotificationService.send_email(email_message, email_args, template_file, delay_args, inline_attachments)
 
   end
 

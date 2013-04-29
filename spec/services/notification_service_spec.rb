@@ -17,13 +17,13 @@ describe NotificationService do
       } 
       email_message = FactoryGirl.build(:email_message_presenter)
       template_file = '_templates/email/send_contact_us'     
-
+      inline_attachments = 'app/assets/images/email/email_footer.jpg'
       delay_args = { 
         queue: "email", 
         priority: 100
       }
 
-      NotificationService.send_email(email_message, email_args, template_file, delay_args)
+      NotificationService.send_email(email_message, email_args, template_file, delay_args, inline_attachments)
 
       job = Delayed::Job.first
 
@@ -38,13 +38,13 @@ describe NotificationService do
       } 
       email_message = FactoryGirl.build(:email_message_presenter)
       template_file = '_templates/email/send_contact_us'     
-
+      inline_attachments = 'app/assets/images/email/email_footer.jpg'
       delay_args = { 
         queue: "email", 
         priority: 100
       }
 
-      NotificationService.send_email(email_message, email_args, template_file, delay_args)
+      NotificationService.send_email(email_message, email_args, template_file, delay_args, inline_attachments)
 
       job = Delayed::Job.first
 
@@ -63,13 +63,13 @@ describe NotificationService do
       } 
       email_message = FactoryGirl.build(:email_message_presenter)
       template_file = '_templates/email/send_contact_us' 
-
+      inline_attachments = 'app/assets/images/email/email_footer.jpg'
       delay_args = { 
         queue: "email", 
         priority: 100
       }
 
-      NotificationService.send_email(email_message, email_args, template_file, delay_args)
+      NotificationService.send_email(email_message, email_args, template_file, delay_args, inline_attachments)
 
       job = Delayed::Job.first
 
@@ -106,11 +106,12 @@ describe NotificationService do
         to: ENV["SITE_EMAIL"]
       } 
       template_file = '_templates/email/send_contact_us'     
+      inline_attachments = ['app/assets/images/email/email_header.jpg', 'app/assets/images/email/email_footer.jpg', 'app/assets/images/email/email_attachment.jpg']
       delay_args = { 
         queue: "email", 
         priority: 100
       }      
-      NotificationService.send_email(@email_message, email_args, template_file, delay_args)
+      NotificationService.send_email(@email_message, email_args, template_file, delay_args, inline_attachments)
       job = Delayed::Job.first
       job.invoke_job
       job.destroy
@@ -151,20 +152,21 @@ describe NotificationService do
       last_email.body.encoded.should match(ENV["SITE_NAME"])
     end  
 
-    #ensure that the inline attachmet variable appears in the email body
-    it 'assigns inline attachmet' do
-      last_email.body.encoded.should match('logo.jpg')
+    #ensure that the inline attachment variable appears in the email body
+    it 'assigns inline attachment' do
+      last_email.body.encoded.should match('email_footer.jpg')
     end     
 
-    #ensure that the inline attachmets variable appears in the email body
-    it 'assigns multipy inline attachmets' do
-      last_email.body.encoded.should match('logo.jpg')
-      #last_email.body.encoded.should match('logo2.jpg')
-    end       
+    #ensure that the inline attachments variable appears in the email body
+    it 'assigns multipy inline attachments' do
+      last_email.body.encoded.should match('email_header.jpg')
+      last_email.body.encoded.should match('email_footer.jpg')
+      last_email.body.encoded.should match('email_attachment.jpg')
+    end             
 
   end
 
-  describe 'send email with no template file and no delay args' do
+  describe 'send email with no template file, no delay args and inline attachments' do
 
     before (:each) do
       @email_message = FactoryGirl.build(:email_message_presenter)
@@ -173,7 +175,7 @@ describe NotificationService do
         from: @email_message.email,
         to: ENV["SITE_EMAIL"]
       }   
-      NotificationService.send_email(@email_message, email_args, nil, nil)
+      NotificationService.send_email(nil, email_args, nil, nil, nil)
       job = Delayed::Job.first
       job.invoke_job
       job.destroy
