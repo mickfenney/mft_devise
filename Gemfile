@@ -5,7 +5,6 @@ unless RUBY_PLATFORM =~ /mingw/i
   gem 'libnotify'  
 end
 gem 'rails', '3.2.13'
-gem 'sqlite3'
 gem 'jquery-rails'
 gem "thin", ">= 1.5.1"
 gem "bootstrap-sass", ">= 2.3.0.0"
@@ -21,6 +20,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 group :development do
+  gem 'sqlite3'
   gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
   gem 'guard-spork'
   gem 'guard'
@@ -35,6 +35,7 @@ group :development do
   gem "factory_girl_rails", ">= 4.2.0"
 end
 group :test do
+  gem 'sqlite3'
   gem 'rspec'
   gem 'growl'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
@@ -60,3 +61,4 @@ gem 'active_attr'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
+gem 'devise-async'
