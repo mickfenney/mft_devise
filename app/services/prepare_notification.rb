@@ -10,7 +10,8 @@ class PrepareNotification
 
     template_file = '_templates/email/send_contact_us'
 
-    inline_attachments = 'app/assets/images/email/email_footer.jpg'
+    #inline_attachments = 'app/assets/images/email/email_footer.jpg'
+    inline_attachments = nil
 
     delay_args = { 
       queue: "email", 

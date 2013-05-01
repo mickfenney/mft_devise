@@ -1,9 +1,24 @@
-<p>From: <%= @email_message.name.strip %></p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <!-- Facebook sharing information tags -->
+        <meta property="og:title" content="*|MC:SUBJECT|*" />
+        
+        <title>*|MC:SUBJECT|*</title>
+	</head>
+    <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
 
-<p>Email: <%= @email_message.email.strip %></p>
+		<p>From: <%= @email_message.name.strip %></p>
 
-<p>Message: <%= simple_format(@email_message.content.strip) %></p>
+		<p>Email: <%= @email_message.email.strip %></p>
 
-<p><%= link_to ENV["SITE_NAME"], root_url %></p>
+		<p>Message: <%= simple_format(@email_message.content.strip) %></p>
 
-<p><%= image_tag attachments['email_footer.jpg'].url %></p>
+		<p><%= link_to ENV["SITE_NAME"], root_url %></p>
+
+	    <p><%= image_tag "#{root_url}assets/email/email_footer.jpg" %></p>
+    
+    </body>
+</html>

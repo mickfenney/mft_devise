@@ -28,7 +28,7 @@ group :development do
   gem 'growl'
   gem 'ruby_gntp'
   gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
-  gem "letter_opener", ">= 1.1.0"
+  #gem "letter_opener", ">= 1.1.0"
   gem "quiet_assets", ">= 1.0.1"
   gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
   gem "rspec-rails", ">= 2.12.2"

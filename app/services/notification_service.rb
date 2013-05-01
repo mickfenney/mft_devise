@@ -12,7 +12,9 @@ class NotificationService
 
     @email_message = email_message
 
-    inline_attachments = [inline_attachments] if inline_attachments.is_a? String
+    unless inline_attachments.nil? or inline_attachments == ''
+      inline_attachments = [inline_attachments] if inline_attachments.is_a? String
+    end
 
     email_args[:to] = [email_args[:to]] if email_args[:to].is_a? String
 
