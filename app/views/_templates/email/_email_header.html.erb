@@ -356,7 +356,7 @@ max-width:280px;
                                      <tr>
                                          <td valign="top">
                                              <div mc:edit="std_preheader_content">
-                                                 Contact us about any site related issues.
+                                                 <%= ENV["SITE_NAME"] %> is part of the Ascet Software group.
                                                 </div>
                                             </td>
                                         </tr>
@@ -374,7 +374,7 @@ max-width:280px;
                                         <tr>
                                             <td class="headerContent">
                                              <!-- // Begin Module: Standard Header Image \\ -->
-                                             <img src=<%= "#{root_url}assets/email/email_header.jpg" %> style="max-width:320px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
+                                             <img src=<%= "#{root_url}assets/email_header.png" %> style="max-width:320px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
                                              <!-- // End Module: Standard Header Image \\ -->
                                             </td>
                                         </tr>
