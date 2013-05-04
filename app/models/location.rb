@@ -24,7 +24,17 @@ class Location < ActiveRecord::Base
 
   before_validation strip_attributes :except => [:address, :latitude, :longitude, :is_map]
 
-  after_validation :do_geocoding
+  #after_validation :run_geocode
+
+  after_save :run_geocode, :if => :address_changed?
+
+  def run_geocode
+    delay_args = { 
+      queue: "geocoder", 
+      priority: 200
+    }
+    self.delay(delay_args).do_geocoding
+  end  
 
   private
     def do_geocoding
@@ -39,6 +49,7 @@ class Location < ActiveRecord::Base
           self[:latitude]  = locate_gecode.latitude
           self[:longitude] = locate_gecode.longitude
         end
+        self.save
       end
     end # do_geocoding method
   

@@ -44,12 +44,18 @@ end
     end
 
     it "should populate the latitude field when given a valid address" do
-      location = FactoryGirl.create(:location, :latitude => nil)
-      location.latitude.should == @micks_house.latitude
+      location = FactoryGirl.create(:location)
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy    
+      location.latitude.should == @micks_house.latitude  
     end
 
     it "should populate the longitude field when given a valid address" do
-      location = FactoryGirl.create(:location, :longitude => nil)
+      location = FactoryGirl.create(:location)
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy     
       location.longitude.should == @micks_house.longitude
     end
 
@@ -67,16 +73,25 @@ end
       raw_address = 'Big Ben UK'
       wanted_address = 'Big Ben, City of Westminster, London SW1A, UK'
       location = FactoryGirl.create(:location, :address => raw_address)
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy      
       Location.first.address.should == wanted_address
     end
 
     it "should store the correct latitude when given a partial but valid address" do
       location = FactoryGirl.create(:location, :address => @micks_house.address, :latitude => nil)
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy    
       Location.first.latitude.should == @micks_house.latitude
     end
 
     it "should store the correct longitude when given a partial but valid address" do
       location = FactoryGirl.create(:location, :address => @micks_house.address, :longitude => nil)
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy      
       Location.first.longitude.should == @micks_house.longitude
     end        
 
@@ -88,6 +103,9 @@ end
       mick = Location.first
       mick.address = invalid_address
       mick.save
+      job = Delayed::Job.first
+      job.invoke_job
+      job.destroy   
       # Make sure the database record count stays at 1
       Location.count.should == 1
       # query back mick record and check fileds are nil

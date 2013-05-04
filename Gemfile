@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 unless RUBY_PLATFORM =~ /mingw/i
   ruby "2.0.0"
-  gem 'therubyracer'
+  #gem 'therubyracer'
   gem 'libnotify'  
 end
 gem 'rails', '3.2.13'

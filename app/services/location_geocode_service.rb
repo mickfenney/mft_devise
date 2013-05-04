@@ -33,9 +33,10 @@ class LocationGeocodeService
       @longitude = nil
       unless @address.nil?
         @address.strip!
+        Geocoder.configure(:timeout => 15)
         unless ENV['HTTP_PROXY'].nil?
           http_proxy_env = ENV['HTTP_PROXY'].sub(/http:\/\//, "")
-          Geocoder.configure(:http_proxy => http_proxy_env, :timeout => 5)
+          Geocoder.configure(:http_proxy => http_proxy_env, :timeout => 15)
         end          
         @geocoder_result = Geocoder.search(@address)
         begin
