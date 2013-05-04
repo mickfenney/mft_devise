@@ -19,7 +19,7 @@ class EmailDeliveryService < ActionMailer::Base
     else
       mail(email_args) do |format|
         format.html { render template_file }
-        format.text { render template_file }
+        #format.text { render template_file }
       end
     end  
 

@@ -17,7 +17,7 @@ describe NotificationService do
       } 
       email_message = FactoryGirl.build(:email_message_presenter)
       template_file = '_templates/email/send_contact_us'     
-      inline_attachments = 'app/assets/images/email/email_footer.jpg'
+      inline_attachments = 'app/assets/images/email_header.png'
       delay_args = { 
         queue: "email", 
         priority: 100
@@ -38,7 +38,7 @@ describe NotificationService do
       } 
       email_message = FactoryGirl.build(:email_message_presenter)
       template_file = '_templates/email/send_contact_us'     
-      inline_attachments = 'app/assets/images/email/email_footer.jpg'
+      inline_attachments = 'app/assets/images/email_header.png'
       delay_args = { 
         queue: "email", 
         priority: 100
@@ -63,7 +63,7 @@ describe NotificationService do
       } 
       email_message = FactoryGirl.build(:email_message_presenter)
       template_file = '_templates/email/send_contact_us' 
-      inline_attachments = 'app/assets/images/email/email_footer.jpg'
+      inline_attachments = 'app/assets/images/email_header.png'
       delay_args = { 
         queue: "email", 
         priority: 100
@@ -106,7 +106,7 @@ describe NotificationService do
         to: ENV["SITE_EMAIL"]
       } 
       template_file = '_templates/email/send_contact_us'     
-      inline_attachments = ['app/assets/images/email/email_header.jpg', 'app/assets/images/email/email_footer.jpg', 'app/assets/images/email/email_attachment.jpg']
+      inline_attachments = ['app/assets/images/email_header.png']
       delay_args = { 
         queue: "email", 
         priority: 100
@@ -154,14 +154,12 @@ describe NotificationService do
 
     #ensure that the inline attachment variable appears in the email body
     it 'assigns inline attachment' do
-      last_email.body.encoded.should match('email_footer.jpg')
+      last_email.body.encoded.should match('email_header.png')
     end     
 
     #ensure that the inline attachments variable appears in the email body
     it 'assigns multipy inline attachments' do
-      last_email.body.encoded.should match('email_header.jpg')
-      last_email.body.encoded.should match('email_footer.jpg')
-      last_email.body.encoded.should match('email_attachment.jpg')
+      last_email.body.encoded.should match('email_header.png')
     end             
 
   end
