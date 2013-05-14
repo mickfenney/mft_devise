@@ -4,9 +4,7 @@
   <div class="row">
     <div class="span12">
 
-      <%= render 'layouts/messages' %>
-
-      <h3>Edit <%= resource_name.to_s.humanize %></h3>
+     <h3>Edit <%= "#{resource_name.to_s.humanize}: #{current_user.name}" %></h3>
 
       <ul class="nav nav-tabs">
         <li class="<%= is_active_tab('general', params[:tab]) %>"><a href="#general" data-toggle="tab">General</a></li>
