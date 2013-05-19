@@ -7,7 +7,7 @@ describe "User Sign In" do
   end
 
   it "should be able to login as a valid user" do
-    visit "#{root_path}users/sign_in"
+    visit new_user_session_path
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => @user.password
     click_button "Sign in"
@@ -16,7 +16,7 @@ describe "User Sign In" do
   end 	
 
   it "should not be able to login as a non valid user" do
-    visit "#{root_path}users/sign_in"
+    visit new_user_session_path
     fill_in "Email", :with => nil
     fill_in "Password", :with => nil
     click_button "Sign in"
@@ -24,7 +24,7 @@ describe "User Sign In" do
   end   
 
   it "should redirect to Edit User page when clicking Edit link on User page" do
-    visit "#{root_path}users/sign_in"
+    visit new_user_session_path
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => @user.password
     click_button "Sign in"
@@ -43,3 +43,137 @@ describe "User Sign In" do
   end    
 
 end	
+
+#######################################################
+
+describe 'User Sign Up' do
+
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+  end   
+
+  it 'should allow a new user to sign up with valid details' do
+    visit new_user_registration_path
+    fill_in 'Name', :with => 'New User'
+    fill_in 'Email', :with => 'newuser@example.com'
+    fill_in 'Password', :with => 'userpassword'
+    fill_in 'Password confirmation', :with => 'userpassword'
+    click_button 'Sign up'
+    page.should have_content("A message with a confirmation link has been sent to your email address. Please open the link to activate your account.")
+  end
+
+  it 'should not allow a new user to sign up with an blank name' do
+    visit new_user_registration_path
+    fill_in 'Name', :with => nil
+    fill_in 'Email', :with => 'newuser@example.com'
+    fill_in 'Password', :with => 'userpassword'
+    fill_in 'Password confirmation', :with => 'userpassword'
+    click_button 'Sign up'
+    page.should have_content("Please review the problems below:")
+    page.should have_content("can't be blank")
+  end 
+
+  it 'should not allow a new user to sign up with a blank email' do
+    visit new_user_registration_path
+    fill_in 'Name', :with => nil
+    fill_in 'Email', :with => @user.email
+    fill_in 'Password', :with => 'userpassword'
+    fill_in 'Password confirmation', :with => 'userpassword'
+    click_button 'Sign up'
+    page.should have_content("Please review the problems below:")
+    page.should have_content("can't be blank")
+  end  
+
+  it 'should not allow a new user to sign up with an invalid email' do
+    visit new_user_registration_path
+    fill_in 'Name', :with => 'New User'
+    fill_in 'Email', :with => 'is_a_invalid_email'
+    fill_in 'Password', :with => 'userpassword'
+    fill_in 'Password confirmation', :with => 'userpassword'
+    click_button 'Sign up'
+    page.should have_content("Please review the problems below:")
+    page.should have_content("is invalid")
+  end     
+
+  it 'should not allow a new user to sign up with an already valid user email' do
+    visit new_user_registration_path
+    fill_in 'Name', :with => 'New User'
+    fill_in 'Email', :with => @user.email
+    fill_in 'Password', :with => 'userpassword'
+    fill_in 'Password confirmation', :with => 'userpassword'
+    click_button 'Sign up'
+    page.should have_content("Please review the problems below:")
+    page.should have_content("has already been taken")
+  end
+
+  it 'should not allow a new user to sign up with blank passwords' do
+    visit new_user_registration_path
+    fill_in 'Name', :with => 'New User'
+    fill_in 'Email', :with => 'newuser@example.com'
+    fill_in 'Password', :with => nil
+    fill_in 'Password confirmation', :with => nil
+    click_button 'Sign up'
+    page.should have_content("Please review the problems below:")
+    page.should have_content("can't be blank")
+  end
+
+  it 'should not allow a new user to sign up with mismatched passwords' do
+    visit new_user_registration_path
+    fill_in 'Name', :with => 'New User'
+    fill_in 'Email', :with => 'newuser@example.com'
+    fill_in 'Password', :with => 'userpassword'
+    fill_in 'Password confirmation', :with => 'mismatchedpassword'
+    click_button 'Sign up'
+    page.should have_content("Please review the problems below:")
+    page.should have_content("doesn't match confirmation")
+  end         
+
+end
+
+#######################################################
+
+describe 'User Forgot password' do
+
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+  end  
+
+  it 'should allow a user to recover password' do
+    reset_email
+    visit new_user_session_path
+    click_link 'Forgot your password?'
+    fill_in 'Email', :with => @user.email
+    click_button 'Send me reset password instructions'
+    job = Delayed::Job.first
+    Delayed::Job.count.should == 1
+    job.attributes['handler'].should match(":reset_password_instructions")
+    job.attributes['queue'].should match("devise_email")
+    #raise job.to_yaml
+    job.invoke_job
+    job.destroy
+    Delayed::Job.count.should == 0
+    count_email.should == 1
+    last_email.subject.should == "Reset password instructions"
+    last_email.from.should == [ENV["SITE_EMAIL"]]
+    last_email.to.should == [@user.email]
+    last_email.body.encoded.should include("Someone has requested a link to change your password. You can do this through the link below.")
+    last_email.body.encoded.should include(ENV["SITE_NAME"])
+    reset_email
+    count_email.should == 0
+  end 
+
+end
+
+#######################################################
+
+describe 'Invite User' do
+
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+  end   
+
+  it 'should allow a new user to be invited' do
+    pending
+  end  
+
+end 
