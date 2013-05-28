@@ -29,7 +29,7 @@ describe "Class Field Presence:" do
   it { should_not strip_attribute :address }
   it { should_not strip_attribute :is_map } 
   it { should_not strip_attribute :longitude }
-  it { should_not strip_attribute :latitude } 
+  it { should_not strip_attribute :latitude }
 end
 ################################################################################
   describe "Class Instantiation:" do
@@ -71,7 +71,7 @@ end
 
     it "should store full address when given a partial but valid address" do
       raw_address = 'Big Ben UK'
-      wanted_address = 'Big Ben, City of Westminster, London SW1A, UK'
+      wanted_address = 'Big Ben, London, Greater London SW1A 0AA, UK'
       location = FactoryGirl.create(:location, :address => raw_address)
       job = Delayed::Job.first
       job.invoke_job

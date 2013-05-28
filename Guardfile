@@ -33,5 +33,5 @@ end
 
 unless RUBY_PLATFORM =~ /mingw/i
   #notification :notifysend
-  notification :libnotify, :timeout => 3, :transient => false, :append => true, :urgency => :critical
+  notification :libnotify, :timeout => 4, :transient => false, :append => true
 end

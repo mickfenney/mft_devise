@@ -5,8 +5,8 @@ FactoryGirl.define do
     name "Home"
     address "75 Seaview Avenue, Safety Beach VIC 3936, Australia"
     is_map true
-    latitude -38.31199
-    longitude 144.996326
+    latitude -38.312
+    longitude 144.996
     locatable_id 1
     locatable_type "User"
   end

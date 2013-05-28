@@ -20,7 +20,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 group :development do
-  gem 'sqlite3'
+  #gem 'sqlite3'
+  gem 'mysql2'
   gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
   gem 'guard-spork'
   gem 'guard'
@@ -35,7 +36,8 @@ group :development do
   gem "factory_girl_rails", ">= 4.2.0"
 end
 group :test do
-  gem 'sqlite3'
+  #gem 'sqlite3'
+  gem 'mysql2'
   gem 'rspec'
   gem 'growl'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
@@ -50,7 +52,8 @@ group :test do
   gem "factory_girl_rails", ">= 4.2.0"
 end
 group :production do
-  gem 'pg'
+  #gem 'pg'
+  gem 'mysql2'
 end
 gem 'will_paginate', '> 3.0'
 gem "strip_attributes", ">= 1.2"
