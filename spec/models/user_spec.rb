@@ -146,7 +146,34 @@ describe User do
       user = FactoryGirl.build(:user)
       user.add_role(:user)
       user.has_role?(:user).should be_true
-    end    
+    end  
+
+    it "should send a invatation email to the invited 'user'" do
+      reset_email
+      count_email.should == 0
+      u1 = FactoryGirl.create(:user)
+      #u1.add_role(:admin)
+      #u1.save!
+      u2 = FactoryGirl.create(:user, :name => 'inviteuser', :email => 'inviteuser@example.com', :invited_by_id => u1.id)
+      u2.invite!
+      job = Delayed::Job.first
+      Delayed::Job.count.should == 1
+      job.invoke_job
+      job.destroy
+      Delayed::Job.count.should == 0
+      count_email.should == 1
+      last_email.subject.should == "Invitation instructions"
+      last_email.from.should == [ENV["SITE_EMAIL"]]
+      last_email.to.should == ['inviteuser@example.com']
+      last_email.body.encoded.should include("Someone has invited you")
+      last_email.body.encoded.should include("you can accept it through the link below.")
+      last_email.body.encoded.should include("If you don't want to accept the invitation, please ignore this email.")
+      last_email.body.encoded.should include("Your account won't be created until you access the link above and set your password.")
+      last_email.body.encoded.should include(ENV["SITE_NAME"])
+      reset_email
+      count_email.should == 0  
+      #u1.accept_invitation!
+    end       
 
   end
 end

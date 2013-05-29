@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable, :async      
+         :recoverable, :rememberable, :trackable, :validatable, :async 
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :name, :email, :phone, :password, :password_confirmation, :locations, :theme, :locations_attributes, :as => :admin
@@ -60,6 +60,23 @@ class User < ActiveRecord::Base
 
   after_create :assign_default_role
   after_save :assign_default_role
+
+  ### TODO: test is passing when it should not pass
+  # # devise_invitable accept_invitation! method overriden
+  # def accept_invitation!
+  #   #logger.debug 'accept_invitation called'
+  #   self.confirm! 
+  #   super
+  # end
+
+  # devise_invitable invite! method overriden
+  def invite!
+    #logger.debug 'invite called'
+    self.confirm!
+    super
+    #self.confirmed_at = Time.now
+    #self.save
+  end  
 
   def phone=(num)
     num.gsub!(/\D/, '') if num.is_a?(String)
