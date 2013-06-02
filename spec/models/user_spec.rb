@@ -102,6 +102,18 @@ describe User do
       short_pw.should_not be_valid
     end
 
+    it "should be able to change username and password" do
+      user = FactoryGirl.create(:user)
+      user.name.should == 'Test User'
+      user.password.should == 'changeme'
+      user.name = 'New User'
+      user.password = 'password'
+      user.password_confirmation = 'password'
+      user.save
+      user.name.should == 'New User'
+      user.password.should == 'password'
+    end    
+
     describe "password encryption" do
       before(:each) do
         @user = FactoryGirl.create(:user)
@@ -143,8 +155,7 @@ describe User do
     end 
 
     it "should automatically set the role as 'user'" do
-      user = FactoryGirl.build(:user)
-      user.add_role(:user)
+      user = FactoryGirl.create(:user)
       user.has_role?(:user).should be_true
     end  
 
@@ -152,10 +163,11 @@ describe User do
       reset_email
       count_email.should == 0
       u1 = FactoryGirl.create(:user)
-      #u1.add_role(:admin)
-      #u1.save!
-      u2 = FactoryGirl.create(:user, :name => 'inviteuser', :email => 'inviteuser@example.com', :invited_by_id => u1.id)
+      u1.add_role(:admin)
+      u1.has_role?(:admin).should be_true
+      u2 = FactoryGirl.build(:user, :name => 'inviteuser', :email => 'inviteuser@example.com', :invited_by_id => u1.id, :invited_by_type => 'User')
       u2.invite!
+      #raise u2.to_yaml
       job = Delayed::Job.first
       Delayed::Job.count.should == 1
       job.invoke_job
@@ -172,7 +184,6 @@ describe User do
       last_email.body.encoded.should include(ENV["SITE_NAME"])
       reset_email
       count_email.should == 0  
-      #u1.accept_invitation!
     end       
 
   end
