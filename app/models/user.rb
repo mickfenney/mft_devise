@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   attr_accessible :role_ids, :name, :email, :phone, :password, :password_confirmation, :locations, :theme, :locations_attributes, :as => :admin
   attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :locations_attributes
 
-  enum_attr :theme, ['default', 'amelia', 'slate', 'united'].sort
+  enumerate :theme, :with => ThemeEnum
 
   validates_presence_of :name, :theme
   #validates_uniqueness_of :name
@@ -53,6 +53,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :locations, allow_destroy: true
 
   before_validation strip_attributes :except => [:phone, :password, :password_confirmation]
+
+  validates_inclusion_of :theme, :in => ThemeEnum
 
   validates :name, :length => { :maximum => 255 }
   validates :email, :length => { :maximum => 255 }

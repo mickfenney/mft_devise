@@ -139,9 +139,8 @@ describe User do
     end    
 
     it "should not create a new instance given and invalid 'theme' (enum) attribute" do
-      expect {
-        user = FactoryGirl.build(:user, :theme => 'notheme')
-      }.to raise_error
+      user = FactoryGirl.build(:user, :theme => 'notheme')
+      user.should_not be_valid
     end    
 
     it "should not create a new instance given a nil 'theme' (enum) attribute" do

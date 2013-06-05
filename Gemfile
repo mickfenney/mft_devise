@@ -58,7 +58,7 @@ end
 gem 'will_paginate', '> 3.0'
 gem "strip_attributes", ">= 1.2"
 gem 'geocoder'
-gem 'enumerated_attribute'
+gem 'active_enum' 
 gem 'rack-mini-profiler'
 gem 'active_attr'
 gem 'daemons'

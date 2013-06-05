@@ -29,7 +29,7 @@
                 <span class="add-on"><i class="icon-bell"></i></span><%= f.input_field :phone, :required => false, :size => '' %>
               <% end %>
               <%= f.input :theme, :wrapper => :prepend do %>
-                <span class="add-on"><i class="icon-wrench"></i></span><%= f.enum_select :theme %> 
+                <span class="add-on"><i class="icon-wrench"></i></span><%= f.input_field :theme, :include_blank => false %> 
               <% end %>
               <div class="form-actions">
                 <%= f.button :submit, "Update", :class => 'btn btn-primary' %>
