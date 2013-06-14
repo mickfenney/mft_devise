@@ -250,6 +250,56 @@ describe 'Invite User' do
     last_email.body.encoded.should include(ENV["SITE_NAME"])
     reset_email
     count_email.should == 0    
-  end    
+  end  
 
-end 
+end
+
+#######################################################
+
+describe 'Search User' do    
+
+  before(:each) do
+    @admin_user = FactoryGirl.create(:user)
+    @admin_user.add_role(:admin)
+    @admin_user.has_role?(:admin).should be_true
+    @user = FactoryGirl.create(:user, :name => 'New User', :email => 'new@example.com')
+  end 
+
+  it 'should be able to search for a user'  do
+    visit new_user_session_path
+    fill_in "Email", :with => @admin_user.email
+    fill_in "Password", :with => @admin_user.password
+    click_button "Sign in"
+    page.should have_content("Signed in successfully.")
+    page.should have_content(@admin_user.name) 
+    visit users_path
+    page.should have_selector('h3', text: 'Users')
+    fill_in 'search', :with => 'nomatch' 
+    click_button "Search"
+    page.should have_content("Your search for 'nomatch' did not return any results")
+    fill_in 'search', :with => 'Test'
+    click_button "Search"
+    page.should have_content("example@example.com")
+    fill_in 'search', :with => 'New'
+    click_button "Search"
+    page.should have_content("new@example.com")
+    fill_in 'search', :with => ''
+    click_button "Search"
+    page.should have_content("example@example.com")
+    page.should have_content("new@example.com")
+    #save_and_open_page
+  end
+
+  it 'should be redirected to home page if you are not an admin user'  do
+    visit new_user_session_path
+    fill_in "Email", :with => @user.email
+    fill_in "Password", :with => @user.password
+    click_button "Sign in"
+    page.should have_content("Signed in successfully.")
+    page.should have_content(@user.name) 
+    visit users_path
+    page.should have_selector('h3', text: 'Home')
+    page.should have_content("Not authorized as an administrator.")
+  end  
+
+end
