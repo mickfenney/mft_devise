@@ -34,6 +34,7 @@ group :development do
   gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
   gem "rspec-rails", ">= 2.12.2"
   gem "factory_girl_rails", ">= 4.2.0"
+  gem 'faker'
 end
 group :test do
   #gem 'sqlite3'
@@ -50,6 +51,7 @@ group :test do
   gem "email_spec", ">= 1.4.0"
   gem "rspec-rails", ">= 2.12.2"
   gem "factory_girl_rails", ">= 4.2.0"
+  gem 'faker'
 end
 group :production do
   #gem 'pg'

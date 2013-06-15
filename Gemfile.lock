@@ -101,6 +101,8 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     ffi (1.8.1)
     ffi (1.8.1-x86-mingw32)
     figaro (0.6.3)
@@ -284,6 +286,7 @@ DEPENDENCIES
   devise_invitable (>= 1.1.5)
   email_spec (>= 1.4.0)
   factory_girl_rails (>= 4.2.0)
+  faker
   figaro (>= 0.5.3)
   geocoder
   growl

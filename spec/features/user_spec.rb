@@ -265,7 +265,7 @@ describe 'Search User' do
     @user = FactoryGirl.create(:user, :name => 'New User', :email => 'new@example.com')
   end 
 
-  it 'should be able to search for a user'  do
+  it 'should be able to search for a user' do
     visit new_user_session_path
     fill_in "Email", :with => @admin_user.email
     fill_in "Password", :with => @admin_user.password
@@ -290,7 +290,7 @@ describe 'Search User' do
     #save_and_open_page
   end
 
-  it 'should be redirected to home page if you are not an admin user'  do
+  it 'should be redirected to home page if you are not an admin user' do
     visit new_user_session_path
     fill_in "Email", :with => @user.email
     fill_in "Password", :with => @user.password
@@ -301,5 +301,20 @@ describe 'Search User' do
     page.should have_selector('h3', text: 'Home')
     page.should have_content("Not authorized as an administrator.")
   end  
+
+  it 'should be able to show pagination' do
+    50.times do
+      user = FactoryGirl.create(:user, :name => Faker::Name.name, :email => Faker::Internet.email)
+    end
+    visit new_user_session_path
+    fill_in "Email", :with => @admin_user.email
+    fill_in "Password", :with => @admin_user.password
+    click_button "Sign in"
+    page.should have_content("Signed in successfully.")
+    page.should have_content(@admin_user.name) 
+    visit users_path
+    page.should have_selector('h3', text: 'Users')
+    page.should have_content("<< Previous 1 2 3 4 5 6 Next >>")
+  end
 
 end

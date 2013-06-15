@@ -66,4 +66,18 @@ if Rails.env.development?
   user.add_role :docs
   user.save!
 
+  50.times do
+
+    user = User.new(
+      :name => Faker::Name.name,
+      :email => Faker::Internet.email,
+      :password => 'password',
+      :password_confirmation => 'password',
+    )
+    puts 'user: ' << Faker::Name.name
+    user.skip_confirmation!
+    user.save!
+
+  end
+
 end
