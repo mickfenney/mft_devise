@@ -85,6 +85,10 @@ class User < ActiveRecord::Base
     super(num)
   end
 
+  def created_at_format
+    self.created_at.to_date.strftime('%a, %d %b %Y')
+  end
+
   private
 
     def assign_default_role
