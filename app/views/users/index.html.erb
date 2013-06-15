@@ -38,7 +38,7 @@
               <td><%= image_tag avatar_url(user), :class => 'round' %></td>
               <td id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
               <td data-title="Email"><a href="mailto:<%= user.email %>"><%= user.email %></a></td>
-              <td data-title="Registered"><%= user.created_at.to_date %></td>
+              <td data-title="Registered"><%= user.created_at_format %></td>
               <td data-title="Roles"><% user.roles.each do |role| %><%= role.name.titleize %> <% end %></td>
               <td>
                 <a data-toggle="modal" href="#role-options-<%= user.id %>" class="btn btn-mini btn-primary" type="button">Change roles</a>
