@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "User Sign In" do 
+describe "User Sign In" do
 
   before(:each) do
     @user = FactoryGirl.create(:user)
@@ -315,6 +315,60 @@ describe 'Search User' do
     visit users_path
     page.should have_selector('h3', text: 'Users')
     page.should have_content("<< Previous 1 2 3 4 5 6 Next >>")
-  end
+  end 
 
+end
+
+#######################################################
+
+describe 'Update User Details' do 
+
+  before(:each) do
+    @admin_user = FactoryGirl.create(:user)
+    @admin_user.add_role(:admin)
+    @admin_user.has_role?(:admin).should be_true
+    @user = FactoryGirl.create(:user, :name => 'New User', :email => 'new@example.com')
+  end 
+
+  it 'should allow a user to update there General details' do
+    visit new_user_session_path
+    fill_in "Email", :with => @admin_user.email
+    fill_in "Password", :with => @admin_user.password
+    click_button "Sign in"
+    page.should have_content("Signed in successfully.")
+    page.should have_content(@admin_user.name)
+    visit edit_user_registration_path
+    page.should have_selector('h3', text: 'Edit User: Test User')
+    fill_in "Name", :with => 'new name'
+    fill_in "Phone", :with => '0000 222 444'
+    select "Slate", :from => 'Theme'
+    fill_in "general password", :with => @admin_user.password
+    click_button "Update General"
+    page.should have_content("You updated your account successfully.")
+    #raise User.first.to_yaml
+    User.first.name.should == "new name"
+    User.first.phone.should == "0000222444"
+    User.first.theme.should == "slate"   
+  end  
+
+   it 'should allow an admin user to update a users General details' do
+    visit new_user_session_path
+    fill_in "Email", :with => @admin_user.email
+    fill_in "Password", :with => @admin_user.password
+    click_button "Sign in"
+    page.should have_content("Signed in successfully.")
+    page.should have_content(@admin_user.name)
+    visit root_url+"/users/"+@user.id.to_s+"/edit"
+    page.should have_selector('h3', text: 'Edit New User')
+    fill_in "Name", :with => 'a new name'
+    fill_in "Phone", :with => '0000 333 555'
+    select "Slate", :from => 'Theme'
+    click_button "Update General"
+    page.should have_content("User a new name updated.")
+    u = User.find_by_id(@user.id)
+    #raise u.to_yaml
+    u.name.should == "a new name"
+    u.phone.should == "0000333555"
+    u.theme.should == "slate"
+  end 
 end

@@ -26,16 +26,16 @@
                 <span class="add-on"><i class="icon-envelope"></i></span><%= f.email_field :email, :required => true, :size => '' %>
               <% end %>
               <%= f.input :phone, :wrapper => :prepend do %>
-                <span class="add-on"><i class="icon-bell"></i></span><%= f.input_field :phone, :required => false, :size => '' %>
+                <span class="add-on"><i class="icon-bell"></i></span><%= f.input_field :phone, :required => false, :size => '', :placeholder => 'mobile or landline' %>
               <% end %>
               <%= f.input :theme, :wrapper => :prepend do %>
                 <span class="add-on"><i class="icon-wrench"></i></span><%= f.input_field :theme, :include_blank => false %> 
               <% end %>   
               <%= f.input :current_password, :wrapper => :prepend do %>
-                <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :current_password, :hint => "we need your current password to confirm your changes", :required => true, :size => '' %>
+                <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :current_password, :hint => "we need your current password to confirm your changes", :required => true, :size => '', :id => 'general password' %>
               <% end %>                           
               <div class="form-actions">
-                <%= f.button :submit, "Update", :class => 'btn btn-primary' %>
+                <%= f.button :submit, "Update General", :class => 'btn btn-primary' %>
               </div>  
             </div>   
           <% end %>
@@ -55,10 +55,10 @@
                 <div class="form-inputs">                  
                 <%= render 'users/form' %>
                 <%= f.input :current_password, :wrapper => :prepend do %>
-                  <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :current_password, :hint => "we need your current password to confirm your changes", :required => true, :size => '' %>
+                  <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :current_password, :hint => "we need your current password to confirm your changes", :required => true, :size => '', :id => 'location password' %>
                 <% end %>               
                 <div class="form-actions">
-                  <%= f.button :submit, "Update", :class => 'btn btn-primary' %>
+                  <%= f.button :submit, "Update Locations", :class => 'btn btn-primary' %>
                 </div>  
               </div>                        
             <% end %>
@@ -80,7 +80,7 @@
                 <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :password_confirmation, :required => true, :size => '' %>
               <% end %>
               <%= f.input :current_password, :wrapper => :prepend do %>
-                <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :current_password, :hint => "we need your current password to confirm your changes", :required => true, :size => '' %>
+                <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :current_password, :hint => "we need your current password to confirm your changes", :required => true, :size => '', :id => 'current password' %>
               <% end %>
               <div class="form-actions">
                 <%= f.button :submit, "Change password", :class => 'btn btn-primary' %>
