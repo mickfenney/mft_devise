@@ -391,5 +391,17 @@ describe 'Update User Details' do
     u.phone.should == "0000333555"
     u.theme.should == "slate"
   end 
+
+  it 'should not allow a user to update invalid details' do
+    visit edit_user_registration_path
+    page.should have_selector('h3', text: 'Edit User: Test User')
+    fill_in "Name", :with => nil
+    fill_in "Phone", :with => '1234'
+    fill_in "general password", :with => nil
+    click_button "Update General"
+    page.should have_content("Please review the problems below:")
+    page.should have_content("Phone is too short (minimum is 8 characters") 
+    page.should have_content("can't be blank")
+  end
  
 end
