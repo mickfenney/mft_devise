@@ -328,15 +328,41 @@ describe 'Update User Details' do
     @admin_user.add_role(:admin)
     @admin_user.has_role?(:admin).should be_true
     @user = FactoryGirl.create(:user, :name => 'New User', :email => 'new@example.com')
-  end 
-
-  it 'should allow a user to update there General details' do
     visit new_user_session_path
     fill_in "Email", :with => @admin_user.email
     fill_in "Password", :with => @admin_user.password
     click_button "Sign in"
     page.should have_content("Signed in successfully.")
-    page.should have_content(@admin_user.name)
+    page.should have_content(@admin_user.name)    
+  end 
+
+  it 'should have certain content on the user edit page' do
+    visit edit_user_registration_path
+
+    # General Tab
+    page.should have_content("General")
+
+    # Profile Image Tab
+    page.should have_content('Profile Image')    
+    page.should have_link('Change Gravatar', href: 'http://www.gravatar.com/emails')
+    # OR:
+    find_link('Change Gravatar')[:href].should == 'http://www.gravatar.com/emails'
+
+    # Locations Tab
+    page.should have_content('Locations')
+    page.should have_content('+ Add Location')
+
+    # Password Tab
+    page.should have_content('Password')
+    page.should have_content('Password confirmation')
+    page.should have_content('Current password')
+
+    # Cancel my Account Tab
+    page.should have_content('Cancel my Account')
+    page.should have_content('Unhappy? Cancel my account.')
+  end  
+
+  it 'should allow a user to update there General details' do
     visit edit_user_registration_path
     page.should have_selector('h3', text: 'Edit User: Test User')
     fill_in "Name", :with => 'new name'
@@ -352,12 +378,6 @@ describe 'Update User Details' do
   end  
 
    it 'should allow an admin user to update a users General details' do
-    visit new_user_session_path
-    fill_in "Email", :with => @admin_user.email
-    fill_in "Password", :with => @admin_user.password
-    click_button "Sign in"
-    page.should have_content("Signed in successfully.")
-    page.should have_content(@admin_user.name)
     visit root_url+"/users/"+@user.id.to_s+"/edit"
     page.should have_selector('h3', text: 'Edit New User')
     fill_in "Name", :with => 'a new name'
@@ -371,4 +391,5 @@ describe 'Update User Details' do
     u.phone.should == "0000333555"
     u.theme.should == "slate"
   end 
+ 
 end
