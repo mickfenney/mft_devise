@@ -128,14 +128,35 @@ describe User do
       end
     end
 
-    it "should not accept more than 15 char phone number" do
-      user = FactoryGirl.build(:user, :phone => '123456789123456789')
-      user.should_not be_valid
+    it 'should trim non numeric chars from a phone number and accept it as valid' do
+      u = FactoryGirl.build(:user, :phone => ' 0000 111 222 +- foo () & $ # ^ ! @ * %')
+      u.should be_valid
+      u.phone.should == '0000111222'
+    end  
+
+    it 'should reject a phone number that is too short' do
+      u = FactoryGirl.build(:user, :phone => '1234567')
+      u.should_not be_valid
     end
 
-    it "should accept up to 15 char phone number" do
-      user = FactoryGirl.build(:user, :phone => '+61 000 000 000')
-      user.should be_valid
+    it 'should reject a phone number that is too long' do
+      u = FactoryGirl.build(:user, :phone => '1234567890123')
+      u.should_not be_valid
+    end
+
+    it 'should accept a blank phone number' do
+      u = FactoryGirl.build(:user, :phone => '')
+      u.should be_valid
+    end
+
+    it 'should accept a nil phone number' do
+      u = FactoryGirl.build(:user, :phone => nil)
+      u.should be_valid
+    end
+
+    it 'should accept a valid phone number with no non numeric chars' do
+      u = FactoryGirl.build(:user, :phone => '123456789')
+      u.should be_valid
     end    
 
     it "should not create a new instance given and invalid 'theme' (enum) attribute" do
