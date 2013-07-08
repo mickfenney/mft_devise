@@ -27,7 +27,7 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'growl'
-  gem 'ruby_gntp'
+  gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
   gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem "letter_opener", ">= 1.1.0"
   gem "quiet_assets", ">= 1.0.1"
