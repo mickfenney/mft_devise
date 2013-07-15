@@ -5,5 +5,6 @@ class ThemeEnum < ActiveEnum::Base
   value id: 'amelia', name: 'Amelia'
   value id: 'slate', name: 'Slate'
   value id: 'united', name: 'United'
+  value id: 'cosmo', name: 'Cosmo'
 
 end
