@@ -299,7 +299,7 @@ describe 'Search User' do
     page.should have_content(@user.name) 
     visit users_path
     page.should have_selector('h3', text: 'Home')
-    page.should have_content("Not authorized as an administrator.")
+    page.should have_content("You are not authorized to access this page.")
   end  
 
   it 'should be able to show pagination' do
