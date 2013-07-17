@@ -1,6 +1,6 @@
 <tr>
   <td><%= image_tag avatar_url(user), :class => 'round' %></td>
-  <td id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
+  <td data-title="Username" id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
   <td data-title="Email"><a href="mailto:<%= user.email %>"><%= user.email %></a></td>
   <td data-title="Registered"><%= user.created_at.to_s(:human_short) %></td>
   <td data-title="Roles"><% user.roles.each do |role| %><%= role.name.titleize %> <% end %></td>
