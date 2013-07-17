@@ -1,0 +1,8 @@
+$('#users_results').append('<%= j render :partial => "user", :collection => @users %>');
+<% if @users.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@users) %>');
+<% else %>
+    $('.pagination').remove();
+<% end %>
+
+<% sleep 2 %>
