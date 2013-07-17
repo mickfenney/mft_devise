@@ -39,11 +39,11 @@ module ApplicationHelper
 
   def pagination_links(collection, options = {})
     options[:renderer] ||= BootstrapPaginationHelper::LinkRenderer
-    options[:class] ||= 'pagination pagination-left'
+    options[:class] ||= 'pagination'
     options[:inner_window] ||= 2
     options[:outer_window] ||= 1
-    options[:previous_label] ||= h("<< Previous")
-    options[:next_label] ||= h("Next >>")
+    #options[:previous_label] ||= h("<< Previous")
+    #options[:next_label] ||= h("Next >>")
     will_paginate(collection, options)
   end  
 
