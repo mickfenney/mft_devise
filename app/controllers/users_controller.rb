@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @page_title = 'Search User'
-    #authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    #authorize! :index, @user, :message => 'You are not authorized to access this page.'
     @users = User.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
     unless  @users.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 
   def edit
     @page_title = 'Edit User'
+    #authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
   end
   
