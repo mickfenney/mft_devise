@@ -22,7 +22,11 @@ group :assets do
 end
 group :development do
   #gem 'sqlite3'
-  gem 'mysql2', '0.3.11'
+  if RUBY_PLATFORM =~ /mingw/i
+    gem 'mysql2', '0.3.11' 
+  else 
+    gem 'mysql2'
+  end
   gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
   gem 'guard-spork'
   gem 'guard'
@@ -39,7 +43,11 @@ group :development do
 end
 group :test do
   #gem 'sqlite3'
-  gem 'mysql2', '0.3.11'
+  if RUBY_PLATFORM =~ /mingw/i
+    gem 'mysql2', '0.3.11' 
+  else 
+    gem 'mysql2'
+  end
   gem 'rspec'
   gem 'growl'
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
@@ -56,7 +64,11 @@ group :test do
 end
 group :production do
   #gem 'pg'
-  gem 'mysql2', '0.3.11'
+  if RUBY_PLATFORM =~ /mingw/i
+    gem 'mysql2', '0.3.11' 
+  else 
+    gem 'mysql2'
+  end
 end
 gem 'will_paginate', '> 3.0'
 gem "strip_attributes", ">= 1.2"
