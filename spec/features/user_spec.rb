@@ -314,7 +314,7 @@ describe 'Search User' do
     page.should have_content(@admin_user.name) 
     visit users_path
     page.should have_selector('h3', text: 'Users')
-    page.should have_content("← Previous 1 2 3 4 5 6 Next →")
+    page.should have_content("Previous 1 2 3 4 5 6 Next")
   end 
 
 end
