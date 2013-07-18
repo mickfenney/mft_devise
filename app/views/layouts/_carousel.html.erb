@@ -1,0 +1,44 @@
+<div id="featureCarousel" class="carousel slide">
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="item active">
+    <%= image_tag('1.jpg') %>
+      <div class="carousel-caption clearfix">
+        <p>
+          <% unless user_signed_in? %>
+            <%= link_to 'Sign up now!', new_user_registration_path, :class => 'btn btn-primary pull-left' %>
+          <% else %>
+            <%= ENV["SITE_NAME"] %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag('2.jpg') %>
+      <div class="carousel-caption clearfix">
+        <p>
+          <% unless user_signed_in? %>
+            <%= link_to 'Sign up now!', new_user_registration_path, :class => 'btn btn-primary pull-left' %>
+          <% else %>
+            <%= ENV["SITE_NAME"] %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div class="item">
+      <%= image_tag('3.jpg') %>
+      <div class="carousel-caption clearfix">
+        <p>
+          <% unless user_signed_in? %>
+            <%= link_to 'Sign up now!', new_user_registration_path, :class => 'btn btn-primary pull-left' %>
+          <% else %>
+            <%= ENV["SITE_NAME"] %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#featureCarousel" data-slide="prev"><i class="icon-chevron-left"></i></a>
+  <a class="carousel-control right" href="#featureCarousel" data-slide="next"><i class="icon-chevron-right"></i></a>
+</div>
