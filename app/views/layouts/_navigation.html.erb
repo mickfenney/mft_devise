@@ -24,16 +24,20 @@
             <%= link_to 'Edit Account', edit_user_registration_path %>
             </li>
             <% if current_user.has_role? :admin %>
-            <li class="dropdown" id="preview-menu">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
-            <ul class="dropdown-menu">
-              <li><a href="<%= users_path %>"><i class="icon-search"></i> Users</a></li>
-              <li class="divider"></li>
-              <li><a href="<%= new_user_invitation_path %>"><i class="icon-envelope"></i> Send Invitation</a></li>
-              <li class="divider"></li>
-              <li><a href="<%= delayed_job_path %>" target="_blank"><i class="icon-list-alt"></i> Job Queue</a></li>        
-            </ul>    
-          <% end %>
+              <li class="dropdown" id="preview-menu">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
+              <ul class="dropdown-menu">
+                <li><a href="<%= users_path %>"><i class="icon-search"></i> Users</a></li>
+                <li class="divider"></li>
+                <li><a href="<%= new_user_invitation_path %>"><i class="icon-envelope"></i> Send Invitation</a></li>
+                <li class="divider"></li>
+                <li><a href="<%= delayed_job_path %>" target="_blank"><i class="icon-list-alt"></i> Job Queue</a></li>        
+              </ul> 
+            <% else %>
+              <li <%= active_css(new_user_invitation_path) %>>
+              <%= link_to 'Send Invitation', new_user_invitation_path %>
+              </li>
+            <% end %>
           <% else %>
             <li <%= active_css(new_user_registration_path) %>>
             <%= link_to 'Sign Up', new_user_registration_path %>
