@@ -14,9 +14,3 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-
-$(function(){
-
-	$('.carousel').carousel({interval: 10000});
-
-});

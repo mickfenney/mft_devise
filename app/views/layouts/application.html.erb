@@ -12,20 +12,16 @@
     <%= yield(:head) %>
     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   </head>
-  <body class="<%= controller_name %> <%= action_name %> round">
+  <body class="<%= controller_name %> <%= action_name %> round" data-spy="scroll" data-target=".bs-docs-sidebar">
     <%= render 'layouts/navigation' %>
     <% if controller_name == 'home' %>
       <%= render 'layouts/carousel' %>
     <% end %>
-    <container>
-      <div id="main" role="main">
-        <div class="container">
-          <%= yield %>
-        </div> <!--! end of .container -->
-        <br />
-        <%= render 'layouts/footer' %>
-      </div>
-      <%= debug(params) if Rails.env.development? %>
-    </container>
+    <div class="container">
+      <%= yield %>
+    </div> <!--! end of .container -->
+    <br />
+    <%= render 'layouts/footer' %>
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
