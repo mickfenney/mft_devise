@@ -17,6 +17,8 @@ MftDevise::Application.routes.draw do
   	                                   :invitations   => 'invitations' }
   resources :users
 
+  resources :documents
+
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 
 end

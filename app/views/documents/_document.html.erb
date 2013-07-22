@@ -1,0 +1,6 @@
+<tr>
+  <td data-title="Title" id="hint"><%= link_to document.title, document, :title => 'Show '+document.title, :'data-placement' => 'right' %></td>
+  <td data-title="Doc Type"><%= document.doc_type %></td>
+  <td><%= link_to 'Edit', edit_document_path(document), :class => 'btn btn-primary btn-mini' %></td>
+  <td><%= link_to 'Destroy Document', document, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+</tr>

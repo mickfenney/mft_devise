@@ -79,5 +79,22 @@ if Rails.env.development?
     user.save!
 
   end
+ 
+  puts 'DEFAULT DOCUMENTS'
+  doc = Document.new(
+    :title => 'test doc',
+    :doc_type => 'text',
+    :body => 'This is a test document...',
+  )  
+  doc.save!
+  puts 'doc: ' << doc.title
+
+  doc = Document.new(
+    :title => 'new doc',
+    :doc_type => 'text',
+    :body => 'This is a new test document...',
+  )  
+  doc.save!
+  puts 'doc: ' << doc.title  
 
 end

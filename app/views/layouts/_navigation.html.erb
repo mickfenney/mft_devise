@@ -31,7 +31,7 @@
                 <li class="divider"></li>
                 <li><a href="<%= new_user_invitation_path %>"><i class="icon-envelope"></i> Send Invitation</a></li>
                 <li class="divider"></li>
-                <li><a href="<%= delayed_job_path %>" target="_blank"><i class="icon-list-alt"></i> Job Queue</a></li>        
+                <li><a href="<%= delayed_job_path %>" target="_blank"><i class="icon-list-alt"></i> Job Queue</a></li>  
               </ul> 
             <% else %>
               <li <%= active_css(new_user_invitation_path) %>>
@@ -43,12 +43,17 @@
             <%= link_to 'Sign Up', new_user_registration_path %>
             </li>
           <% end %>
-            <li <%= active_css(contact_path) %>>
-            <%= link_to 'Contact', contact_path %>
-            </li>  
-            <li <%= active_css(about_path) %>>
-            <%= link_to 'About', about_path %>
-            </li>    
+          <% if can? :all, Document %>
+            <li <%= active_css(documents_path) %>>
+            <%= link_to 'Documents', documents_path %>
+            </li>
+          <% end %>
+          <li <%= active_css(contact_path) %>>
+          <%= link_to 'Contact', contact_path %>
+          </li>  
+          <li <%= active_css(about_path) %>>
+          <%= link_to 'About', about_path %>
+          </li>    
         </ul>
       </nav>
      </div>
