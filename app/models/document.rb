@@ -6,6 +6,8 @@ class Document < ActiveRecord::Base
 
   validates_presence_of :title, :doc_type, :body
 
+  before_validation strip_attributes
+
   validates :title, :length => { :maximum => 255 }
   validates_length_of :body, :maximum => 50000
   validates_inclusion_of :doc_type, :in => DocumentEnum
