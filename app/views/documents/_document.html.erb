@@ -3,4 +3,5 @@
   <td data-title="Doc Type"><%= document.doc_type %></td>
   <td><%= link_to 'Edit Document', edit_document_path(document), :class => 'btn btn-primary btn-mini' %></td>
   <td><%= link_to 'Destroy Document', document, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+  <td data-title="User"><%= User.find_by_id(document.user_id).name %></td>
 </tr>

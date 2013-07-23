@@ -5,5 +5,6 @@ FactoryGirl.define do
     title "MyString"
     doc_type "text"
     body "MyText"
+    user_id 1
   end
 end

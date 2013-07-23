@@ -85,6 +85,7 @@ if Rails.env.development?
     :title => 'test doc',
     :doc_type => 'text',
     :body => 'This is a test document...',
+    :user_id => 1,
   )  
   doc.save!
   puts 'doc: ' << doc.title
@@ -93,6 +94,7 @@ if Rails.env.development?
     :title => 'new doc',
     :doc_type => 'text',
     :body => 'This is a new test document...',
+    :user_id => 1,
   )  
   doc.save!
   puts 'doc: ' << doc.title  

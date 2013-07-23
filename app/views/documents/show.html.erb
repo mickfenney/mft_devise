@@ -18,6 +18,16 @@
 	</p>
 
 	<p>
+	  <b>User:</b>
+	  <%= User.find_by_id(@document.user_id).name %>
+	</p>
+
+	<p>
+	  <b>Created:</b>
+      <%= @document.created_at.to_s(:human_short) %>
+	</p>		
+
+	<p>
 	  <b>Content:</b>
 	  <pre class="prettyprint linenums"><%= @document.body %></pre>
 	</p>
