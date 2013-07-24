@@ -80,7 +80,7 @@ if Rails.env.development?
 
   end
 
-   puts 'DEFAULT DOCUMENT TYPES'
+  puts 'DEFAULT DOCUMENT TYPES'
   dt = DocumentType.new(
     :name => 'text',
     :display_name => 'Text',

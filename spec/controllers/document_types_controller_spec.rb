@@ -20,15 +20,15 @@ require 'spec_helper'
 
 describe DocumentTypesController do
 
-  # # This should return the minimal set of attributes required to create a valid
-  # # DocumentType. As you add validations to DocumentType, be sure to
-  # # adjust the attributes here as well.
-  # let(:valid_attributes) { { "name" => "MyString" } }
+  # This should return the minimal set of attributes required to create a valid
+  # DocumentType. As you add validations to DocumentType, be sure to
+  # adjust the attributes here as well.
+  let(:valid_attributes) { { "name" => "text", "display_name" => "MyString", "description" => "MyString", "user_id" => 1 } }
 
-  # # This should return the minimal set of values that should be in the session
-  # # in order to pass any filters (e.g. authentication) defined in
-  # # DocumentTypesController. Be sure to keep this updated too.
-  # let(:valid_session) { {} }
+  # This should return the minimal set of values that should be in the session
+  # in order to pass any filters (e.g. authentication) defined in
+  # DocumentTypesController. Be sure to keep this updated too.
+  let(:valid_session) { {} }
 
   # describe "GET index" do
   #   it "assigns all document_types as @document_types" do
@@ -38,28 +38,28 @@ describe DocumentTypesController do
   #   end
   # end
 
-  # describe "GET show" do
-  #   it "assigns the requested document_type as @document_type" do
-  #     document_type = DocumentType.create! valid_attributes
-  #     get :show, {:id => document_type.to_param}, valid_session
-  #     assigns(:document_type).should eq(document_type)
-  #   end
-  # end
+  describe "GET show" do
+    it "assigns the requested document_type as @document_type" do
+      document_type = DocumentType.create! valid_attributes
+      get :show, {:id => document_type.to_param}, valid_session
+      assigns(:document_type).should eq(document_type)
+    end
+  end
 
-  # describe "GET new" do
-  #   it "assigns a new document_type as @document_type" do
-  #     get :new, {}, valid_session
-  #     assigns(:document_type).should be_a_new(DocumentType)
-  #   end
-  # end
+  describe "GET new" do
+    it "assigns a new document_type as @document_type" do
+      get :new, {}, valid_session
+      assigns(:document_type).should be_a_new(DocumentType)
+    end
+  end
 
-  # describe "GET edit" do
-  #   it "assigns the requested document_type as @document_type" do
-  #     document_type = DocumentType.create! valid_attributes
-  #     get :edit, {:id => document_type.to_param}, valid_session
-  #     assigns(:document_type).should eq(document_type)
-  #   end
-  # end
+  describe "GET edit" do
+    it "assigns the requested document_type as @document_type" do
+      document_type = DocumentType.create! valid_attributes
+      get :edit, {:id => document_type.to_param}, valid_session
+      assigns(:document_type).should eq(document_type)
+    end
+  end
 
   # describe "POST create" do
   #   describe "with valid params" do

@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require 'cancan/matchers'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -50,6 +51,8 @@ Spork.prefork do
     #     --seed 1234
     config.order = "random"
 
+    config.include FactoryGirl::Syntax::Methods
+
     config.include Rails.application.routes.url_helpers
 
     config.filter_run focus: true
@@ -59,6 +62,10 @@ Spork.prefork do
 
     config.include(MailerMacros)
     #config.before(:each) { reset_email }
+
+    # config.before(:suite) do
+    #   load "#{Rails.root}/db/seeds_doc_types.rb"
+    # end
     
   end
 

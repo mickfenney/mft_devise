@@ -15,9 +15,8 @@ describe Document do
 ################################################################################
   describe "Class Instantiation:" do
     it "should create a new instance given valid attributes" do
-      dt = FactoryGirl.create(:document_type)
-      dt.should be_valid
-      doc = FactoryGirl.create(:document, :doc_type => dt.name)
+      FactoryGirl.create(:document_type)
+      doc = FactoryGirl.create(:document)
       doc.should be_valid
     end
   end
@@ -34,17 +33,18 @@ describe Document do
       d.should_not be_valid
     end
 
-    it "should not create a new instance given an invalid 'doc type' (enum) attribute" do
+    it "should not create a new instance given an invalid 'doc type' attribute" do
       d = FactoryGirl.build(:document, :doc_type => 'notdoctype')
       d.should_not be_valid
     end    
 
-    it "should not create a new instance given a nil 'doc type' (enum) attribute" do
+    it "should not create a new instance given a nil 'doc type' attribute" do
       d = FactoryGirl.build(:document, :doc_type => nil)
       d.should_not be_valid
     end
 
     it "should accept valid doc type" do
+      FactoryGirl.create(:document_type)
       d = FactoryGirl.build(:document, :doc_type => 'text')
       d.should be_valid
     end  
@@ -60,7 +60,8 @@ describe Document do
     end   
 
     it "should accept valid user id" do
-      d = FactoryGirl.build(:document, :user_id => 1)
+      FactoryGirl.create(:document_type)
+      d = FactoryGirl.build(:document)
       d.should be_valid
     end  
 
