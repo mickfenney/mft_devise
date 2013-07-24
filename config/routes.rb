@@ -19,6 +19,8 @@ MftDevise::Application.routes.draw do
 
   resources :documents
 
+  resources :document_types
+
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 
 end

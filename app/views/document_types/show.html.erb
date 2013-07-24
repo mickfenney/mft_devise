@@ -1,0 +1,41 @@
+<div class="content round">
+  <div class="row">
+    <div class="span12">
+
+      <%= render 'layouts/messages' %>
+
+      <h3>Document Type</h3>    	
+
+	<p>
+	  <b>Display Name:</b>
+	  <%= @document_type.display_name %>
+	</p>
+
+	<p>
+	  <b>Name:</b>
+	  <%= @document_type.name %>
+	</p>
+
+	<p>
+	  <b>Description:</b>
+	  <%= @document_type.description %>
+	</p>	
+
+	<p>
+	  <b>User:</b>
+	  <%= User.find_by_id(@document_type.user_id).name %>
+	</p>
+
+	<p>
+	  <b>Created:</b>
+      <%= @document_type.created_at.to_s(:human_short) %>
+	</p>		
+
+	<br />
+
+	<%= link_to 'Edit', edit_document_type_path(@document_type), :class => 'btn btn-primary btn-mini' %> |
+	<%= link_to 'Back', document_types_path, :class => 'btn btn-primary btn-mini'%>
+
+    </div>
+  </div>
+</div>

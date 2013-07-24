@@ -79,6 +79,25 @@ if Rails.env.development?
     user.save!
 
   end
+
+   puts 'DEFAULT DOCUMENT TYPES'
+  dt = DocumentType.new(
+    :name => 'text',
+    :display_name => 'Text',
+    :description => 'Default text documents',
+    :user_id => 1,
+  )
+  dt.save!
+  puts 'doc type: ' << dt.display_name
+
+  dt = DocumentType.new(
+    :name => 'perl',
+    :display_name => 'Perl',
+    :description => 'Practical Extraction and Report Language',
+    :user_id => 1,
+  )
+  dt.save!
+  puts 'doc type: ' << dt.display_name 
  
   puts 'DEFAULT DOCUMENTS'
   doc = Document.new(
@@ -97,6 +116,6 @@ if Rails.env.development?
     :user_id => 1,
   )  
   doc.save!
-  puts 'doc: ' << doc.title  
+  puts 'doc: ' << doc.title
 
 end

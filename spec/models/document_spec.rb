@@ -15,7 +15,9 @@ describe Document do
 ################################################################################
   describe "Class Instantiation:" do
     it "should create a new instance given valid attributes" do
-      doc = FactoryGirl.create(:document)
+      dt = FactoryGirl.create(:document_type)
+      dt.should be_valid
+      doc = FactoryGirl.create(:document, :doc_type => dt.name)
       doc.should be_valid
     end
   end

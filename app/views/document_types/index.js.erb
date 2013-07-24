@@ -1,0 +1,8 @@
+$('#document_type_results').append('<%= j render :partial => "document_type", :collection => @document_types %>');
+<% if @document_types.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@document_types) %>');
+<% else %>
+    $('.pagination').remove();
+<% end %>
+
+<% sleep 1 %>

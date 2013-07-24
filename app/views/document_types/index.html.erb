@@ -1,0 +1,52 @@
+<div class="content round">
+  <div class="row">
+    <div class="span12">
+      
+      <%= render 'layouts/messages' %>
+
+      <h3>Document Types</h3>
+
+      <%= simple_form_for(:document_types, :url => document_types_path, :method => :get, :html => {:class => 'form-horizontal'}) do |f| %>
+        <div class="form-inputs">
+          <%= f.input :search, :wrapper => :prepend do %>
+            <span class="add-on"><i class="icon-search"></i></span><%= text_field_tag :search, params[:search],  :placeholder => 'by name, display name or desc' %>
+          <% end %>
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, "Search", :name => nil, :class => 'btn btn-primary' %>
+        </div>   
+      <% end %>
+      
+      <% if @document_types.any? %>
+        <section id="no-more-tables"> 
+          <table class="table table-striped table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Display Name</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+                <th>User</th>
+              </tr>
+            </thead>
+            <tbody id="document_type_results">
+              <%= render :partial => "document_type", :collection => @document_types %>
+            </tbody>
+          </table>  
+        </section>
+      <% end %> 
+
+      <%= will_paginate @document_types %>
+
+      <br />
+
+      <%= link_to 'Create Document Type', new_document_type_path, :class => 'btn btn-primary btn-mini' %>      
+
+    </div>
+  </div>
+</div>
+
+<script>
+$("#dt_hint a").tooltip()
+</script>

@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     elsif user.has_role? :docs
       can :manage, Document
+      can :manage, DocumentType
     elsif user.has_role? :user
       can :view, User, :id => user.id      
     else
