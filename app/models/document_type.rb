@@ -6,6 +6,8 @@ class DocumentType < ActiveRecord::Base
 
   before_validation strip_attributes :except => [:user_id]
 
+  validates_uniqueness_of :name
+  validates_uniqueness_of :display_name
   validates_length_of :name, :maximum => 255
   validates_length_of :display_name, :maximum => 255
   validates_length_of :description, :maximum => 255

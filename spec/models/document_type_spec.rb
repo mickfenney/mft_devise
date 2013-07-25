@@ -33,9 +33,15 @@ describe DocumentType do
     end  
 
     it "should not create a new instance given a nil 'name' attribute" do
-      d = FactoryGirl.build(:document_type, :name => nil)
-      d.should_not be_valid
+      dt = FactoryGirl.build(:document_type, :name => nil)
+      dt.should_not be_valid
     end
+
+    it "should reject duplicate names" do
+      dt = FactoryGirl.create(:document_type, :name =>  'ruby')
+      dt = FactoryGirl.build(:document_type, :name =>  'ruby')
+      dt.should_not be_valid
+    end    
 
     it 'should reject a display name that is too long' do
       dt = FactoryGirl.build(:document_type, :display_name => Array.new(256, "a").join)
@@ -51,6 +57,12 @@ describe DocumentType do
       dt = FactoryGirl.build(:document_type, :display_name => nil)
       dt.should_not be_valid
     end 
+
+    it "should reject duplicate display names" do
+      dt = FactoryGirl.create(:document_type, :display_name =>  'Ruby')
+      dt = FactoryGirl.build(:document_type, :display_name =>  'Ruby')
+      dt.should_not be_valid
+    end      
 
     it 'should reject a description that is too long' do
       dt = FactoryGirl.build(:document_type, :description => Array.new(256, "a").join)
