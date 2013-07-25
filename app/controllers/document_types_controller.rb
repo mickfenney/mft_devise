@@ -4,7 +4,7 @@ class DocumentTypesController < ApplicationController
 
   def index
     @page_title = 'Search Document Type'
-    @document_types = DocumentType.page(params[:page]).order("display_name ASC").per_page(10).search(params[:search])
+    @document_types = DocumentType.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
     unless  @document_types.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  

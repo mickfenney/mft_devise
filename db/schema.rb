@@ -31,19 +31,18 @@ ActiveRecord::Schema.define(:version => 20130723232340) do
 
   create_table "document_types", :force => true do |t|
     t.string   "name"
-    t.string   "display_name"
     t.string   "description"
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "documents", :force => true do |t|
     t.string   "title"
-    t.string   "doc_type",   :default => "text"
+    t.integer  "document_type_id", :default => 1
     t.text     "body"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "user_id"
   end
 

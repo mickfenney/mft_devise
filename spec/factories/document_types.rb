@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :document_type do
-    name "text"
-    display_name "MyString"
+    name "Text"
     description "MyString"
     user_id 1
   end

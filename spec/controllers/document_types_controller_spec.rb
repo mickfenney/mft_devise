@@ -23,7 +23,7 @@ describe DocumentTypesController do
   # This should return the minimal set of attributes required to create a valid
   # DocumentType. As you add validations to DocumentType, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "text", "display_name" => "MyString", "description" => "MyString", "user_id" => 1 } }
+  let(:valid_attributes) { { "name" => "text", "description" => "MyString", "user_id" => 1 } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

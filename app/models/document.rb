@@ -1,23 +1,35 @@
 class Document < ActiveRecord::Base
 
-  attr_accessible :body, :doc_type, :title, :user_id
+  attr_accessible :body, :document_type_id, :title, :user_id
 
-  validates_presence_of :title, :doc_type, :body, :user_id
+  validates_presence_of :title, :document_type_id, :body, :user_id
 
-  before_validation strip_attributes :except => [:user_id]
+  before_validation strip_attributes :except => [:document_type_id, :user_id]
 
   validates :title, :length => { :maximum => 255 }
   validates_length_of :body, :maximum => 50000
-  validates_inclusion_of :doc_type, :in => Proc.new { DocumentType.all.collect(&:name) }
+  #validates_inclusion_of :document_type_id, :in => Proc.new { DocumentType.all.collect(&:id) }
+  #validate :document_type_exists
+
+  # protected
+
+  # def document_type_exists
+  #   ids = [DocumentType.all.map(&:id)]
+  #   if !document_type_id.blank? && !ids.member?(document_type_id)
+  #     errors.add(:document_type_id, "does not point to a valid doc type record")
+  #   end
+  # end  
 
   private
 
     def self.search(search)
       if search
         find(:all, 
-             :select => 'DISTINCT documents.*', 
-             :conditions => ['documents.title LIKE ? or documents.doc_type LIKE ? or documents.body LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]
-        )
+             :select => 'DISTINCT d.*', 
+             :from => 'documents d, document_types dt',
+             :conditions => ['d.document_type_id = dt.id and (d.title LIKE ? or dt.name LIKE ? or d.body LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%"],
+             :order => 'updated_at DESC'
+        ) 
       else
         find(:all)
       end

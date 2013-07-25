@@ -14,7 +14,7 @@
 
 	<p>
 	  <b>Doc type:</b>
-	  <%= @document.doc_type %>
+	  <%= DocumentType.find_by_id(@document.document_type_id).name %>
 	</p>
 
 	<p>

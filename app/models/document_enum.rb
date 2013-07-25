@@ -16,7 +16,7 @@ class DocumentEnum < ActiveEnum::Base
   # value id: 'html', name: 'HTML'
 
   DocumentType.find(:all).each do |dt|
-    value id: dt.name, name: dt.display_name
+    value id: dt.id, name: dt.name
   end
 
 end

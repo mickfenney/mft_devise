@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :document do
     title "MyString"
-    doc_type "text"
+    document_type_id 1
     body "MyText"
     user_id 1
   end

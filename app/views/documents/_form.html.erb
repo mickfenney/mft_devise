@@ -9,7 +9,7 @@
      <span class="add-on"><i class="icon-pencil"></i></span><%= f.input_field :title, :required => true, :autofocus => true, :size => '' %>
     <% end %>
     <%= f.input :doc_type, label: 'Document Type', :wrapper => :prepend do %>
-      <span class="add-on"><i class="icon-wrench"></i></span><%= f.collection_select(:doc_type, DocumentType.all, :name, :display_name) %>
+      <span class="add-on"><i class="icon-wrench"></i></span><%= f.collection_select(:document_type_id, DocumentType.all, :id, :name) %>
     <% end %>
     <%= f.input :body, label: 'Content', :wrapper => :prepend do %>
      <span class="add-on"><i class="icon-pencil"></i></span><%= f.text_area :body, :required => true, :rows => 15 %>
