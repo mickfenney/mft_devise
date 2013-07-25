@@ -1,5 +1,5 @@
 <tr>
-  <td data-title="Display Name" id="dt_hint"><%= link_to document_type.display_name, document_type, :display_name => 'Show '+document_type.description, :'data-placement' => 'right' %></td>
+  <td data-title="Display Name" id="dt_hint"><%= link_to document_type.display_name, document_type, :title => 'Description: '+document_type.description, :'data-placement' => 'right' %></td>
   <td data-title="Name"><%= document_type.name %></td>
   <td data-title="Description"><%= document_type.description %></td>
   <td><%= link_to 'Edit Document Type', edit_document_type_path(document_type), :class => 'btn btn-primary btn-mini' %></td>
