@@ -8,8 +8,10 @@ class Document < ActiveRecord::Base
 
   validates :title, :length => { :maximum => 255 }
   validates_length_of :body, :maximum => 50000
+  
   #validates_inclusion_of :document_type_id, :in => Proc.new { DocumentType.all.collect(&:id) }
-  #validate :document_type_exists
+  #validates_inclusion_of :user_id, :in => Proc.new { User.all.collect(&:id) }
+  # validate :document_type_exists
 
   # protected
 

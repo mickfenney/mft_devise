@@ -14,11 +14,11 @@ describe Document do
 
 ################################################################################
   describe "Class Instantiation:" do
-    # it "should create a new instance given valid attributes" do
-    #   FactoryGirl.create(:document_type)
-    #   doc = FactoryGirl.create(:document)
-    #   doc.should be_valid
-    # end
+    it "should create a new instance given valid attributes" do
+      #FactoryGirl.create(:document_type)
+      doc = FactoryGirl.create(:document)
+      doc.should be_valid
+    end
   end
 ################################################################################
   describe "Class Data Memeber Validation:" do
@@ -42,11 +42,11 @@ describe Document do
       d.should_not be_valid
     end
 
-    # it "should accept valid doc type" do
-    #   FactoryGirl.create(:document_type)
-    #   d = FactoryGirl.build(:document)
-    #   d.should be_valid
-    # end  
+    it "should accept valid doc type" do
+      FactoryGirl.create(:document_type)
+      d = FactoryGirl.build(:document)
+      d.should be_valid
+    end  
 
     it 'should reject a body that is too long' do
       d = FactoryGirl.build(:document, :body => Array.new(50001, "a").join)
@@ -58,11 +58,11 @@ describe Document do
       d.should_not be_valid
     end   
 
-    # it "should accept valid user id" do
-    #   FactoryGirl.create(:document_type)
-    #   d = FactoryGirl.build(:document)
-    #   d.should be_valid
-    # end  
+    it "should accept valid user id" do
+      FactoryGirl.create(:document_type)
+      d = FactoryGirl.build(:document)
+      d.should be_valid
+    end  
 
     it 'should not accept a blank user id' do
       d = FactoryGirl.build(:document, :user_id => '')

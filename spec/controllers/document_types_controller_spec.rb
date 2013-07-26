@@ -98,49 +98,49 @@ describe DocumentTypesController do
   #   end
   # end
 
-  # describe "PUT update" do
-  #   describe "with valid params" do
-  #     it "updates the requested document_type" do
-  #       document_type = DocumentType.create! valid_attributes
-  #       # Assuming there are no other document_types in the database, this
-  #       # specifies that the DocumentType created on the previous line
-  #       # receives the :update_attributes message with whatever params are
-  #       # submitted in the request.
-  #       DocumentType.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-  #       put :update, {:id => document_type.to_param, :document_type => { "name" => "MyString" }}, valid_session
-  #     end
+  describe "PUT update" do
+    describe "with valid params" do
+      # it "updates the requested document_type" do
+      #   document_type = DocumentType.create! valid_attributes
+      #   # Assuming there are no other document_types in the database, this
+      #   # specifies that the DocumentType created on the previous line
+      #   # receives the :update_attributes message with whatever params are
+      #   # submitted in the request.
+      #   DocumentType.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
+      #   put :update, {:id => document_type.to_param, :document_type => { "name" => "MyString" }}, valid_session
+      # end
 
-  #     it "assigns the requested document_type as @document_type" do
-  #       document_type = DocumentType.create! valid_attributes
-  #       put :update, {:id => document_type.to_param, :document_type => valid_attributes}, valid_session
-  #       assigns(:document_type).should eq(document_type)
-  #     end
+      it "assigns the requested document_type as @document_type" do
+        document_type = DocumentType.create! valid_attributes
+        put :update, {:id => document_type.to_param, :document_type => valid_attributes}, valid_session
+        assigns(:document_type).should eq(document_type)
+      end
 
-  #     it "redirects to the document_type" do
-  #       document_type = DocumentType.create! valid_attributes
-  #       put :update, {:id => document_type.to_param, :document_type => valid_attributes}, valid_session
-  #       response.should redirect_to(document_type)
-  #     end
-  #   end
+      # it "redirects to the document_type" do
+      #   document_type = DocumentType.create! valid_attributes
+      #   put :update, {:id => document_type.to_param, :document_type => valid_attributes}, valid_session
+      #   response.should redirect_to(document_type)
+      # end
+    end
 
-  #   describe "with invalid params" do
-  #     it "assigns the document_type as @document_type" do
-  #       document_type = DocumentType.create! valid_attributes
-  #       # Trigger the behavior that occurs when invalid params are submitted
-  #       DocumentType.any_instance.stub(:save).and_return(false)
-  #       put :update, {:id => document_type.to_param, :document_type => { "name" => "invalid value" }}, valid_session
-  #       assigns(:document_type).should eq(document_type)
-  #     end
+    describe "with invalid params" do
+      it "assigns the document_type as @document_type" do
+        document_type = DocumentType.create! valid_attributes
+        # Trigger the behavior that occurs when invalid params are submitted
+        DocumentType.any_instance.stub(:save).and_return(false)
+        put :update, {:id => document_type.to_param, :document_type => { "name" => "invalid value" }}, valid_session
+        assigns(:document_type).should eq(document_type)
+      end
 
-  #     it "re-renders the 'edit' template" do
-  #       document_type = DocumentType.create! valid_attributes
-  #       # Trigger the behavior that occurs when invalid params are submitted
-  #       DocumentType.any_instance.stub(:save).and_return(false)
-  #       put :update, {:id => document_type.to_param, :document_type => { "name" => "invalid value" }}, valid_session
-  #       response.should render_template("edit")
-  #     end
-  #   end
-  # end
+      # it "re-renders the 'edit' template" do
+      #   document_type = DocumentType.create! valid_attributes
+      #   # Trigger the behavior that occurs when invalid params are submitted
+      #   DocumentType.any_instance.stub(:save).and_return(false)
+      #   put :update, {:id => document_type.to_param, :document_type => { "name" => "invalid value" }}, valid_session
+      #   response.should render_template("edit")
+      # end
+    end
+  end
 
   # describe "DELETE destroy" do
   #   it "destroys the requested document_type" do
