@@ -1,6 +1,6 @@
 <tr>
-  <td data-title="Title" id="hint"><%= link_to document.title, document, :title => 'Doc Type: '+DocumentType.find_by_id(document.document_type_id).name, :'data-placement' => 'right' %></td>
-  <td data-title="Doc Type"><%= DocumentType.find_by_id(document.document_type_id).name %></td>
+  <td data-title="Title" id="hint"><%= link_to document.title, document, :title => 'Doc Type: '+document.title, :'data-placement' => 'right' %></td>
+  <td data-title="Doc Types"><% document.document_types.each do |dt| %><%= dt.name %> <% end %></td>
   <td><%= link_to 'Edit Document', edit_document_path(document), :class => 'btn btn-primary btn-mini' %></td>
   <td><%= link_to 'Destroy Document', document, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
   <td data-title="User"><%= User.find_by_id(document.user_id).name %></td>

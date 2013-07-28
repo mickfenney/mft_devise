@@ -50,6 +50,8 @@ class User < ActiveRecord::Base
 
   has_many :locations, :as => :locatable
 
+  has_many :documents
+
   accepts_nested_attributes_for :locations, allow_destroy: true
 
   before_validation strip_attributes :except => [:phone, :password, :password_confirmation]

@@ -3,7 +3,7 @@ if DocumentType.count == 0
   dt = DocumentType.create(
     :name => 'Text',
     :description => 'Default Text Documents',
-    :user_id => 1,
+    :user_id => 1,    
   )
   puts '+ doc type: ' << dt.name
 

@@ -4,6 +4,8 @@ class DocumentType < ActiveRecord::Base
 
   validates_presence_of :description, :name, :user_id
 
+  has_and_belongs_to_many :documents
+
   before_validation strip_attributes :except => [:user_id]
 
   validates_uniqueness_of :name

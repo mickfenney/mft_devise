@@ -42,6 +42,7 @@ class DocumentTypesController < ApplicationController
   # POST /document_types.json
   def create
     @document_type = DocumentType.new(params[:document_type])
+    @document_type.user_id = current_user.id
 
     respond_to do |format|
       if @document_type.save
@@ -58,6 +59,7 @@ class DocumentTypesController < ApplicationController
   # PUT /document_types/1.json
   def update
     @document_type = DocumentType.find(params[:id])
+    @document_type.user_id = current_user.id
 
     respond_to do |format|
       if @document_type.update_attributes(params[:document_type])

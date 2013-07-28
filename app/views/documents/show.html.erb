@@ -13,8 +13,8 @@
 	</p>
 
 	<p>
-	  <b>Doc type:</b>
-	  <%= DocumentType.find_by_id(@document.document_type_id).name %>
+	  <b>Document Types:</b>
+	  <% @document.document_types.each do |dt| %><%= dt.name %> <% end %>
 	</p>
 
 	<p>

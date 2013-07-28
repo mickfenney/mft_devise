@@ -1,10 +1,14 @@
 class Document < ActiveRecord::Base
 
-  attr_accessible :body, :document_type_id, :title, :user_id
+  attr_accessible :body, :document_type_ids, :title, :user_id
 
-  validates_presence_of :title, :document_type_id, :body, :user_id
+  validates_presence_of :title, :document_type_ids, :body, :user_id
 
-  before_validation strip_attributes :except => [:document_type_id, :user_id]
+  belongs_to :user
+
+  has_and_belongs_to_many :document_types
+
+  before_validation strip_attributes :except => [:document_type_ids, :user_id]
 
   validates :title, :length => { :maximum => 255 }
   validates_length_of :body, :maximum => 50000
@@ -28,8 +32,8 @@ class Document < ActiveRecord::Base
       if search
         find(:all, 
              :select => 'DISTINCT d.*', 
-             :from => 'documents d, document_types dt',
-             :conditions => ['d.document_type_id = dt.id and (d.title LIKE ? or dt.name LIKE ? or d.body LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%"],
+             :from => 'documents d, document_types_documents dtd, document_types dt', 
+             :conditions => ['d.id = dtd.document_id and dtd.document_type_id = dt.id and (d.title LIKE ? or dt.name LIKE ? or d.body LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%"],
              :order => 'updated_at DESC'
         ) 
       else
