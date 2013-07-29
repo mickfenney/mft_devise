@@ -21,10 +21,17 @@
 		  <%= User.find_by_id(@document_type.user_id).name %>
 		</p>
 
-		<p>
-		  <b>Created:</b>
-	      <%= @document_type.created_at.to_s(:human_short) %>
-		</p>		
+		<% if @document_type.created_at == @document_type.updated_at %>
+			<p>
+			  <b>Created:</b>
+		      <%= @document_type.created_at.to_s(:human_short_time) %>
+			</p>
+		<% else %>
+			<p>
+			  <b>Updated:</b>
+		      <%= @document_type.updated_at.to_s(:human_short_time) %>
+			</p>
+		<% end %>	
 
 		<br />
 

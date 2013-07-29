@@ -59,7 +59,7 @@ class DocumentTypesController < ApplicationController
   # PUT /document_types/1.json
   def update
     @document_type = DocumentType.find(params[:id])
-    @document_type.user_id = current_user.id
+    @document_type.updated_at = Time.now
 
     respond_to do |format|
       if @document_type.update_attributes(params[:document_type])

@@ -8,10 +8,15 @@ class Ability
     if user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :docs
-      can :manage, Document
-      can :manage, DocumentType
+      can :view, User, :id => user.id
+      can :view, Document
+      can :search, Document
+      can :view, DocumentType
+      can :search, DocumentType
+      can :manage, Document, :user_id => user.id
+      can :manage, DocumentType, :user_id => user.id
     elsif user.has_role? :user
-      can :view, User, :id => user.id      
+      can :view, User, :id => user.id 
     else
     end
     # Define abilities for the passed in user here. For example:
