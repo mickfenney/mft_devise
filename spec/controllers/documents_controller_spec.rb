@@ -20,14 +20,14 @@ require 'spec_helper'
 
 describe DocumentsController do
 
-  # before (:each) do
-  #   @document_type = FactoryGirl.create(:document_type)
-  # end
+  before(:each) do
+    @dt = FactoryGirl.create(:document_type)
+  end  
 
   # This should return the minimal set of attributes required to create a valid
   # Document. As you add validations to Document, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "title" => "MyString", "document_type_id" => 1, "body" => "MyText", "user_id" => 1 } }
+  let(:valid_attributes) { { "title" => "MyString", "document_type_ids" => [@dt.id], "body" => "MyText", "user_id" => 1 } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -36,7 +36,6 @@ describe DocumentsController do
 
   # describe "GET index" do
   #   it "assigns all documents as @documents" do
-  #     #FactoryGirl.create(:document_type)
   #     document = Document.create! valid_attributes
   #     get :index, {}, valid_session
   #     assigns(:documents).should eq([document])
@@ -45,7 +44,6 @@ describe DocumentsController do
 
   describe "GET show" do
     it "assigns the requested document as @document" do
-      #FactoryGirl.create(:document_type)
       document = Document.create! valid_attributes
       get :show, {:id => document.to_param}, valid_session
       assigns(:document).should eq(document)
@@ -61,7 +59,6 @@ describe DocumentsController do
 
   describe "GET edit" do
     it "assigns the requested document as @document" do
-      #FactoryGirl.create(:document_type)
       document = Document.create! valid_attributes
       get :edit, {:id => document.to_param}, valid_session
       assigns(:document).should eq(document)
@@ -118,7 +115,6 @@ describe DocumentsController do
       # end
 
       it "assigns the requested document as @document" do
-        #FactoryGirl.create(:document_type)
         document = Document.create! valid_attributes
         put :update, {:id => document.to_param, :document => valid_attributes}, valid_session
         assigns(:document).should eq(document)
@@ -133,7 +129,6 @@ describe DocumentsController do
 
     describe "with invalid params" do
       it "assigns the document as @document" do
-        #FactoryGirl.create(:document_type)
         document = Document.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Document.any_instance.stub(:save).and_return(false)

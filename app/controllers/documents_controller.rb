@@ -59,6 +59,7 @@ class DocumentsController < ApplicationController
   # PUT /documents/1.json
   def update
     @document = Document.find(params[:id])
+    @document.user_id = current_user.id
 
     respond_to do |format|
       if @document.update_attributes(params[:document])
