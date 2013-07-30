@@ -58,6 +58,19 @@ module ApplicationHelper
     else
       ""
     end
-  end  
+  end 
+
+  # Returns the name as a delimited string from an object list
+  def display_delimited_string(object_list, method_name = 'name', delimiter = ',')
+    delimited_string = ''
+    object_list.each do |oa|
+      if object_list.last.send(method_name) == oa.send(method_name)
+        delimited_string += "#{oa.send(method_name).titleize}"
+      else
+        delimited_string += "#{oa.send(method_name).titleize}#{delimiter} "
+      end
+    end       
+    return delimited_string
+  end   
 
 end
