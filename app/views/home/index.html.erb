@@ -1,3 +1,7 @@
+
+<div class="container">
+  <section>
+
 <div class="content round">
   <div class="row">
     <div class="span12">
@@ -9,8 +13,12 @@
         <p><%= image_tag avatar_url(current_user, 100), :class => 'round' %></p>
         <p>Signed in as user <%=link_to current_user.name, current_user %></p>
         <p>Site theme set as <%= @css_theme %></p>
+        <p> Time Zone <%= Time.zone %></p>
       <% end %>
       
     </div>
   </div>
+</div>
+
+  </section>
 </div>
