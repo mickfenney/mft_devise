@@ -1,24 +1,25 @@
+<%= render 'layouts/carousel' %>
 
 <div class="container">
   <section>
 
-<div class="content round">
-  <div class="row">
-    <div class="span12">
+    <div class="content round">
+      <div class="row">
+        <div class="span12">
 
-      <%= render 'layouts/messages' %>
-      <h3>Home</h3>
-      <p>Welcome to <%= ENV["SITE_NAME"] %></p>
-      <% if user_signed_in? %>
-        <p><%= image_tag avatar_url(current_user, 100), :class => 'round' %></p>
-        <p>Signed in as user <%=link_to current_user.name, current_user %></p>
-        <p>Site theme set as <%= @css_theme %></p>
-        <p> Time Zone <%= Time.zone %></p>
-      <% end %>
-      
+          <%= render 'layouts/messages' %>
+          <h3>Home</h3>
+          <p>Welcome to <%= ENV["SITE_NAME"] %></p>
+          <% if user_signed_in? %>
+            <p><%= image_tag avatar_url(current_user, 100), :class => 'round' %></p>
+            <p>Signed in as user <%=link_to current_user.name, current_user %></p>
+            <p>Site theme set as <%= @css_theme %></p>
+            <p> Time Zone <%= Time.zone %></p>
+          <% end %>
+          
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
   </section>
 </div>
