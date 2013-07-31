@@ -1,4 +1,4 @@
-<header class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top">
  <div class="navbar-inner">
    <div class="container">
      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -8,61 +8,59 @@
      </a>
      <%= link_to ENV["SITE_NAME"], root_path, :class => 'brand' %>
      <div class="nav-collapse collapse" id="main-menu">
-      <nav>
-        <ul class="nav" id="main-menu-left">
-          <% if user_signed_in? %>
-            <li>
-            <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
-            </li>
-          <% else %>
-            <li <%= active_css(new_user_session_path) %>>
-            <%= link_to 'Sign In', new_user_session_path %>
-            </li>
-          <% end %>
-          <% if user_signed_in? %>
-            <li <%= active_css(edit_user_registration_path) %>>
-            <%= link_to 'Edit Account', edit_user_registration_path %>
-            </li>
-            <% if current_user.has_role? :admin %>
-              <li class="dropdown" id="preview-menu">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
-              <ul class="dropdown-menu">
-                <li><a href="<%= users_path %>"><i class="icon-search"></i> Users</a></li>
-                <li class="divider"></li>
-                <li><a href="<%= new_user_invitation_path %>"><i class="icon-envelope"></i> Send Invitation</a></li>
-                <li class="divider"></li>
-                <li><a href="<%= delayed_job_path %>" target="_blank"><i class="icon-list-alt"></i> Job Queue</a></li>  
-              </ul> 
-            <% else %>
-              <li <%= active_css(new_user_invitation_path) %>>
-              <%= link_to 'Send Invitation', new_user_invitation_path %>
-              </li>
-            <% end %>
-          <% else %>
-            <li <%= active_css(new_user_registration_path) %>>
-            <%= link_to 'Sign Up', new_user_registration_path %>
-            </li>
-          <% end %>
-          <% if can? :all, Document %>
+      <ul class="nav" id="main-menu-left">
+        <% if user_signed_in? %>
+          <li>
+          <%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %>
+          </li>
+        <% else %>
+          <li <%= active_css(new_user_session_path) %>>
+          <%= link_to 'Sign In', new_user_session_path %>
+          </li>
+        <% end %>
+        <% if user_signed_in? %>
+          <li <%= active_css(edit_user_registration_path) %>>
+          <%= link_to 'Edit Account', edit_user_registration_path %>
+          </li>
+          <% if current_user.has_role? :admin %>
             <li class="dropdown" id="preview-menu">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Documents</a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin</a>
             <ul class="dropdown-menu">
-              <li><a href="<%= documents_path %>"><i class="icon-search"></i> Documents</a></li>
-              <% if can? :all, DocumentType %>
-                <li class="divider"></li>
-                <li><a href="<%= document_types_path %>"><i class="icon-search"></i> Document Types</a></li>
-              <% end %> 
-            </ul>
+              <li><a href="<%= users_path %>"><i class="icon-search"></i> Users</a></li>
+              <li class="divider"></li>
+              <li><a href="<%= new_user_invitation_path %>"><i class="icon-envelope"></i> Send Invitation</a></li>
+              <li class="divider"></li>
+              <li><a href="<%= delayed_job_path %>" target="_blank"><i class="icon-list-alt"></i> Job Queue</a></li>  
+            </ul> 
+          <% else %>
+            <li <%= active_css(new_user_invitation_path) %>>
+            <%= link_to 'Send Invitation', new_user_invitation_path %>
+            </li>
           <% end %>
-          <li <%= active_css(contact_path) %>>
-          <%= link_to 'Contact', contact_path %>
-          </li>  
-          <li <%= active_css(about_path) %>>
-          <%= link_to 'About', about_path %>
-          </li>    
-        </ul>
-      </nav>
+        <% else %>
+          <li <%= active_css(new_user_registration_path) %>>
+          <%= link_to 'Sign Up', new_user_registration_path %>
+          </li>
+        <% end %>
+        <% if can? :all, Document %>
+          <li class="dropdown" id="preview-menu">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Documents</a>
+          <ul class="dropdown-menu">
+            <li><a href="<%= documents_path %>"><i class="icon-search"></i> Documents</a></li>
+            <% if can? :all, DocumentType %>
+              <li class="divider"></li>
+              <li><a href="<%= document_types_path %>"><i class="icon-search"></i> Document Types</a></li>
+            <% end %> 
+          </ul>
+        <% end %>
+        <li <%= active_css(contact_path) %>>
+        <%= link_to 'Contact', contact_path %>
+        </li>  
+        <li <%= active_css(about_path) %>>
+        <%= link_to 'About', about_path %>
+        </li>    
+      </ul>
      </div>
    </div>
  </div>
-</header>
+</div>

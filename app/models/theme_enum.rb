@@ -13,5 +13,6 @@ class ThemeEnum < ActiveEnum::Base
   value id: 'spacelab', name: 'Spacelab'
   value id: 'superhero', name: 'Superhero'
   value id: 'united', name: 'United'
+  value id: 'bootstrap', name: 'Bootstrap'
 
 end
