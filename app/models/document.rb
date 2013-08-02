@@ -2,7 +2,8 @@ class Document < ActiveRecord::Base
 
   attr_accessible :body, :document_type_ids, :title, :user_id
 
-  validates_presence_of :title, :document_type_ids, :body, :user_id
+  validates_presence_of :title, :body, :user_id
+  validates_presence_of :document_type_ids, :message => "please select one"
 
   belongs_to :user
 
