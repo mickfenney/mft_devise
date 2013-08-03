@@ -1,29 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= full_title(@page_title) %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : ENV["SITE_NAME"] %>">
-    <%= stylesheet_link_tag @css_theme, :media => "all" %>
-    <%= stylesheet_link_tag "no-more-tables", :media => "all" %>
-    <%= stylesheet_link_tag "main", :media => "all" %>
-    <%= javascript_include_tag "application" %>
-    <%= csrf_meta_tags %>
-    <%= yield(:head) %>
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
-  </head>
+<head>
+  <title>RailsApp</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
 
-  <body class="<%= controller_name %> <%= action_name %> round" data-spy="scroll" data-target=".bs-docs-sidebar">
-    <%= render 'layouts/navigation' %>
-      <% if controller_name != 'home' %>
-        <div class="container">
-      <% end %>
-        <%= yield %>
-      <% if controller_name != 'home' %>
-        </div>
-      <% end %>
-    <br />
-    <%= render 'layouts/footer' %>
-    <%= debug(params) if Rails.env.development? %>
-  </body>
+<%= yield %>
+
+</body>
 </html>
