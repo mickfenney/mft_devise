@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RailsApp::Application.load_tasks
+MftDevise::Application.load_tasks
