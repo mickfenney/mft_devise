@@ -14,4 +14,10 @@ SITE_EMAIL: site@example.com
 ADMIN_NAME: mick
 ADMIN_EMAIL: mick@example.com
 ADMIN_PASSWORD: password
+ADMIN_LOCATION1: big ben UK
+ADMIN_LOCATION2: big ben UK
+ADMIN_NAME2: test
+ADMIN_EMAIL2: test1@example.com
+ADMIN_PASSWORD2: password
+ADMIN_LOCATION3: big ben UK
 ROLES: [admin, user, docs]

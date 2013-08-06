@@ -7,7 +7,8 @@ module UserHelper
     if ENV['RAILS_ENV'] == "development" then
       return("http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}")
     else
-      return("http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}&d=#{CGI.escape(default_url)}")
+      return("http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}")	
+      #return("http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}&d=#{CGI.escape(default_url)}")
     end
   end
 
