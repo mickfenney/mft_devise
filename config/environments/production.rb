@@ -79,7 +79,12 @@ MftDevise::Application.configure do
     password: ENV["GMAIL_PASSWORD"]
   }
 
-
+  # config.action_mailer.smtp_settings = {
+  #   :address   => "smtp.mandrillapp.com",
+  #   :port      => 587,
+  #   :user_name => ENV["MANDRILL_USERNAME"],
+  #   :password  => ENV["MANDRILL_API_KEY"]
+  # }
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)

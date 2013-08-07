@@ -9,7 +9,9 @@
 #
 GMAIL_USERNAME: Your_Username
 GMAIL_PASSWORD: Your_Password
-SITE_NAME: mfTechnology
+MANDRILL_USERNAME: Your_Username
+MANDRILL_API_KEY: Your_Password
+SITE_NAME: testSite
 SITE_EMAIL: site@example.com
 ADMIN_NAME: mick
 ADMIN_EMAIL: mick@example.com
