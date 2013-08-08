@@ -42,7 +42,7 @@
 			  <% if @document.document_types.last.name == 'Text' %>
 			  	<div class="text-doc round"><%= @document.body.html_safe %></div>
 			  <% else %>
-			  	<pre class="prettyprint linenums"><%= @document.body.html_safe %></pre>
+			  	<pre class="prettyprint linenums"><%= @document.body %></pre>
 			  <% end %>
 			</p>
 
