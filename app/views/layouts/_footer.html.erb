@@ -1,11 +1,18 @@
-<div class="container">
-  <div class="footer round">
-     <div class="row">
-      <div class="span12">
-        <footer>
-          Copyright &copy; 2013 <%= ENV["SITE_NAME"] %>, All rights reserved.
-        </footer> 
-      </div>
-    </div>
-  </div>
-</div> <!--! end of .container -->  
+<footer>
+	<div class="container">
+	  <div class="footer round">
+	     <div class="row">
+	      <div class="span6">
+	      	<div class="pull-left">
+	        Copyright &copy; 2013 <%= ENV["SITE_NAME"] %>, All rights reserved.  
+	        </div>     
+	      </div>
+	      <div class="span6">
+	      	<div class="pull-right">
+	      		<%= render 'layouts/social_media' %>
+					</div>
+	      </div>      
+	    </div>
+	  </div>
+	</div> <!--! end of .container -->  
+</footer> 

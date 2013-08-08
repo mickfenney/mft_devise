@@ -57,6 +57,18 @@ body { padding-top: 60px; }
   border-radius: 0 0 5px 5px;
 }
 
+.social-media {
+  border: 0;
+  width: 31px;
+  height: 34px;
+}
+
+.text-doc {
+  padding: 8px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+}
+
 /* miscellaneous */
 
 @mixin box_sizing {
