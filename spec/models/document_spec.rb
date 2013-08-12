@@ -6,11 +6,13 @@ describe Document do
   it { should respond_to(:document_type_ids) }
   it { should respond_to(:body) }
   it { should respond_to(:user_id) }
+  it { should respond_to(:is_private) }
 
   it { should strip_attribute :title }
   #it { should_not strip_attribute :document_type_ids }
   it { should strip_attribute :body }
   it { should_not strip_attribute :user_id }
+  it { should_not strip_attribute :is_private }
 
 ################################################################################  
   before(:each) do
@@ -68,7 +70,17 @@ describe Document do
     it 'should not accept a blank user id' do
       d = FactoryGirl.build(:document, :user_id => '', :document_type_ids => [@dt.id])
       d.should_not be_valid
-    end       
+    end  
+
+    it "should accept valid is private" do
+      d = FactoryGirl.build(:document, :is_private => false, :document_type_ids => [@dt.id])
+      d.should be_valid
+    end  
+
+    it 'should not accept a blank is private' do
+      d = FactoryGirl.build(:document, :user_id => '', :document_type_ids => [@dt.id])
+      d.should_not be_valid
+    end         
 
   end
 end
