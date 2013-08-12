@@ -5,6 +5,6 @@ run MftDevise::Application
 
 if Rails.env.production?
   DelayedJobWeb.use Rack::Auth::Basic do |username, password|
-    username == 'admin' && password == 'password'
+    username == 'admin' && password == ENV['DELAYED_JOB_ADMIN']
   end
 end

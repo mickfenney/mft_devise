@@ -11,6 +11,7 @@ GMAIL_USERNAME: Your_Username
 GMAIL_PASSWORD: Your_Password
 MANDRILL_USERNAME: Your_Username
 MANDRILL_API_KEY: Your_Password
+DELAYED_JOB_ADMIN: password
 SITE_NAME: testSite
 SITE_EMAIL: site@example.com
 ADMIN_NAME: mick
