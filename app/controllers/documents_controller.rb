@@ -15,6 +15,10 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @document = Document.find(params[:id])
+    if @document.is_private? and @document.user_id != current_user.id
+      redirect_to root_path, alert: 'You are not authorized to access this page.'
+      return
+    end  
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,6 +40,10 @@ class DocumentsController < ApplicationController
   # GET /documents/1/edit
   def edit
     @document = Document.find(params[:id])
+    if @document.is_private? and @document.user_id != current_user.id
+      redirect_to root_path, alert: 'You are not authorized to access this page.'
+      return      
+    end    
   end
 
   # POST /documents
@@ -76,6 +84,12 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @document = Document.find(params[:id])
+
+    if @document.is_private? and @document.user_id != current_user.id
+      redirect_to root_path, alert: 'You are not authorized to access this page.'
+      return
+    end  
+
     @document.destroy
 
     respond_to do |format|

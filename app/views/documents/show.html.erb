@@ -5,46 +5,55 @@
 			<%= render 'layouts/messages' %>
 
 			<h3>Document</h3>    	
-
-			<p>
-			  <b>Title:</b>
-			  <%= @document.title %>
-			</p>
-
-			<p>
-			  <b>Document Types:</b>
-			  <% @document.document_types.each do |dt| %><%= dt.name %> <% end %>
-			</p>
-
-			<p>
-			  <b>User:</b>
-			  <%= User.find_by_id(@document.user_id).name %>
-			</p>
-
-			<% if @document.created_at == @document.updated_at %>
+     
+      <% unless @document.is_private? and @document.user_id != current_user.id %>
+            
 				<p>
-				  <b>Created:</b>
-			      <%= @document.created_at.to_s(:human_short_time) %>
+				  <b>Title:</b>
+				  <%= @document.title %>
 				</p>
-			<% else %>
-				<p>
-				  <b>Created:</b>
-			      <%= @document.created_at.to_s(:human_short_time) %>
-				</p>	
-				<p>
-				  <b>Updated:</b>
-			      <%= @document.updated_at.to_s(:human_short_time) %>
-				</p>
-			<% end %>
 
-			<p>
-			  <b>Content:</b>
-			  <% if @document.document_types.last.name == 'Text' %>
-			  	<div class="text-doc round"><%= @document.body.html_safe %></div>
-			  <% else %>
-			  	<pre class="prettyprint linenums"><%= @document.body %></pre>
-			  <% end %>
-			</p>
+				<p>
+				  <b>Document Types:</b>
+				  <% @document.document_types.each do |dt| %><%= dt.name %> <% end %>
+				</p>
+
+				<p>
+				  <b>User:</b>
+				  <%= User.find_by_id(@document.user_id).name %>
+				</p>
+
+				<% if @document.created_at == @document.updated_at %>
+					<p>
+					  <b>Created:</b>
+				      <%= @document.created_at.to_s(:human_short_time) %>
+					</p>
+				<% else %>
+					<p>
+					  <b>Created:</b>
+				      <%= @document.created_at.to_s(:human_short_time) %>
+					</p>	
+					<p>
+					  <b>Updated:</b>
+				      <%= @document.updated_at.to_s(:human_short_time) %>
+					</p>
+				<% end %>
+
+				<p>
+				  <b>Private:</b>
+				  <%= @document.is_private %>
+				</p>			
+
+				<p>
+				  <b>Content:</b>
+				  <% if @document.document_types.last.name == 'Text' %>
+				  	<div class="text-doc round"><%= @document.body.html_safe %></div>
+				  <% else %>
+				  	<pre class="prettyprint linenums"><%= @document.body %></pre>
+				  <% end %>
+				</p>
+
+			<% end %>	
 
 			<br />
 

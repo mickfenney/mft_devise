@@ -1,6 +1,6 @@
 class Document < ActiveRecord::Base
 
-  attr_accessible :body, :document_type_ids, :title, :user_id
+  attr_accessible :body, :document_type_ids, :title, :user_id, :is_private
 
   validates_presence_of :title, :body, :user_id
   validates_presence_of :document_type_ids, :message => "please select one"
@@ -9,7 +9,7 @@ class Document < ActiveRecord::Base
 
   has_and_belongs_to_many :document_types
 
-  before_validation strip_attributes :except => [:document_type_ids, :user_id]
+  before_validation strip_attributes :except => [:document_type_ids, :user_id, :is_private]
 
   validates :title, :length => { :maximum => 255 }
   validates_length_of :body, :maximum => 50000
@@ -36,7 +36,7 @@ class Document < ActiveRecord::Base
              :from => 'documents d, document_types_documents dtd, document_types dt', 
              :conditions => ['d.id = dtd.document_id and dtd.document_type_id = dt.id and (d.title LIKE ? or dt.name LIKE ? or d.body LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%"],
              :order => 'updated_at DESC'
-        ) 
+        )
       else
         find(:all)
       end
