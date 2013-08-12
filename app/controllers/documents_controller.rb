@@ -14,6 +14,7 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @page_title = 'Show Document'
     @document = Document.find(params[:id])
     if @document.is_private? and @document.user_id != current_user.id
       redirect_to root_path, alert: 'You are not authorized to access this page.'
@@ -29,6 +30,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   # GET /documents/new.json
   def new
+    @page_title = 'Create Document'
     @document = Document.new
 
     respond_to do |format|
@@ -39,6 +41,7 @@ class DocumentsController < ApplicationController
 
   # GET /documents/1/edit
   def edit
+    @page_title = 'Edit Document'
     @document = Document.find(params[:id])
     if @document.is_private? and @document.user_id != current_user.id
       redirect_to root_path, alert: 'You are not authorized to access this page.'

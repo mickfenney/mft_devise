@@ -14,6 +14,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types/1
   # GET /document_types/1.json
   def show
+    @page_title = 'Show Document Type'
     @document_type = DocumentType.find(params[:id])
 
     respond_to do |format|
@@ -25,6 +26,7 @@ class DocumentTypesController < ApplicationController
   # GET /document_types/new
   # GET /document_types/new.json
   def new
+    @page_title = 'Create Document Type'
     @document_type = DocumentType.new
 
     respond_to do |format|
@@ -35,6 +37,7 @@ class DocumentTypesController < ApplicationController
 
   # GET /document_types/1/edit
   def edit
+    @page_title = 'Edit Document'
     @document_type = DocumentType.find(params[:id])
   end
 

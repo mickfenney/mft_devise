@@ -1,6 +1,7 @@
 class ContactUsController < ApplicationController
 
   def new
+    @page_title = 'Contact Us'
     name_email = nil
     if user_signed_in? 
       name_email = {:name => current_user.name, :email => current_user.email}
