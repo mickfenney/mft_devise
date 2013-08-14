@@ -403,5 +403,38 @@ describe 'Update User Details' do
     page.should have_content("Phone is too short (minimum is 8 characters") 
     page.should have_content("can't be blank")
   end
+
+end 
+
+#######################################################
+
+describe 'Lock User' do    
+
+  before(:each) do
+    @user = FactoryGirl.create(:user)
+  end 
+
+  it "should lock the account and send an Unlock Instructions email", :focus=>true do
+    reset_email
+    count_email.should == 0
+    visit new_user_session_path
+    21.times do
+        fill_in "Email", :with => @user.email
+        fill_in "Password", :with => 'wrong_password'
+        click_button "Sign in"
+    end    
+    job = Delayed::Job.first
+    Delayed::Job.count.should == 1
+    page.should have_content("Your account is locked.")
+    job.invoke_job
+    job.destroy
+    Delayed::Job.count.should == 0
+    count_email.should == 1
+    last_email.subject.should == "Unlock Instructions"
+    last_email.body.encoded.should include("Click the link below to unlock your account:")
+    last_email.body.encoded.should include(ENV["SITE_NAME"])
+    reset_email
+    count_email.should == 0      
+  end    
  
 end
