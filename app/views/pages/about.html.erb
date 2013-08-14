@@ -20,9 +20,7 @@
 		<div class="span3 bs-docs-sidebar">
 			<ul class="nav nav-list bs-docs-sidenav">
 			  <li><a href="#technology"><i class="icon-chevron-right"></i> Technology</a></li>
-			  <li><a href="#file-structure"><i class="icon-chevron-right"></i> File structure</a></li>
-			  <li><a href="#contents"><i class="icon-chevron-right"></i> What's included</a></li>
-			  <li><a href="#html-template"><i class="icon-chevron-right"></i> HTML template</a></li>
+			  <li><a href="#documents"><i class="icon-chevron-right"></i> Document Section</a></li>
 			  <li><a href="#examples"><i class="icon-chevron-right"></i> Examples</a></li>
 			  <li><a href="#what-next"><i class="icon-chevron-right"></i> What next?</a></li>
 			</ul>
@@ -35,196 +33,129 @@
           <div class="page-header">
             <h1>1. Technology</h1>
           </div>
-          <p class="lead">This is a ruby on rails application. The inital application has been created with the rails composer using rolify, devise and can can with a MySQL database backend. The application is using the twitter-bootstrap for it's visual affects.</p>
+          <p class="lead">This is a ruby on rails application. The inital application has been created with the rails composer using devise, CanCan with Rolify. The backend can be configured tou use the database of choice. The application is using twitter-bootstrap for it's visual affects.</p>
 
           <div class="row-fluid">
             <div class="span6">
-              <h2>Download compiled</h2>
-              <p><strong>Fastest way to get started:</strong> get the compiled and minified versions of our CSS, JS, and images. No docs or original source files.</p>
-              <p><a class="btn btn-large btn-primary" href="assets/bootstrap.zip" onclick="_gaq.push(['_trackEvent', 'Getting started', 'Download', 'Download compiled']);">Download Bootstrap</a></p>
+              <h2>Twitter Bootstrap</h2>
+              <p><strong>Checkout the Bootstrap website.</p>
+              <p><a class="btn btn-large btn-primary" href="http://getbootstrap.com/2.3.2/" target="_blank">Bootstrap</a></p>
             </div>
             <div class="span6">
-              <h2>Download source</h2>
-              <p>Get the original files for all CSS and JavaScript, along with a local copy of the docs by downloading the latest version directly from GitHub.</p>
-              <p><a class="btn btn-large" href="https://github.com/twitter/bootstrap/zipball/master" onclick="_gaq.push(['_trackEvent', 'Getting started', 'Download', 'Download source']);">Download Bootstrap source</a></p>
+              <h2>Rails Composer</h2>
+              <p>Checkout rails composer on github.</p>
+              <p><a class="btn btn-large" href="https://github.com/RailsApps/rails-composer" target="_blank">Rails Composer</a></p>
             </div>
           </div>
         </section>
 
-        <!-- File structure
+        <!-- Documents
         ================================================== -->
-        <section id="file-structure">
+        <section id="documents">
           <div class="page-header">
-            <h1>2. File structure</h1>
+            <h1>2. Documents</h1>
           </div>
-          <p class="lead">Within the download you'll find the following file structure and contents, logically grouping common assets and providing both compiled and minified variations.</p>
-          <p>Once downloaded, unzip the compressed folder to see the structure of (the compiled) Bootstrap. You'll see something like this:</p>
-<pre class="prettyprint">
-  bootstrap/
-  ├── css/
-  │   ├── bootstrap.css
-  │   ├── bootstrap.min.css
-  ├── js/
-  │   ├── bootstrap.js
-  │   ├── bootstrap.min.js
-  └── img/
-      ├── glyphicons-halflings.png
-      └── glyphicons-halflings-white.png
-</pre>
-          <p>This is the most basic form of Bootstrap: compiled files for quick drop-in usage in nearly any web project. We provide compiled CSS and JS (<code>bootstrap.*</code>), as well as compiled and minified CSS and JS (<code>bootstrap.min.*</code>). The image files are compressed using <a href="http://imageoptim.com/">ImageOptim</a>, a Mac app for compressing PNGs.</p>
-          <p>Please note that all JavaScript plugins require jQuery to be included.</p>
-        </section>
-
-        <!-- Contents
-        ================================================== -->
-        <section id="contents">
-          <div class="page-header">
-            <h1>3. What's included</h1>
-          </div>
-          <p class="lead">Bootstrap comes equipped with HTML, CSS, and JS for all sorts of things, but they can be summarized with a handful of categories visible at the top of the <a href="http://getbootstrap.com">Bootstrap documentation</a>.</p>
+          <p class="lead">This website has a documentation system for the handling of code snippets.</p>
 
           <h2>Docs sections</h2>
-          <h4><a href="http://twitter.github.com/bootstrap/scaffolding.html">Scaffolding</a></h4>
-          <p>Global styles for the body to reset type and background, link styles, grid system, and two simple layouts.</p>
-          <h4><a href="http://twitter.github.com/bootstrap/base-css.html">Base CSS</a></h4>
-          <p>Styles for common HTML elements like typography, code, tables, forms, and buttons. Also includes <a href="http://glyphicons.com">Glyphicons</a>, a great little icon set.</p>
-          <h4><a href="http://twitter.github.com/bootstrap/components.html">Components</a></h4>
-          <p>Basic styles for common interface components like tabs and pills, navbar, alerts, page headers, and more.</p>
-          <h4><a href="http://twitter.github.com/bootstrap/javascript.html">JavaScript plugins</a></h4>
-          <p>Similar to Components, these JavaScript plugins are interactive components for things like tooltips, popovers, modals, and more.</p>
-
-          <h2>List of components</h2>
-          <p>Together, the <strong>Components</strong> and <strong>JavaScript plugins</strong> sections provide the following interface elements:</p>
+          <h4>Serach</h4>
+          <p>You can search for all documets by title, doc type or content.</p>
+          <h4>View</h4>
+          <p>You can view all documents except for private ones. Private docmets can only be vied by the user who has created them.</p>
+          <h4>Create</h4>
+          <p>You can create a document with docs access.</p>
+          <h4>Update</h4>
+          <p>You can only update the documents that you create. Admin users can update all documents.</p>
+          <h4>Remove</h4>
+          <p>You can only remove the documents that you create. Admin users can remove all documents.</p>
+          <h4>Private</h4>
+          <p>You can create a private document which only you can view, update or remove. Admins will not have access to these documents only the user who has created them.</p>          
+          <h2>List Document Types</h2>
+          <p>Note: Document types can be only added by admin users.</p>
           <ul>
-            <li>Button groups</li>
-            <li>Button dropdowns</li>
-            <li>Navigational tabs, pills, and lists</li>
-            <li>Navbar</li>
-            <li>Labels</li>
-            <li>Badges</li>
-            <li>Page headers and hero unit</li>
-            <li>Thumbnails</li>
-            <li>Alerts</li>
-            <li>Progress bars</li>
-            <li>Modals</li>
-            <li>Dropdowns</li>
-            <li>Tooltips</li>
-            <li>Popovers</li>
-            <li>Accordion</li>
-            <li>Carousel</li>
-            <li>Typeahead</li>
+            <li>Text</li>
+            <li>Perl</li>
+            <li>Java</li>
+            <li>Ruby</li>
+            <li>HTML</li>
+            <li>MySQL</li>
+            <li>PL/SQL</li>
+            <li>Rails</li>
+            <li>PHP</li>
+            <li>More to be added</li>
           </ul>
-          <p>In future guides, we may walk through these components individually in more detail. Until then, look for each of these in the documentation for information on how to utilize and customize them.</p>
+          <p>The document system is a great way to handle all your document and code snippets.</p>
         </section>
 
-        <!-- HTML template
+        <!-- Document Example
         ================================================== -->
-        <section id="html-template">
+        <section id="examples">
           <div class="page-header">
-            <h1>4. Basic HTML template</h1>
+            <h1>3. Examples</h1>
           </div>
-          <p class="lead">With a brief intro into the contents out of the way, we can focus on putting Bootstrap to use. To do that, we'll utilize a basic HTML template that includes everything we mentioned in the <a href="./getting-started.html#file-structure">File structure</a>.</p>
+          <p class="lead">This is some examples of the documents and how they will look on this website.</p>
           <p>Now, here's a look at a <strong>typical HTML file</strong>:</p>
 <pre class="prettyprint linenums">
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;Bootstrap 101 Template&lt;/title&gt;
+    &lt;title&gt;Page Template&lt;/title&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;h1&gt;Hello, world!&lt;/h1&gt;
-    &lt;script src="http://code.jquery.com/jquery.js"&gt;&lt;/script&gt;
+    &lt;p&gt;This is a test template page&gt;&lt;/p&gt;
   &lt;/body&gt;
 &lt;/html&gt;
 </pre>
-          <p>To make this <strong>a Bootstrapped template</strong>, just include the appropriate CSS and JS files:</p>
+
+          <p>Here's a look at a <strong>typical Perl file</strong>:</p>
 <pre class="prettyprint linenums">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Bootstrap 101 Template&lt;/title&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;!-- Bootstrap --&gt;
-    &lt;link href="css/bootstrap.min.css" rel="stylesheet" media="screen"&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Hello, world!&lt;/h1&gt;
-    &lt;script src="http://code.jquery.com/jquery.js"&gt;&lt;/script&gt;
-    &lt;script src="js/bootstrap.min.js"&gt;&lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+#!/usr/local/bin/perl -w
+#
+# Program to do the obvious
+#
+
+use strict;
+use warnings;
+
+print 'Hello world.';   # Print a message
+
+exit;
 </pre>
-          <p><strong>And you're set!</strong> With those two files added, you can begin to develop any site or application with Bootstrap.</p>
-        </section>
 
-        <!-- Examples
-        ================================================== -->
-        <section id="examples">
-          <div class="page-header">
-            <h1>5. Examples</h1>
-          </div>
-          <p class="lead">Move beyond the base template with a few example layouts. We encourage folks to iterate on these examples and not simply use them as an end result.</p>
-          <ul class="thumbnails bootstrap-examples">
-            <li class="span3">
-              <a class="thumbnail" href="examples/starter-template.html">
-                <img src="assets/img/examples/bootstrap-example-starter.png" alt="">
-              </a>
-              <h4>Starter template</h4>
-              <p>A barebones HTML document with all the Bootstrap CSS and JavaScript included.</p>
-            </li>
-            <li class="span3">
-              <a class="thumbnail" href="examples/hero.html">
-                <img src="assets/img/examples/bootstrap-example-marketing.png" alt="">
-              </a>
-              <h4>Basic marketing site</h4>
-              <p>Featuring a hero unit for a primary message and three supporting elements.</p>
-            </li>
-            <li class="span3">
-              <a class="thumbnail" href="examples/fluid.html">
-                <img src="assets/img/examples/bootstrap-example-fluid.png" alt="">
-              </a>
-              <h4>Fluid layout</h4>
-              <p>Uses our new responsive, fluid grid system to create a seamless liquid layout.</p>
-            </li>
+          <p>Here's a look at a <strong>typical Rails class</strong>:</p>
+<pre class="prettyprint linenums">
+class DocumentType < ActiveRecord::Base
 
-            <li class="span3">
-              <a class="thumbnail" href="examples/marketing-narrow.html">
-                <img src="assets/img/examples/bootstrap-example-marketing-narrow.png" alt="">
-              </a>
-              <h4>Narrow marketing</h4>
-              <p>Slim, lightweight marketing template for small projects or teams.</p>
-            </li>
-            <li class="span3">
-              <a class="thumbnail" href="examples/justified-nav.html">
-                <img src="assets/img/examples/bootstrap-example-justified-nav.png" alt="">
-              </a>
-              <h4>Justified nav</h4>
-              <p>Marketing page with equal-width navigation links in a modified navbar.</p>
-            </li>
-            <li class="span3">
-              <a class="thumbnail" href="examples/signin.html">
-                <img src="assets/img/examples/bootstrap-example-signin.png" alt="">
-              </a>
-              <h4>Sign in</h4>
-              <p>Barebones sign in form with custom, larger form controls and a flexible layout.</p>
-            </li>
+  attr_accessible :description, :name, :user_id
 
-            <li class="span3">
-              <a class="thumbnail" href="examples/sticky-footer.html">
-                <img src="assets/img/examples/bootstrap-example-sticky-footer.png" alt="">
-              </a>
-              <h4>Sticky footer</h4>
-              <p>Pin a fixed-height footer to the bottom of the user's viewport.</p>
-            </li>
-            <li class="span3">
-              <a class="thumbnail" href="examples/carousel.html">
-                <img src="assets/img/examples/bootstrap-example-carousel.png" alt="">
-              </a>
-              <h4>Carousel jumbotron</h4>
-              <p>A more interactive riff on the basic marketing site featuring a prominent carousel.</p>
-            </li>
-          </ul>
+  validates_presence_of :description, :name, :user_id
+
+  has_and_belongs_to_many :documents
+
+  before_validation strip_attributes :except => [:user_id]
+
+  validates_uniqueness_of :name
+  validates_length_of :name, :maximum => 255
+  validates_length_of :description, :maximum => 255
+
+  private
+
+    def self.search(search)
+      if search
+        find(:all, 
+             :select => 'DISTINCT document_types.*', 
+             :conditions => ['document_types.name LIKE ? or document_types.description LIKE ?', "%#{search}%", "%#{search}%"]
+        )
+      else
+        find(:all)
+      end
+    end 
+
+end
+</pre>
+          <p><strong>Syntax Highlighted!</strong> Theese examples show how the documents will be syntax highlighted.</p>
         </section>
 
         <!-- Next
@@ -233,9 +164,9 @@
           <div class="page-header">
             <h1>What next?</h1>
           </div>
-          <p class="lead">Head to the docs for information, examples, and code snippets, or take the next leap and customize Bootstrap for any upcoming project.</p>
-          <a class="btn btn-large btn-primary" href="./scaffolding.html" onclick="_gaq.push(['_trackEvent', 'Getting started', 'Next steps', 'Visit docs']);">Visit the Bootstrap docs</a>
-          <a class="btn btn-large" href="./customize.html" style="margin-left: 5px;" onclick="_gaq.push(['_trackEvent', 'Getting started', 'Next steps', 'Customize']);">Customize Bootstrap</a>
+          <p class="lead">The <%= ENV["SITE_NAME"] %> group will be adding more features to this site.</p>
+          <p>Feel free to contact us on anything about this website.</p>
+          <%= link_to 'Contact Us', contact_path, :class => "btn btn-large btn-primary" %>
         </section>
 
         </div>
