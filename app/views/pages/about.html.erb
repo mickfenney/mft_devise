@@ -13,7 +13,7 @@
 
 <div class="content round">	
 
-	<div class="row">
+	<div class="row-fluid">
 
 		<!-- Docs nav
 		================================================== -->
@@ -33,7 +33,7 @@
           <div class="page-header">
             <h1>1. Technology</h1>
           </div>
-          <p class="lead">This is a ruby on rails application. The inital application has been created with the rails composer using devise, CanCan with Rolify. The backend can be configured tou use the database of choice. The application is using twitter-bootstrap for it's visual affects.</p>
+          <p class="lead">This is a ruby on rails application. The inital application has been created with the Rails Composer using Devise, CanCan with Rolify. The backend can be configured tou use the database of choice. The application is using twitter-bootstrap for it's visual affects.</p>
 
           <div class="row-fluid">
             <div class="span6">
@@ -55,13 +55,13 @@
           <div class="page-header">
             <h1>2. Documents</h1>
           </div>
-          <p class="lead">This website has a documentation system for the handling of code snippets.</p>
+          <p class="lead">This website has a documentation system for the handling of code snippets. The documents can be stored under multible document types.</p>
 
           <h2>Docs sections</h2>
           <h4>Serach</h4>
           <p>You can search for all documets by title, doc type or content.</p>
           <h4>View</h4>
-          <p>You can view all documents except for private ones. Private docmets can only be vied by the user who has created them.</p>
+          <p>You can view all documents except for private ones. Private documents can only be vied by the user who has created them.</p>
           <h4>Create</h4>
           <p>You can create a document with docs access.</p>
           <h4>Update</h4>
@@ -82,7 +82,7 @@
             <li>PL/SQL</li>
             <li>Rails</li>
             <li>PHP</li>
-            <li>More to be added</li>
+            <li>More can be added</li>
           </ul>
           <p>The document system is a great way to handle all your document and code snippets.</p>
         </section>
@@ -155,7 +155,7 @@ class DocumentType < ActiveRecord::Base
 
 end
 </pre>
-          <p><strong>Syntax Highlighted!</strong> Theese examples show how the documents will be syntax highlighted.</p>
+          <p><strong>Syntax Highlighted!</strong> These examples show how the documents will be syntax highlighted.</p>
         </section>
 
         <!-- Next
@@ -164,7 +164,7 @@ end
           <div class="page-header">
             <h1>What next?</h1>
           </div>
-          <p class="lead">The <%= ENV["SITE_NAME"] %> group will be adding more features to this site.</p>
+          <p class="lead">The <%= ENV["SITE_NAME"] %> group will continue to add more features to this site.</p>
           <p>Feel free to contact us on anything about this website.</p>
           <%= link_to 'Contact Us', contact_path, :class => "btn btn-large btn-primary" %>
         </section>
