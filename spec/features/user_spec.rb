@@ -414,7 +414,7 @@ describe 'Lock User' do
     @user = FactoryGirl.create(:user)
   end 
 
-  it "should lock the account and send an Unlock Instructions email", :focus=>true do
+  it "should lock the account and send an Unlock Instructions email" do
     reset_email
     count_email.should == 0
     visit new_user_session_path
