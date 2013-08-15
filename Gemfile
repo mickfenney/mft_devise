@@ -33,7 +33,7 @@ group :development do
   gem 'guard-rspec'
   gem 'growl'
   gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
-  #gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
+  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem "letter_opener", ">= 1.1.0"
   gem "quiet_assets", ">= 1.0.1"
   #gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
@@ -54,7 +54,7 @@ group :test do
   gem 'spork-rails'
   gem 'guard-spork'
   gem 'guard-rspec'
-  #gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
+  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem "capybara", ">= 2.0.2"
   gem "database_cleaner", ">= 0.9.1"
   gem "email_spec", ">= 1.4.0"
