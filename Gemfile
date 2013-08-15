@@ -10,7 +10,6 @@ gem "thin", ">= 1.5.1"
 gem "bootstrap-sass", ">= 2.3.0.0"
 gem "bootstrap-switch-rails"
 gem "devise", "2.2.4"
-#gem "devise", ">= 2.2.3"
 gem "devise_invitable", ">= 1.1.5"
 gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
@@ -81,5 +80,5 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 gem 'devise-async'
-#gem 'mandrill-rails'
+gem 'mandrill-rails'
 gem 'tinymce-rails'
