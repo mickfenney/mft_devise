@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-switch
 //= require tinymce-jquery
 //= require_tree .

@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 gem 'jquery-rails'
 gem "thin", ">= 1.5.1"
 gem "bootstrap-sass", ">= 2.3.0.0"
+gem "bootstrap-switch-rails"
 gem "devise", "2.2.4"
 #gem "devise", ">= 2.2.3"
 gem "devise_invitable", ">= 1.1.5"
