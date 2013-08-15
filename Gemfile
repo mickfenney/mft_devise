@@ -21,7 +21,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 group :development do
-  #gem 'sqlite3'
+  gem 'sqlite3'
   if RUBY_PLATFORM =~ /mingw/i
     gem 'mysql2', '0.3.11' 
   else 
@@ -33,16 +33,16 @@ group :development do
   gem 'guard-rspec'
   gem 'growl'
   gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
-  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
+  #gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem "letter_opener", ">= 1.1.0"
   gem "quiet_assets", ">= 1.0.1"
-  gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
+  #gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
   gem "rspec-rails", ">= 2.12.2"
   gem "factory_girl_rails", ">= 4.2.0"
   gem 'faker'
 end
 group :test do
-  #gem 'sqlite3'
+  gem 'sqlite3'
   if RUBY_PLATFORM =~ /mingw/i
     gem 'mysql2', '0.3.11' 
   else 
@@ -50,11 +50,11 @@ group :test do
   end
   gem 'rspec'
   gem 'growl'
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'spork-rails'
   gem 'guard-spork'
   gem 'guard-rspec'
-  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
+  #gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem "capybara", ">= 2.0.2"
   gem "database_cleaner", ">= 0.9.1"
   gem "email_spec", ">= 1.4.0"
