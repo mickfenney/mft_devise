@@ -9,7 +9,7 @@
        <span class="add-on"><i class="icon-pencil"></i></span><%= f.input_field :title, :required => true, :autofocus => true, :size => '' %>
       <% end %>   
 
-      <div id="tinyMCE_id">tinyMCE <input type="button" value="Show" id="toggleButton"></div>
+      <div id="tinyMCE_id" style="padding-left: 109px;">tinyMCE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="btn btn-primary btn-mini" type="button" value="Show" id="toggleButton"></div>
 
       <%= f.input :body, label: 'Content', :wrapper => :prepend do %>
         <div id="body1"><%= f.text_area :body, :rows => 10 %></div>
@@ -38,7 +38,7 @@ $(function() {
   $('#toggleButton').click( function(){
     $('#body1').toggle('50000', function(){
       if ($('#body1').is(':visible')) {
-        $('#toggleButton').val('Hide')
+        $('#toggleButton').val('Hide');
         $("form").submit(function(){
           $('#body2').remove();
         }); 
