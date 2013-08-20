@@ -1,7 +1,7 @@
 <% params[:tab] ||= 'body02' %>
 <ul class="nav nav-tabs">
-  <li class="<%= is_active_tab('body02', params[:tab]) %>"><a href="#body02" data-toggle="tab">Hide TinyMCE</a></li>
-  <li class="<%= is_active_tab('body01', params[:tab]) %>"><a href="#body01" data-toggle="tab">Show TinyMCE</a></li>
+  <li class="<%= is_active_tab('body02', params[:tab]) %>"><a href="#body02" data-toggle="tab">Default</a></li>
+  <li class="<%= is_active_tab('body01', params[:tab]) %>"><a href="#body01" data-toggle="tab">TinyMCE</a></li>
 </ul>
 <div id="tabbed_profile" class="tab-content">
   <div id="body01" class="tab-pane fade in <%= is_active_tab('body01', params[:tab]) %>">
