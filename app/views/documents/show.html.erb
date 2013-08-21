@@ -46,7 +46,7 @@
 
 				<p>
 				  <b>Content:</b>
-				  <% if @document.document_types.last.name == 'Text' %>
+				  <% if (@document.document_types.first.name == 'Text' or @document.document_types.last.name == 'Text') && @document.document_types.size == 1 %>
 				  	<div class="text-doc round"><%= @document.body.html_safe %></div>
 				  <% else %>
 				  	<pre class="prettyprint linenums"><%= @document.body %></pre>

@@ -1,0 +1,23 @@
+<%= simple_form_for(@document, :html => { :class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+  <input type='hidden' name='tab' value='body02' />
+  <% if @document.is_private? and @document.user_id == current_user.id or !@document.is_private? %>
+    <div class="form-inputs">
+      <%= f.input :title, :wrapper => :prepend do %>
+       <span class="add-on"><i class="icon-pencil"></i></span><%= f.input_field :title, :required => true, :autofocus => true, :size => '' %>
+      <% end %>  
+      <%= f.input :body, label: 'Content', :wrapper => :prepend do %>
+        <%= f.text_area :body, :rows => 10, :class => 'tinymce' %><%= tinymce :alternate %>
+      <% end %>
+      <%= f.association :document_types, label: 'Document Types', collection: DocumentType.all(order: 'name') %>
+      <% if @document.user_id == current_user.id or params[:action] == 'new' %>
+        <%= f.input :is_private, label: 'Private', :wrapper => :prepend do %>
+          <div class="make-switch switch-small" data-on="success" data-off="danger" data-on-label="Yes" data-off-label="No"><%= f.check_box :is_private %></div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>
