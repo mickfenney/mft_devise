@@ -1,11 +1,11 @@
 <fieldset>
 
   <%= f.input :name, :wrapper => :prepend do %>
-    <span class="add-on"><i class="icon-wrench"></i></span><%= f.text_field :name, :size => '' %> 
+    <span class="add-on"><i class="icon-pencil"></i></span><%= f.text_field :name, :size => '' %> 
   <% end %>
 
   <%= f.input :address, :wrapper => :prepend do %>
-    <span class="add-on"><i class="icon-wrench"></i></span><%= f.text_field :address, :size => '' %> 
+    <span class="add-on"><i class="icon-map-marker"></i></span><%= f.text_field :address, :size => '' %> 
   <% end %>
 
   <%= f.input "Show Google Map" do %>

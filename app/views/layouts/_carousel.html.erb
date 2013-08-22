@@ -6,9 +6,9 @@
       <div class="carousel-caption clearfix">
         <p>
           <% unless user_signed_in? %>
-            <%= link_to 'Sign up now!', new_user_registration_path, :class => 'btn btn-primary btn-mini pull-left' %>
+            <div class="pull-right"><%= link_to image_tag('logo_white_small.png'), new_user_session_path %></div>
           <% else %>
-            <%= ENV["SITE_NAME"] %>
+            <div class="pull-right"><%= image_tag('logo_white_small.png') %></div>
           <% end %>
         </p>
       </div>
@@ -18,9 +18,9 @@
       <div class="carousel-caption clearfix">
         <p>
           <% unless user_signed_in? %>
-            <%= link_to 'Sign up now!', new_user_registration_path, :class => 'btn btn-primary btn-mini pull-left' %>
+            <div class="pull-right"><%= link_to image_tag('logo_white_small.png'), new_user_session_path %></div>
           <% else %>
-            <%= ENV["SITE_NAME"] %>
+            <div class="pull-right"><%= image_tag('logo_white_small.png') %></div>
           <% end %>
         </p>
       </div>
@@ -30,13 +30,25 @@
       <div class="carousel-caption clearfix">
         <p>
           <% unless user_signed_in? %>
-            <%= link_to 'Sign up now!', new_user_registration_path, :class => 'btn btn-primary btn-mini pull-left' %>
+            <div class="pull-right"><%= link_to image_tag('logo_white_small.png'), new_user_session_path %></div>
           <% else %>
-            <%= ENV["SITE_NAME"] %>
+            <div class="pull-right"><%= image_tag('logo_white_small.png') %></div>
           <% end %>
         </p>
       </div>
     </div>
+    <div class="item">
+      <%= image_tag('4.jpg') %>
+      <div class="carousel-caption clearfix">
+        <p>
+          <% unless user_signed_in? %>
+            <div class="pull-right"><%= link_to image_tag('logo_white_small.png'), new_user_session_path %></div>
+          <% else %>
+            <div class="pull-right"><%= image_tag('logo_white_small.png') %></div>
+          <% end %>
+        </p>
+      </div>
+    </div>    
   </div>
   <!-- Carousel nav -->
   <a class="carousel-control left" href="#featureCarousel" data-slide="prev">&lsaquo;</a>
