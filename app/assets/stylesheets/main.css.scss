@@ -538,3 +538,32 @@ ol.linenums li {
   line-height: 20px;
   text-shadow: 0 1px 0 #fff;
 }
+
+/* Piture Gullery
+------------------------------ */
+
+.painting {
+  border: solid 1px #CCC;
+  padding: 10px 10px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.painting .name {
+  padding-top: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.painting .image_placeholder {
+  width: 200px;
+  height: 150px;
+  background-color: #B6B6B6;
+}
+
+.painting .actions {
+  font-size: 10px;
+  text-align: center;
+  color: #777;
+}

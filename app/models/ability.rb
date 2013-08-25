@@ -15,6 +15,14 @@ class Ability
       can :search, DocumentType
       can :manage, Document, :user_id => user.id
       can :manage, DocumentType, :user_id => user.id
+    elsif user.has_role? :pics
+      can :view, User, :id => user.id
+      can :view, Gallery
+      can :search, Gallery
+      can :view, Painting
+      can :search, Painting
+      can :manage, Gallery, :user_id => user.id
+      can :manage, Painting, :user_id => user.id      
     elsif user.has_role? :user
       can :view, User, :id => user.id 
     else

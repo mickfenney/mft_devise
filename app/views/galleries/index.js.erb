@@ -1,0 +1,8 @@
+$('#gallery_results').append('<%= j render :partial => "gallery", :collection => @galleries %>');
+<% if @galleries.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@galleries) %>');
+<% else %>
+    $('.pagination').remove();
+<% end %>
+
+<% sleep 1 %>

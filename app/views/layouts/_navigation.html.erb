@@ -53,6 +53,11 @@
             <% end %> 
           </ul>
         <% end %>
+        <% if can? :all, Gallery %>
+            <li <%= active_css(galleries_path) %>>
+            <%= link_to 'Galleries', galleries_path %>
+            </li>  
+        <% end %> 
         <li <%= active_css(contact_path) %>>
         <%= link_to 'Contact', contact_path %>
         </li>  

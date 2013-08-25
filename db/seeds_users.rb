@@ -30,6 +30,17 @@ user.skip_confirmation!
 user.add_role :docs
 user.save!
 
+user = User.new(
+  :name => 'pics',
+  :email => 'pics@example.com',
+  :password => 'password',
+  :password_confirmation => 'password',
+)
+puts '+ user: ' << user.name
+user.skip_confirmation!
+user.add_role :pics
+user.save!
+
 50.times do
 
   user = User.new(

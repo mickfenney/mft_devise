@@ -82,3 +82,5 @@ gem 'delayed_job_web'
 gem 'devise-async'
 gem 'mandrill-rails'
 gem 'tinymce-rails'
+gem "rmagick"
+gem "carrierwave"

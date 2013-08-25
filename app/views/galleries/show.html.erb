@@ -1,0 +1,58 @@
+<div class="content round">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <%= render 'layouts/messages' %>
+
+      <h3>Picture Gallery</h3>
+
+      <p>
+        <b>Name:</b>
+        <%= @gallery.name %>
+      </p>    
+      
+      <p>
+        <b>User:</b>
+        <%= User.find_by_id(@gallery.user_id).name %>
+      </p>
+
+      <% if @gallery.created_at == @gallery.updated_at %>
+        <p>
+          <b>Created:</b>
+            <%= @gallery.created_at.to_s(:human_short_time) %>
+        </p>
+      <% else %>
+        <p>
+          <b>Created:</b>
+            <%= @gallery.created_at.to_s(:human_short_time) %>
+        </p>    
+        <p>
+          <b>Updated:</b>
+            <%= @gallery.updated_at.to_s(:human_short_time) %>
+        </p>
+      <% end %>        
+
+      <p>
+        <%= link_to "Add a Picture", new_painting_path(:gallery_id => @gallery) %> |
+        <%= link_to "Edit Gallery", edit_gallery_path %> | 
+        <%= link_to "Remove Gallery", @gallery, :confirm => 'Are you sure?', :method => :delete %> |
+        <%= link_to "View Galleries", galleries_path %>
+      </p>      
+
+      <div id="paintings">
+        <% for painting in @gallery.paintings %>
+          <div class="painting">
+            <%= image_tag painting.image_url(:thumb) if painting.image? %>
+            <div class="name"><%= painting.name %></div>
+            <div class="actions">
+              <%= link_to "edit", edit_painting_path(painting) %> |
+              <%= link_to "remove", painting, :confirm => 'Are you sure?', :method => :delete %>
+            </div>
+          </div>
+        <% end %>
+        <div class="clear"></div>
+      </div>
+
+    </div>
+  </div>
+</div>

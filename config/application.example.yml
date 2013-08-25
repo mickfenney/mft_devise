@@ -23,4 +23,4 @@ ADMIN_NAME2: test
 ADMIN_EMAIL2: test1@example.com
 ADMIN_PASSWORD2: password
 ADMIN_LOCATION3: big ben UK
-ROLES: [admin, user, docs]
+ROLES: [admin, user, docs, pics]
