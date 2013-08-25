@@ -38,7 +38,11 @@ Gemfile.lock
 /doc/app/
 /doc/features.html
 /doc/specs.html
-/public/*
+/public/cache
+/public/assets
+/public/stylesheets/compiled
+/public/system/*
+/public/uploads/*
 /spec/tmp/*
 /cache
 /capybara*
