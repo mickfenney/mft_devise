@@ -82,7 +82,7 @@ gem 'delayed_job_web'
 gem 'devise-async'
 gem 'mandrill-rails'
 gem 'tinymce-rails'
-if RUBY_PLATFORM == /mingw/i
+unless RUBY_PLATFORM =~ /mingw/i
   gem "rmagick"
 end
 gem "carrierwave"

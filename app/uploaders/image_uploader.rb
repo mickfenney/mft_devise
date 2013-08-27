@@ -3,7 +3,7 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or ImageScience support:
-  include CarrierWave::RMagick if RUBY_PLATFORM == /mingw/i
+  include CarrierWave::RMagick unless RUBY_PLATFORM =~ /mingw/i
   # include CarrierWave::ImageScience
 
   # Choose what kind of storage to use for this uploader:
@@ -29,7 +29,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  if RUBY_PLATFORM == /mingw/i
+  unless RUBY_PLATFORM =~ /mingw/i
     version :thumb do
       process :resize_to_limit => [150, 150]
     end
