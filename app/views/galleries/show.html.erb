@@ -33,24 +33,24 @@
       <% end %>        
 
       <p>
-        <%= link_to "Add a Picture", new_painting_path(:gallery_id => @gallery) %> |
+        <%= link_to "Add a Picture", new_picture_path(:gallery_id => @gallery) %> |
         <%= link_to "Edit Gallery", edit_gallery_path %> | 
         <%= link_to "Remove Gallery", @gallery, :confirm => 'Are you sure?', :method => :delete %> |
         <%= link_to "View Galleries", galleries_path %>
       </p>      
 
-      <div id="paintings">
-        <% for painting in @gallery.paintings %>
-          <div class="painting">
+      <div id="pictures">
+        <% for picture in @gallery.pictures %>
+          <div class="picture">
             <% if RUBY_PLATFORM =~ /mingw/i %>
-              <%= image_tag painting.image_url(), size: "150x150" if painting.image? %>
+              <%= image_tag picture.image_url(), size: "150x150" if picture.image? %>
             <% else %>
-              <%= image_tag painting.image_url(:thumb) if painting.image? %> 
+              <%= image_tag picture.image_url(:thumb) if picture.image? %> 
             <% end %>
-            <div class="name"><%= painting.name %></div>
+            <div class="name"><%= picture.name %></div>
             <div class="actions">
-              <%= link_to "edit", edit_painting_path(painting) %> |
-              <%= link_to "remove", painting, :confirm => 'Are you sure?', :method => :delete %>
+              <%= link_to "edit", edit_picture_path(picture) %> |
+              <%= link_to "remove", picture, :confirm => 'Are you sure?', :method => :delete %>
             </div>
           </div>
         <% end %>

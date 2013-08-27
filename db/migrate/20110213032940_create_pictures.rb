@@ -1,6 +1,6 @@
-class CreatePaintings < ActiveRecord::Migration
+class CreatePictures < ActiveRecord::Migration
   def self.up
-    create_table :paintings do |t|
+    create_table :pictures do |t|
       t.integer :gallery_id
       t.integer :user_id
       t.string :name
@@ -9,6 +9,6 @@ class CreatePaintings < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :paintings
+    drop_table :pictures
   end
 end

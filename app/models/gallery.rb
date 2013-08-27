@@ -4,7 +4,7 @@ class Gallery < ActiveRecord::Base
 
   validates_presence_of :name, :user_id
 
-  has_many :paintings
+  has_many :pictures
 
   before_validation strip_attributes :except => [:user_id]
 
@@ -16,11 +16,11 @@ class Gallery < ActiveRecord::Base
   protected
 
     def remove_id_directory
-    	@dirs = Painting.where('gallery_id' => id)
+    	@dirs = Picture.where('gallery_id' => id)
       for dir in @dirs
-      	FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/painting/image/#{dir.id}", :force => true)
+      	FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/picture/image/#{dir.id}", :force => true)
       end
-      Painting.destroy_all('gallery_id' => id)    
+      Picture.destroy_all('gallery_id' => id)    
     end  
 
   private

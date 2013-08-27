@@ -19,10 +19,10 @@ class Ability
       can :view, User, :id => user.id
       can :view, Gallery
       can :search, Gallery
-      can :view, Painting
-      can :search, Painting
+      can :view, Picture
+      can :search, Picture
       can :manage, Gallery, :user_id => user.id
-      can :manage, Painting, :user_id => user.id      
+      can :manage, Picture, :user_id => user.id      
     elsif user.has_role? :user
       can :view, User, :id => user.id 
     else

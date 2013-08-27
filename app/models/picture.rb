@@ -1,4 +1,4 @@
-class Painting < ActiveRecord::Base
+class Picture < ActiveRecord::Base
 	
   attr_accessible :gallery_id, :user_id, :name, :image, :remote_image_url
 
@@ -14,6 +14,8 @@ class Painting < ActiveRecord::Base
 
   before_create :default_name
 
+  before_update :default_name
+
   after_destroy :remove_id_directory
 
   def default_name
@@ -23,7 +25,7 @@ class Painting < ActiveRecord::Base
   protected
 
     def remove_id_directory
-      FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/painting/image/#{id}", :force => true)
-    end    
+      FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/picture/image/#{id}", :force => true)
+    end
 
 end

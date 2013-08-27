@@ -542,7 +542,7 @@ ol.linenums li {
 /* Piture Gullery
 ------------------------------ */
 
-.painting {
+.picture {
   border: solid 1px #CCC;
   padding: 10px 10px;
   float: left;
@@ -550,19 +550,19 @@ ol.linenums li {
   margin-bottom: 20px;
 }
 
-.painting .name {
+.picture .name {
   padding-top: 5px;
   text-align: center;
   font-weight: bold;
 }
 
-.painting .image_placeholder {
+.picture .image_placeholder {
   width: 200px;
   height: 150px;
   background-color: #B6B6B6;
 }
 
-.painting .actions {
+.picture .actions {
   font-size: 10px;
   text-align: center;
   color: #777;

@@ -23,7 +23,7 @@ MftDevise::Application.routes.draw do
 
   resources :galleries
   
-  resources :paintings  
+  resources :pictures  
 
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 

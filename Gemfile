@@ -3,6 +3,7 @@ unless RUBY_PLATFORM =~ /mingw/i
   ruby "2.0.0"
   #gem 'therubyracer'
   gem 'libnotify'  
+  gem "rmagick"
 end
 gem 'rails', '3.2.13'
 gem 'jquery-rails'
@@ -82,7 +83,4 @@ gem 'delayed_job_web'
 gem 'devise-async'
 gem 'mandrill-rails'
 gem 'tinymce-rails'
-unless RUBY_PLATFORM =~ /mingw/i
-  gem "rmagick"
-end
 gem "carrierwave"
