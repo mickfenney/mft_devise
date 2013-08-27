@@ -42,7 +42,11 @@
       <div id="paintings">
         <% for painting in @gallery.paintings %>
           <div class="painting">
-            <%= image_tag painting.image_url(:thumb) if painting.image? %>
+            <% if RUBY_PLATFORM =~ /mingw/i %>
+              <%= image_tag painting.image_url(), size: "150x150" if painting.image? %>
+            <% else %>
+              <%= image_tag painting.image_url(:thumb) if painting.image? %> 
+            <% end %>
             <div class="name"><%= painting.name %></div>
             <div class="actions">
               <%= link_to "edit", edit_painting_path(painting) %> |
