@@ -37,7 +37,22 @@
         <%= link_to "Edit Gallery", edit_gallery_path %> | 
         <%= link_to "Remove Gallery", @gallery, :confirm => 'Are you sure?', :method => :delete %> |
         <%= link_to "View Galleries", galleries_path %>
-      </p>      
+      </p>   
+
+      <p>
+        <b>View Images</b>
+        <div>
+          <% for picture in @gallery.pictures %>
+            <% if RUBY_PLATFORM =~ /mingw/i %>
+              <%= link_to picture.image_url(), :rel => :lazybox do %>
+                <%= image_tag picture.image_url(), size: "15x15" if picture.image? %>
+              <% end %>
+            <% else %>
+              <%= image_tag picture.image_url(:thumb), size: "15x15" if picture.image? %> 
+            <% end %>
+          <% end %>
+        </div>
+      </p>          
 
       <div id="pictures">
         <% for picture in @gallery.pictures %>

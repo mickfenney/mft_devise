@@ -84,3 +84,5 @@ gem 'devise-async'
 gem 'mandrill-rails'
 gem 'tinymce-rails'
 gem "carrierwave"
+gem 'lazybox'
+gem 'bourbon'

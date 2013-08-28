@@ -567,3 +567,14 @@ ol.linenums li {
   text-align: center;
   color: #777;
 }
+
+/* Laxybox
+------------------------------ */
+
+#lazybox.lazybox {
+  background: transparent;
+  padding: 0;
+  border: 5px solid #222;
+  border-radius: 0;
+  @include box-shadow(0 0 50px 10px cyan);
+}
