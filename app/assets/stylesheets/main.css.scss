@@ -543,7 +543,10 @@ ol.linenums li {
 ------------------------------ */
 
 .picture {
-  border: solid 1px #CCC;
+  border-top: solid 1px #CCC;
+  border-left: solid 1px #CCC;
+  border-right: solid 1px #CCC;
+  border-bottom: solid 1px #CCC;
   padding: 10px 10px;
   float: left;
   margin-right: 20px;
@@ -571,5 +574,6 @@ ol.linenums li {
   padding: 0;
   border: 5px solid #222;
   border-radius: 0;
+  width: 600px;
   @include box-shadow(0 0 50px 10px cyan);
 }

@@ -18,6 +18,9 @@ class Picture < ActiveRecord::Base
 
   after_destroy :remove_id_directory
 
+  after_save :remove_tmp_directory
+
+
   def default_name
     if image.filename
       self.name ||= File.basename(image.filename, '.*').titleize if image
@@ -33,5 +36,9 @@ class Picture < ActiveRecord::Base
     def remove_id_directory
       FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/picture/image/#{id}", :force => true)
     end
+
+    def remove_tmp_directory
+      FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/tmp", :force => true)
+    end     
 
 end
