@@ -19,7 +19,13 @@ class Picture < ActiveRecord::Base
   after_destroy :remove_id_directory
 
   def default_name
-    self.name ||= File.basename(image.filename, '.*').titleize if image
+    if image.filename
+      self.name ||= File.basename(image.filename, '.*').titleize if image
+    else
+      unless self.name
+        self.name = 'Unknown'
+      end
+    end
   end
 
   protected
