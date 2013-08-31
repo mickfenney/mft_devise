@@ -569,11 +569,35 @@ ol.linenums li {
 /* Laxybox
 ------------------------------ */
 
-#lazybox.lazybox {
-  background: transparent;
-  padding: 0;
-  border: 5px solid #222;
-  border-radius: 0;
-  width: 600px;
-  @include box-shadow(0 0 50px 10px cyan);
+@media (min-width: 768px) and (max-width: 2000px) {
+  #lazybox.lazybox {
+    background: transparent;
+    padding: 0;
+    border: 5px solid #222;
+    border-radius: 0;
+    width: 600px;
+    @include box-shadow(0 0 50px 10px cyan);
+  }
+}
+
+@media (max-width: 767px) {
+  #lazybox.lazybox {
+    background: transparent;
+    padding: 0;
+    border: 5px solid #222;
+    border-radius: 0;
+    width: 450px;
+    @include box-shadow(0 0 50px 10px cyan);
+  }
+}
+
+@media (max-width: 480px) {
+  #lazybox.lazybox {
+    background: transparent;
+    padding: 0;
+    border: 5px solid #222;
+    border-radius: 0;
+    width: 300px;
+    @include box-shadow(0 0 50px 10px cyan);
+  }
 }
