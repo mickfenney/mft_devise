@@ -56,6 +56,9 @@
         <% if can? :all, Gallery %>
             <li <%= active_css(galleries_path) %>>
             <%= link_to 'Galleries', galleries_path %>
+            <li <%= active_css(contact_path) %>>
+            <%= link_to 'Video', video_path %>
+            </li>              
             </li>  
         <% end %> 
         <li <%= active_css(contact_path) %>>

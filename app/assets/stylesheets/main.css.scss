@@ -601,3 +601,12 @@ ol.linenums li {
     @include box-shadow(0 0 50px 10px cyan);
   }
 }
+
+#lazybox.player {
+  border: none;
+  background: #222;
+  border-radius: 0;
+  @include box-shadow(0 0 50px 10px magenta);
+}
+
+#lazybox_body > * { display: block; }
