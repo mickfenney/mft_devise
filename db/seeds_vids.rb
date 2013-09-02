@@ -6,6 +6,6 @@ if Video.count == 0
     :description => 'This is a test youtube video of the sumernats burnout competition...',
     :user_id => 1,
   )
-  puts '+ doc: ' << vid.name
+  puts '+ vid: ' << vid.name
 
 end
