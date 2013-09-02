@@ -1,0 +1,86 @@
+<div class="content round">
+  <div class="row-fluid">
+    <div class="span12">
+
+	  	<%= render 'layouts/messages' %>
+
+	  	<h3>Video</h3>    	
+
+			<p>
+			  <b>Name:</b>
+			  <%= @video.name %>
+			</p>
+
+			<p>
+			  <b>Code:</b>
+			  <%= @video.code %>
+			</p>
+
+			<p>
+			  <b>Description:</b>
+			  <%= @video.description %>
+			</p>				
+
+			<p>
+			  <b>User:</b>
+			  <%= User.find_by_id(@video.user_id).name %>
+			</p>
+
+			<% if @video.created_at == @video.updated_at %>
+				<p>
+				  <b>Created:</b>
+			      <%= @video.created_at.to_s(:human_short_time) %>
+				</p>
+			<% else %>
+				<p>
+				  <b>Created:</b>
+			      <%= @video.created_at.to_s(:human_short_time) %>
+				</p>		
+				<p>
+				  <b>Updated:</b>
+			      <%= @video.updated_at.to_s(:human_short_time) %>
+				</p>
+			<% end %>	
+
+			<p>
+			  <b>View Video:</b>
+			  <%= link_to "mobile", "", :id => 'youtube_player1_'+@video.code %> - 
+			  <%= link_to "tablet", "", :id => 'youtube_player2_'+@video.code %> - 
+			  <%= link_to "desktop", "", :id => 'youtube_player3_'+@video.code %>
+			</p>
+			
+			<br />
+
+			<%= link_to 'Edit', edit_video_path(@video) %> |
+			<%= link_to 'Back', videos_path %>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("a#youtube_player1_<%= @video.code %>").click(function(e){
+      e.preventDefault()
+      $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'mobile', :vcode => @video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
+    })
+  })
+</script>
+
+<script>
+  $(document).ready(function(){
+    $("a#youtube_player2_<%= @video.code %>").click(function(e){
+      e.preventDefault()
+      $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'tablet', :vcode => @video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
+    })
+  })
+</script>
+
+<script>
+  $(document).ready(function(){
+    $("a#youtube_player3_<%= @video.code %>").click(function(e){
+      e.preventDefault()
+      $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'desktop', :vcode => @video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
+    })
+  })
+</script>

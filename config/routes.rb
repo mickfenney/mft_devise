@@ -3,7 +3,6 @@ MftDevise::Application.routes.draw do
   get "sessions/new"
 
   get '/about', to: 'pages#about'
-  get '/video', to: 'pages#video'
 
   get  '/contact', to: 'contact_us#new'
   post '/contact', to: 'contact_us#create', :as => :contact_us
@@ -25,6 +24,8 @@ MftDevise::Application.routes.draw do
   resources :galleries
   
   resources :pictures  
+
+  resources :videos
 
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 

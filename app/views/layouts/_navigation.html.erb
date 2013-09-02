@@ -53,14 +53,19 @@
             <% end %> 
           </ul>
         <% end %>
-        <% if can? :all, Gallery %>
-            <li <%= active_css(galleries_path) %>>
-            <%= link_to 'Galleries', galleries_path %>
-            <li <%= active_css(contact_path) %>>
-            <%= link_to 'Video', video_path %>
-            </li>              
-            </li>  
-        <% end %> 
+        <% if can? :all, Gallery or can? :all, Video %>
+          <li class="dropdown" id="preview-menu">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Media</a>
+          <ul class="dropdown-menu">
+            <% if can? :all, Gallery %>
+              <li><a href="<%= galleries_path %>"><i class="icon-search"></i> Picture Galleries</a></li>
+            <% end %>
+            <% if can? :all, DocumentType %>
+              <li class="divider"></li>
+              <li><a href="<%= videos_path %>"><i class="icon-search"></i> Videos</a></li>
+            <% end %> 
+          </ul>
+        <% end %>        
         <li <%= active_css(contact_path) %>>
         <%= link_to 'Contact', contact_path %>
         </li>  

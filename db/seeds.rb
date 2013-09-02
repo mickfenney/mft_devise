@@ -58,4 +58,8 @@ if Rails.env.development?
   puts '+ Loading Test Documents...'
   load "#{Rails.root}/db/seeds_docs.rb"
 
+  puts '+ DEFAULT VIDEOS'
+  puts '+ Loading Test Videos...'
+  load "#{Rails.root}/db/seeds_vids.rb"  
+
 end

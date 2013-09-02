@@ -1,0 +1,8 @@
+$('#video_results').append('<%= j render :partial => "video", :collection => @videos %>');
+<% if @videos.next_page %>
+    $('.pagination').replaceWith('<%= j will_paginate(@videos) %>');
+<% else %>
+    $('.pagination').remove();
+<% end %>
+
+<% sleep 1 %>

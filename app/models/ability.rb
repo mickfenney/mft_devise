@@ -11,20 +11,25 @@ class Ability
       can :view, User, :id => user.id
       can :view, Document
       can :search, Document
+      can :manage, Document, :user_id => user.id
       can :view, DocumentType
       can :search, DocumentType
-      can :manage, Document, :user_id => user.id
       can :manage, DocumentType, :user_id => user.id
     elsif user.has_role? :pics
       can :view, User, :id => user.id
       can :view, Gallery
       can :search, Gallery
+      can :manage, Gallery, :user_id => user.id
       can :view, Picture
       can :search, Picture
-      can :manage, Gallery, :user_id => user.id
-      can :manage, Picture, :user_id => user.id      
+      can :manage, Picture, :user_id => user.id
+    elsif user.has_role? :vids
+      can :view, User, :id => user.id
+      can :view, Video
+      can :search, Video
+      can :manage, Video, :user_id => user.id  
     elsif user.has_role? :user
-      can :view, User, :id => user.id 
+      can :view, User, :id => user.id
     else
     end
     # Define abilities for the passed in user here. For example:
