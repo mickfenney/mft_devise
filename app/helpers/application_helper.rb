@@ -60,6 +60,14 @@ module ApplicationHelper
     end
   end 
 
+  def is_active_accordion(arg1, arg2)
+    if arg1 == arg2
+      'in'
+    else
+      ''
+    end
+  end  
+
   # Returns the name as a delimited string from an object list
   def display_delimited_string(object_list, method_name = 'name', delimiter = ',')
     delimited_string = ''
