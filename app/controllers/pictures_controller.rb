@@ -6,6 +6,10 @@ class PicturesController < ApplicationController
     @picture = Picture.new(:gallery_id => params[:gallery_id])
   end
 
+  # def show
+  #   @picture = Picture.find(params[:id])
+  # end  
+
   def create
     @picture = Picture.new(params[:picture])
     @picture.user_id = current_user.id
