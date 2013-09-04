@@ -1,14 +1,18 @@
 class PicturesController < ApplicationController
 
   load_and_authorize_resource
+
+  def index
+    @pictures = Picture.all
+  end
+
+  def show
+    @picture = Picture.find(params[:id])
+  end
   
   def new
     @picture = Picture.new(:gallery_id => params[:gallery_id])
   end
-
-  # def show
-  #   @picture = Picture.find(params[:id])
-  # end  
 
   def create
     @picture = Picture.new(params[:picture])
