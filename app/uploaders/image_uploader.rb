@@ -5,6 +5,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or ImageScience support:
   include CarrierWave::RMagick unless RUBY_PLATFORM =~ /mingw/i
   # include CarrierWave::ImageScience
+  
+  # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
+  include Sprockets::Helpers::RailsHelper
+  include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
   storage :file

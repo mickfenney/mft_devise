@@ -547,6 +547,10 @@ ol.linenums li {
 /* Piture Gullery
 ------------------------------ */
 
+#new_picture {
+  clear: both;
+}
+
 .picture {
   border-top: solid 1px #CCC;
   border-left: solid 1px #CCC;
@@ -569,6 +573,21 @@ ol.linenums li {
   font-size: 10px;
   text-align: center;
   color: #777;
+}
+
+.upload {
+  border-top: solid 1px #CCC;
+  width: 300px;
+  padding-top: 10px;
+  margin-top: 10px;
+
+  .progress {
+    margin-top: 8px;
+    height: 10px;
+    border: solid 1px #555;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+  }
 }
 
 /* Laxybox

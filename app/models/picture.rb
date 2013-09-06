@@ -9,7 +9,7 @@ class Picture < ActiveRecord::Base
   before_validation strip_attributes :except => [:user_id]
 
   validates_presence_of :image, :user_id, :gallery_id
-  #validates_uniqueness_of :name
+
   validates_length_of :name, :maximum => 255  
 
   before_create :default_name

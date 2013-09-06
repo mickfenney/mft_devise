@@ -12,12 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require bootstrap
 //= require bootstrap-switch
 //= require tinymce-jquery
 //= require lazybox
 //= require_tree .
-
-$(document).ready(function() {
-  $('a[rel*=lazybox]').lazybox({close: false, modal: false, opacity: 0.7, klass: 'lazybox', speed: 200});
-});

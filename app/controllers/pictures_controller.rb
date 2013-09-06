@@ -11,18 +11,11 @@ class PicturesController < ApplicationController
   end
   
   def new
-    @picture = Picture.new(:gallery_id => params[:gallery_id])
+    @picture = Picture.new(:gallery_id => params[:gallery_id], :user_id => params[:user_id])
   end
 
   def create
-    @picture = Picture.new(params[:picture])
-    @picture.user_id = current_user.id
-    if @picture.save
-      flash[:notice] = "Successfully created picture."
-      redirect_to @picture.gallery
-    else
-      render :action => 'new'
-    end
+    @picture = Picture.create(params[:picture])
   end
 
   def edit

@@ -1,0 +1,50 @@
+<div class="content round">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <%= render 'layouts/messages' %>
+
+      <h3>Picture</h3>
+
+      <p>
+        <b>Name:</b>
+        <%= @picture.name %>
+      </p>    
+
+      <p>
+        <b>Gallery:</b>
+        <%= Gallery.find_by_id(@picture.gallery_id).name %>
+      </p>         
+      
+      <p>
+        <b>User:</b>
+        <%= User.find_by_id(@picture.user_id).name %>
+      </p>
+
+      <% if @picture.created_at == @picture.updated_at %>
+        <p>
+          <b>Created:</b>
+            <%= @picture.created_at.to_s(:human_short_time) %>
+        </p>
+      <% else %>
+        <p>
+          <b>Created:</b>
+            <%= @picture.created_at.to_s(:human_short_time) %>
+        </p>    
+        <p>
+          <b>Updated:</b>
+            <%= @picture.updated_at.to_s(:human_short_time) %>
+        </p>
+      <% end %>    
+
+      <p><%= image_tag @picture.image_url, :class => "img-polaroid" %></p>
+
+      <p>
+        <%= link_to "Edit", edit_picture_path(@picture) %> |
+        <%= link_to "Destroy", @picture, :confirm => 'Are you sure?', :method => :delete %> |
+        <%= link_to "Back to Gallery", gallery_path(@picture.gallery_id) %>
+      </p>          
+
+    </div>
+  </div>
+</div>

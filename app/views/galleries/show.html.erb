@@ -33,14 +33,13 @@
       <% end %>        
 
       <p>
-        <%= link_to "Add a Picture", new_picture_path(:gallery_id => @gallery) %> |
+        <%= link_to "Refresh Images", @gallery %> |
         <%= link_to "Edit Gallery", edit_gallery_path %> | 
         <%= link_to "Remove Gallery", @gallery, :confirm => 'Are you sure?', :method => :delete %> |
         <%= link_to "View Galleries", galleries_path %>
-      </p>   
+      </p> 
 
       <p>
-        <b>View Images</b>
         <div>
           <% for picture in @gallery.pictures %>
             <% if RUBY_PLATFORM =~ /mingw/i %>
@@ -57,12 +56,12 @@
       </p>          
 
       <div id="pictures">
-        <% for picture in @gallery.pictures %>
+        <% for picture in @gallery.pictures.order("name ASC") %>
           <div class="picture">
             <% if RUBY_PLATFORM =~ /mingw/i %>
-              <%= image_tag picture.image_url(), size: "150x150" if picture.image? %>
-            <% else %>
-              <%= image_tag picture.image_url(:thumb) if picture.image? %> 
+              <%= link_to image_tag(picture.image_url, size: "150x150"), picture if picture.image? %>
+            <% else %>  
+              <%= link_to image_tag(picture.image_url(:thumb)), picture if picture.image? %>
             <% end %>
             <div class="name"><%= picture.name %></div>
             <div class="actions">
@@ -71,9 +70,30 @@
             </div>
           </div>
         <% end %>
-        <div class="clear"></div>
       </div>
+      <div class="clear"></div>
+
+      <%= simple_form_for(Picture.new, :html => { :class => 'form-horizontal' }) do |f| %>
+        <%= f.hidden_field :gallery_id, :value => @gallery.id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.input :image, :label => "Upload Pictures:", :wrapper => :prepend  do %>
+        <%= f.file_field :image, multiple: true, name: "picture[image]" %>
+        <% end %>
+      <% end %>
+
+      <script id="template-upload" type="text/x-tmpl">
+        <div class="upload">
+          {%=o.name%}
+          <div class="progress progress-success progress-striped active"><div class="bar" style="width: 0%"></div></div>
+        </div>
+      </script>       
 
     </div>
   </div>
 </div>
+
+<script>  
+  $(document).ready(function() {
+    $('a[rel*=lazybox]').lazybox({close: false, modal: false, opacity: 0.7, klass: 'lazybox', speed: 200});
+  });  
+</script>  
