@@ -7,31 +7,32 @@
   <td><%= link_to 'Edit Video', edit_video_path(video), :class => 'btn btn-primary btn-mini' %></td>
   <td><%= link_to 'Destroy Video', video, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
   <td data-title="User"><%= User.find_by_id(video.user_id).name %></td>
+
+  <script>
+    $(document).ready(function(){
+      $("a#youtube_player1_<%= video.code %>").click(function(e){
+        e.preventDefault()
+        $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'mobile', :vcode => video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
+      })
+    })
+  </script>
+
+  <script>
+    $(document).ready(function(){
+      $("a#youtube_player2_<%= video.code %>").click(function(e){
+        e.preventDefault()
+        $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'tablet', :vcode => video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
+      })
+    })
+  </script>
+
+  <script>
+    $(document).ready(function(){
+      $("a#youtube_player3_<%= video.code %>").click(function(e){
+        e.preventDefault()
+        $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'desktop', :vcode => video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
+      })
+    })
+  </script> 
+
 </tr>
-
-<script>
-  $(document).ready(function(){
-    $("a#youtube_player1_<%= video.code %>").click(function(e){
-      e.preventDefault()
-      $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'mobile', :vcode => video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
-    })
-  })
-</script>
-
-<script>
-  $(document).ready(function(){
-    $("a#youtube_player2_<%= video.code %>").click(function(e){
-      e.preventDefault()
-      $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'tablet', :vcode => video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
-    })
-  })
-</script>
-
-<script>
-  $(document).ready(function(){
-    $("a#youtube_player3_<%= video.code %>").click(function(e){
-      e.preventDefault()
-      $.lazybox("<%= j(render :partial => 'layouts/player', :locals => {:video_size => 'desktop', :vcode => video.code}) %>", {niceClose: true, opacity: 0.7, speed: 500, klass: 'player'});
-    })
-  })
-</script> 
