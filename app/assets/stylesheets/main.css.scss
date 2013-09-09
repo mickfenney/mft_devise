@@ -634,3 +634,20 @@ ol.linenums li {
 }
 
 #lazybox_body > * { display: block; }
+
+/* up-down-arrow
+------------------------------ */
+
+.up-down-arrow th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.up-down-arrow th .asc {
+  background-image: url(/assets/up_arrow.gif);
+}
+
+.up-down-arrow th .desc {
+  background-image: url(/assets/down_arrow.gif);
+}

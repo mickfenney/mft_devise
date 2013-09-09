@@ -19,11 +19,12 @@
       
       <% if @galleries.any? %>
         <section id="no-more-tables"> 
-          <table class="table table-striped table-bordered table-condensed">
+          <table class="table table-striped table-bordered table-condensed up-down-arrow">
             <thead>
               <tr>
-                <th>Name</th>
+                <th><%= sortable "name" %></th>
                 <th>Pictures</th>
+                <th><%= sortable "created_at", "Created" %></th>
               </tr>
             </thead>
             <tbody id="gallery_results">

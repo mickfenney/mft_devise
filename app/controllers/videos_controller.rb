@@ -2,9 +2,11 @@ class VideosController < ApplicationController
   
   load_and_authorize_resource
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @page_title = 'Search Video'
-    @videos = Video.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
+    @videos = Video.page(params[:page]).order(sort_column + ' ' + sort_direction).per_page(10).search(params[:search])
     unless  @videos.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  
@@ -86,4 +88,15 @@ class VideosController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+    def sort_column
+      Video.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
 end

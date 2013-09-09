@@ -2,9 +2,11 @@ class DocumentTypesController < ApplicationController
   
   load_and_authorize_resource
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @page_title = 'Search Document Type'
-    @document_types = DocumentType.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
+    @document_types = DocumentType.page(params[:page]).order(sort_column + ' ' + sort_direction).per_page(10).search(params[:search])
     unless  @document_types.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  
@@ -86,4 +88,15 @@ class DocumentTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+    def sort_column
+      DocumentType.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
 end

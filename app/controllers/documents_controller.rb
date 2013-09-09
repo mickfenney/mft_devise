@@ -2,9 +2,11 @@ class DocumentsController < ApplicationController
 
   load_and_authorize_resource
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @page_title = 'Search Document'
-    @documents = Document.page(params[:page]).order("title ASC").per_page(10).search(params[:search])
+    @documents = Document.page(params[:page]).order(sort_column + ' ' + sort_direction).per_page(10).search(params[:search])
     unless  @documents.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  
@@ -100,4 +102,15 @@ class DocumentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  
+    def sort_column
+      Document.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
 end

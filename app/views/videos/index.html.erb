@@ -19,15 +19,17 @@
       
       <% if @videos.any? %>
         <section id="no-more-tables"> 
-          <table class="table table-striped table-bordered table-condensed">
+          <table class="table table-striped table-bordered table-condensed up-down-arrow">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Code</th>
-                <th>Mobile View</th>
-                <th>Tablet View</th>
-                <th>Desktop View</th>
-                <th>User</th>
+                <th><%= sortable "name" %></th>
+                <th><%= sortable "code" %></th>
+                <th>Mobile</th>
+                <th>Tablet</th>
+                <th>Desktop</th>
+                <th></th>
+                <th></th>
+                <th><%= sortable "user_id", "User" %></th>
               </tr>
             </thead>
             <tbody id="video_results">

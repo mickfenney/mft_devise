@@ -4,10 +4,12 @@ class UsersController < ApplicationController
 
   #before_filter :authenticate_user!
 
+  helper_method :sort_column, :sort_direction
+
   def index
     @page_title = 'Search User'
     #authorize! :index, @user, :message => 'You are not authorized to access this page.'
-    @users = User.page(params[:page]).order("name ASC").per_page(10).search(params[:search])
+    @users = User.page(params[:page]).order(sort_column + ' ' + sort_direction).per_page(10).search(params[:search])
     unless  @users.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  
@@ -61,4 +63,15 @@ class UsersController < ApplicationController
       redirect_to users_path, :notice => "Can't delete yourself."
     end
   end
+
+  private
+  
+    def sort_column
+      User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
 end

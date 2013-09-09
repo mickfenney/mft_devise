@@ -41,7 +41,7 @@
 
       <p>
         <div>
-          <% for picture in @gallery.pictures %>
+          <% for picture in @gallery.pictures.order("name ASC") %>
             <% if RUBY_PLATFORM =~ /mingw/i %>
               <%= link_to picture.image_url(), :rel => :lazybox do %>
                 <%= image_tag picture.image_url(), size: "15x15" if picture.image? %>

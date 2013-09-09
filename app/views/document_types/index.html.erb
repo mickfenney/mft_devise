@@ -19,14 +19,14 @@
       
       <% if @document_types.any? %>
         <section id="no-more-tables"> 
-          <table class="table table-striped table-bordered table-condensed">
+          <table class="table table-striped table-bordered table-condensed up-down-arrow">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Description</th>
+                <th><%= sortable "name" %></th>
+                <th><%= sortable "description" %></th>
                 <th></th>
                 <th></th>
-                <th>User</th>
+                <th><%= sortable "user_id", "User" %></th>
               </tr>
             </thead>
             <tbody id="document_type_results">

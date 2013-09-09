@@ -19,13 +19,13 @@
       
       <% if @users.any? %>
         <section id="no-more-tables"> 
-          <table class="table table-striped table-bordered table-condensed">
+          <table class="table table-striped table-bordered table-condensed up-down-arrow">
             <thead>
               <tr>
                 <th ></th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Registered</th>
+                <th><%= sortable "name", "Username" %></th>
+                <th><%= sortable "email" %></th>
+                <th><%= sortable "created_at", "Registered" %></th>
                 <th>Roles</th>
                 <th></th>
                 <th></th>
