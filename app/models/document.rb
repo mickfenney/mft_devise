@@ -31,14 +31,11 @@ class Document < ActiveRecord::Base
 
     def self.search(search)
       if search
-        find(:all, 
-             :select => 'DISTINCT d.*', 
-             :from => 'documents d, document_types_documents dtd, document_types dt', 
-             :conditions => ['d.id = dtd.document_id and dtd.document_type_id = dt.id and (d.title LIKE ? or dt.name LIKE ? or d.body LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%"],
-             :order => 'updated_at DESC'
-        )
+        select('DISTINCT d.*')
+        .from('documents d, document_types_documents dtd, document_types dt')
+        .where('d.id = dtd.document_id and dtd.document_type_id = dt.id and (d.title LIKE ? or dt.name LIKE ? or d.body LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%")
       else
-        find(:all)
+        scoped
       end
     end 
 

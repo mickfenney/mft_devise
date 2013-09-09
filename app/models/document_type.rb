@@ -15,13 +15,11 @@ class DocumentType < ActiveRecord::Base
   private
 
     def self.search(search)
-      if search
-        find(:all, 
-             :select => 'DISTINCT document_types.*', 
-             :conditions => ['document_types.name LIKE ? or document_types.description LIKE ?', "%#{search}%", "%#{search}%"]
-        )
+      if search 
+        select('DISTINCT document_types.*')
+        .where('document_types.name LIKE ? or document_types.description LIKE ?', "%#{search}%", "%#{search}%")
       else
-        find(:all)
+        scoped
       end
     end 
 

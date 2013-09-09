@@ -16,12 +16,10 @@ class Video < ActiveRecord::Base
 
     def self.search(search)
       if search
-        find(:all, 
-             :select => 'DISTINCT videos.*', 
-             :conditions => ['videos.name LIKE ? or videos.code LIKE ? or videos.description LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]
-        )
+        select('DISTINCT videos.*') 
+        .where('videos.name LIKE ? or videos.code LIKE ? or videos.description LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
       else
-        find(:all)
+        scoped
       end
     end 
 

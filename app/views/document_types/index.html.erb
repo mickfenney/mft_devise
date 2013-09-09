@@ -7,6 +7,8 @@
       <h3>Document Types</h3>
 
       <%= simple_form_for(:document_types, :url => document_types_path, :method => :get, :html => {:class => 'form-horizontal'}) do |f| %>
+        <%= hidden_field_tag :direction, params[:direction] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
         <div class="form-inputs">
           <%= f.input :search, :wrapper => :prepend do %>
             <span class="add-on"><i class="icon-search"></i></span><%= text_field_tag :search, params[:search],  :placeholder => 'by name or desc' %>
@@ -27,6 +29,7 @@
                 <th></th>
                 <th></th>
                 <th><%= sortable "user_id", "User" %></th>
+                <th><%= sortable "created_at", "Created" %></th>
               </tr>
             </thead>
             <tbody id="document_type_results">

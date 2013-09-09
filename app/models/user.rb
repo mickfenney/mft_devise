@@ -97,13 +97,11 @@ class User < ActiveRecord::Base
 
     def self.search(search)
       if search
-        find(:all, 
-             :select => 'DISTINCT users.*', 
-             :joins => "LEFT JOIN locations ON locations.locatable_id = users.id AND locations.locatable_type = 'User'", 
-             :conditions => ['users.name LIKE ? or users.email LIKE ? or locations.address LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%"]
-        )
+        select('DISTINCT users.*')
+        .joins("LEFT JOIN locations ON locations.locatable_id = users.id AND locations.locatable_type = 'User'")
+        .where('users.name LIKE ? or users.email LIKE ? or locations.address LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
       else
-        find(:all)
+        scoped
       end
     end    
 

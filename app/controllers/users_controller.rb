@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def index
     @page_title = 'Search User'
     #authorize! :index, @user, :message => 'You are not authorized to access this page.'
-    @users = User.page(params[:page]).order(sort_column + ' ' + sort_direction).per_page(10).search(params[:search])
+    @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
     unless  @users.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  

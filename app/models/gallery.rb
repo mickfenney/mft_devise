@@ -27,12 +27,10 @@ class Gallery < ActiveRecord::Base
 
     def self.search(search)
       if search
-        find(:all, 
-             :select => 'DISTINCT galleries.*', 
-             :conditions => ['galleries.name LIKE ?', "%#{search}%"]
-        )
+        select('DISTINCT galleries.*')
+        .where('galleries.name LIKE ?', "%#{search}%")
       else
-        find(:all)
+        scoped
       end
     end     
 

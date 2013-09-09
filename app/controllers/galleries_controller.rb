@@ -6,7 +6,7 @@ class GalleriesController < ApplicationController
   
   def index
     @page_title = 'Search Galleries'
-    @galleries = Gallery.page(params[:page]).order(sort_column + ' ' + sort_direction).per_page(10).search(params[:search])
+    @galleries = Gallery.search(params[:search]).order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
     unless  @galleries.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  

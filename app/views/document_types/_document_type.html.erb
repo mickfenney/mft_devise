@@ -4,4 +4,5 @@
   <td><%= link_to 'Edit Document Type', edit_document_type_path(document_type), :class => 'btn btn-primary btn-mini' %></td>
   <td><%= link_to 'Destroy Document Type', document_type, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
   <td data-title="User"><%= User.find_by_id(document_type.user_id).name %></td>
+  <td data-title="Created"><%= document_type.created_at.to_s(:human_short) %></td>
 </tr>

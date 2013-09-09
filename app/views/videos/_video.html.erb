@@ -7,6 +7,7 @@
   <td><%= link_to 'Edit Video', edit_video_path(video), :class => 'btn btn-primary btn-mini' %></td>
   <td><%= link_to 'Destroy Video', video, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
   <td data-title="User"><%= User.find_by_id(video.user_id).name %></td>
+  <td data-title="Created"><%= video.created_at.to_s(:human_short) %></td>
 
   <script>
     $(document).ready(function(){
