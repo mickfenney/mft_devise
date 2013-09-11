@@ -599,7 +599,7 @@ ol.linenums li {
     padding: 0;
     border: 5px solid #222;
     border-radius: 0;
-    width: 600px;
+    max-width: 600px;
     @include box-shadow(0 0 50px 10px cyan);
   }
 }
@@ -610,7 +610,7 @@ ol.linenums li {
     padding: 0;
     border: 5px solid #222;
     border-radius: 0;
-    width: 450px;
+    max-width: 450px;
     @include box-shadow(0 0 50px 10px cyan);
   }
 }
@@ -621,7 +621,7 @@ ol.linenums li {
     padding: 0;
     border: 5px solid #222;
     border-radius: 0;
-    width: 300px;
+    max-width: 300px;
     @include box-shadow(0 0 50px 10px cyan);
   }
 }
