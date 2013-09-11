@@ -37,7 +37,7 @@
         </p>
       <% end %>    
 
-      <p><%= image_tag @picture.image_url(), size: "600x600", :class => "img-polaroid" %></p>
+      <p><%= image_tag @picture.image_url(), :class => "img-polaroid" %></p>
 
       <p>
         <%= link_to "Edit", edit_picture_path(@picture) %> |

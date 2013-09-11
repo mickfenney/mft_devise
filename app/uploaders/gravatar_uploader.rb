@@ -26,18 +26,16 @@ class GravatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :scale => [150, 150] unless RUBY_PLATFORM =~ /mingw/i
-
+  # process :scale => [150, 150]
+  #
   # def scale(width, height)
   #   # do something
   # end
 
   # Create different versions of your uploaded files:
-  # unless RUBY_PLATFORM =~ /mingw/i
-  #   version :thumb do
-  #     process :resize_to_limit => [150, 150]
-  #   end
-  # end
+  unless RUBY_PLATFORM =~ /mingw/i
+      process :resize_to_limit => [150, 150]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
