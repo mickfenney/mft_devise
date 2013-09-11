@@ -40,8 +40,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :lockable, :async 
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :role_ids, :name, :email, :phone, :password, :password_confirmation, :locations, :theme, :locations_attributes, :as => :admin
-  attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :locations_attributes
+  attr_accessible :role_ids, :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :is_image, :image, :remote_image_url, :locations_attributes, :as => :admin
+  attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :is_image, :image, :remote_image_url, :locations_attributes
+
+  mount_uploader :image, GravatarUploader
 
   enumerate :theme, :with => ThemeEnum
 
@@ -65,6 +67,9 @@ class User < ActiveRecord::Base
   after_create :assign_default_role
   after_save :assign_default_role
 
+  after_destroy :remove_id_directory
+  after_save :remove_tmp_directory  
+
   ### TODO: test is passing when it should not pass
   # # devise_invitable accept_invitation! method overriden
   # def accept_invitation!
@@ -86,6 +91,16 @@ class User < ActiveRecord::Base
     num.gsub!(/\D/, '') if num.is_a?(String)
     super(num)
   end
+
+  protected
+
+    def remove_id_directory
+      FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/user/image/#{id}", :force => true)
+    end
+
+    def remove_tmp_directory
+      FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/tmp", :force => true)
+    end  
 
   private
 

@@ -38,11 +38,14 @@ describe User do
   it { should respond_to(:email) }
   it { should respond_to(:phone) }
   it { should respond_to(:theme) }
+  it { should respond_to(:is_image) }
+  it { should respond_to(:image) }
+  it { should respond_to(:remote_image_url) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
 
   it { should strip_attribute :name }
-  it { should strip_attribute :email }
+  it { should strip_attribute :email } 
   it { should_not strip_attribute :phone }
   it { should_not strip_attribute :password }
   it { should_not strip_attribute :password_confirmation }

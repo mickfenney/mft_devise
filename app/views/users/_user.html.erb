@@ -1,5 +1,5 @@
 <tr>
-  <td><%= image_tag avatar_url(user), :class => 'round' %></td>
+  <td><%= image_tag avatar_url(user), size: "48x48", :class => 'round gravatar' %></td>
   <td data-title="Username" id="hint"><%= link_to user.name, user, :title => (user.phone? ? [user.name, user.phone].join(" - ") : [user.name, user.email].join(" - ")), :'data-placement' => 'right' %></td>
   <td data-title="Email"><a href="mailto:<%= user.email %>"><%= user.email %></a></td>
   <td data-title="Registered"><%= user.created_at.to_s(:human_short) %></td>

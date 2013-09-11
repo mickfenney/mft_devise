@@ -6,7 +6,7 @@
     <div class="span6">
 
       <h3>User</h3>
-      <p><%= image_tag avatar_url(@user, 100), :class => 'round' %></p>
+      <p><%= image_tag avatar_url(@user, 120), size: "120x120", :class => 'round gravatar' %></p>
       <p>User: <%= @user.name %></p>
       <p>Email: <%= @user.email %></p>
       <% if @user.phone? %><p>Phone: <%= @user.phone %></p><% end %>

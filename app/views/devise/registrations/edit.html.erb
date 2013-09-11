@@ -52,10 +52,32 @@
               Profile Image
             </a>
           </div>
-          <div id="collapseTwo" class="accordion-body collapse">
+          <div id="collapseTwo" class="accordion-body collapse <%= is_active_accordion('gravatar', params[:tab]) %>">
             <div class="accordion-inner">
-              <div><%= image_tag avatar_url(resource, 120), :class => 'img-rounded gravatar' %></div>
+              <div><%= image_tag avatar_url(resource, 120), size: "120x120", :class => 'img-rounded gravatar' %></div>
               <br/>
+              <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+                <%= f.error_notification %>
+                <input type='hidden' name='tab' value='gravatar' />
+                <div class="form-inputs">
+                  <%= f.input :is_private, label: 'Use Upload Image', :wrapper => :prepend do %>
+                    <div class="make-switch switch-small" data-on="success" data-off="danger" data-on-label="Yes" data-off-label="No"><%= f.check_box :is_image %></div>
+                  <% end %>               
+                  <%= f.input :image, :label => "Upload Image:", :wrapper => :prepend  do %>
+                    <%= f.input_field :image, :class => 'btn btn-primary' %>
+                    <%= f.label :remote_image_url, "or image URL" %>
+                  <% end %>
+                  <%= f.input :remote_image_url, :wrapper => :prepend do %>
+                    <span class="add-on"><i class="icon-pencil"></i></span><%= f.input_field :remote_image_url %>     
+                  <% end %>
+                  <%= f.input :current_password, :wrapper => :prepend do %>
+                    <span class="add-on"><i class="icon-eye-close"></i></span><%= f.input_field :current_password, :hint => "we need your current password to confirm your changes", :required => true, :size => '', :id => 'gravatar password' %>
+                  <% end %>                  
+                </div>
+                <div class="form-actions">
+                  <%= f.button :submit, "Update Image", :class => 'btn btn-primary' %>
+                </div>  
+              <% end %>              
               <div><%= link_to_blank 'Change Gravatar', 'http://www.gravatar.com/emails', :class => 'btn btn-primary' %></div>
               <br/>
               <%= link_to "Back", :back %>

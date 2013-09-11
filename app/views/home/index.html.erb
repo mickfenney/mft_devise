@@ -11,7 +11,7 @@
           <h3>Home</h3>
           <p>Welcome to <%= ENV["SITE_NAME"] %></p>
           <% if user_signed_in? %>
-            <p><%= image_tag avatar_url(current_user, 100), :class => 'round' %></p>
+            <p><%= image_tag avatar_url(current_user, 120), size: "120x120", :class => 'round gravatar' %></p>
             <p>Signed in as user <%=link_to current_user.name, current_user %></p>
             <p>Site theme set as <%= @css_theme %></p>
             <p> Time Zone <%= Time.zone %></p>
