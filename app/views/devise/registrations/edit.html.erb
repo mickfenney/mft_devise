@@ -64,7 +64,7 @@
                     <div class="make-switch switch-small" data-on="success" data-off="danger" data-on-label="Yes" data-off-label="No"><%= f.check_box :is_image %></div>
                   <% end %>               
                   <%= f.input :image, :label => "Upload Image:", :wrapper => :prepend  do %>
-                    <%= f.input_field :image, :class => 'btn btn-primary' %>
+                    <%= f.input_field :image %>
                     <%= f.label :remote_image_url, "or image URL" %>
                   <% end %>
                   <%= f.input :remote_image_url, :wrapper => :prepend do %>

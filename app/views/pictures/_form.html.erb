@@ -9,7 +9,7 @@
      <span class="add-on"><i class="icon-pencil"></i></span><%= f.input_field :name, :required => true, :size => '' %>
     <% end %>
     <%= f.input :image, :wrapper => :prepend do %>
-      <%= f.input_field :image, :class => 'btn btn-primary' %>
+      <%= f.input_field :image %>
       <%= f.label :remote_image_url, "or image URL" %>
     <% end %>
     <%= f.input :remote_image_url, :wrapper => :prepend do %>

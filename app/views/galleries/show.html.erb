@@ -77,7 +77,7 @@
         <%= f.hidden_field :gallery_id, :value => @gallery.id %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.input :image, :label => "Upload Pictures:", :wrapper => :prepend  do %>
-        <%= f.file_field :image, multiple: true, name: "picture[image]", :class => 'btn btn-primary' %>
+        <%= f.file_field :image, multiple: true, name: "picture[image]" %>
         <% end %>
       <% end %>
 

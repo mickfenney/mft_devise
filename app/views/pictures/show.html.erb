@@ -41,7 +41,7 @@
 
       <p>
         <%= link_to "Edit", edit_picture_path(@picture) %> |
-        <%= link_to "Destroy", @picture, :confirm => 'Are you sure?', :method => :delete %> |
+        <%= link_to "Remove", @picture, :confirm => 'Are you sure?', :method => :delete %> |
         <%= link_to "Back to Gallery", gallery_path(@picture.gallery_id) %>
       </p>          
 
