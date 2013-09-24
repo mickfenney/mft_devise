@@ -9,17 +9,15 @@ describe Picture do
   it { should respond_to(:user_id) }
 
   it { should strip_attribute :name }
-  #it { should strip_attribute :image }
-  #it { should strip_attribute :remote_image_url }
   it { should_not strip_attribute :gallery_id }  
   it { should_not strip_attribute :user_id }
-
 
 ################################################################################
   describe "Class Instantiation:" do
     it "should create a new instance given valid attributes" do
       p = FactoryGirl.create(:picture)
       p.should be_valid
+      FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/picture/image/#{p.id}", :force => true)
     end
   end
 ################################################################################
@@ -48,6 +46,7 @@ describe Picture do
     it 'should not accept a blank user id' do
       p = FactoryGirl.build(:picture, :user_id => '')
       p.should_not be_valid
+      FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/tmp", :force => true)
     end       
 
   end
