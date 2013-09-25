@@ -1,5 +1,9 @@
 #!/bin/bash
 
+rm -r log
+rm -r tmp
+rm -r public/uploads
+
 echo Y | mysqladmin -u root -ppassword drop mft-devise-test
 echo Y | mysqladmin -u root -ppassword drop mft-devise-dev
 
