@@ -16,7 +16,12 @@
         </div>
         <div class="form-actions">
           <%= f.button :submit, "Search", :name => nil, :class => 'btn btn-primary' %>
-        </div>   
+        </div>
+        <% if current_user.has_role? :admin and params[:search] %>
+          <div class='middle'> 
+            <b><%= link_to 'Generate CSV Report', users_path+'.csv?report=csv&direction='+params[:direction]+'&sort='+params[:sort]+'&search='+params[:search] %></b>
+          </div> 
+        <% end %>
       <% end %>
       
       <% if @users.any? %>
