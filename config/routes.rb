@@ -15,11 +15,19 @@ MftDevise::Application.routes.draw do
   devise_for :users, :controllers => { :sessions      => "sessions", 
   	                                   :registrations => 'registrations', 
   	                                   :invitations   => 'invitations' }
-  resources :users
+
+  resources :users do
+    collection { get :users }
+  end
 
   resources :documents
 
-  resources :document_types
+  resources :document_types do
+    collection { post :import }
+    collection { get :document_types }
+  end  
+
+  #resources :document_type_imports
 
   resources :galleries
   

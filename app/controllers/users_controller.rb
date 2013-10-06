@@ -13,15 +13,15 @@ class UsersController < ApplicationController
     unless  @users.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
     end  
-    if params[:report] == 'csv'
-      @users_all = User.search(params[:search]).order(sort_column + " " + sort_direction)
-      respond_to do |format|
-        format.csv { send_data @users_all.to_csv }
-      end
-    else
-      render 'index'
-    end
+    render 'index'
   end
+
+  def users
+    @users = User.search(params[:search]).order(sort_column + " " + sort_direction)
+    respond_to do |format|
+      format.csv { send_data @users.to_csv }
+    end
+  end  
 
   def show
     @page_title = 'Show User'

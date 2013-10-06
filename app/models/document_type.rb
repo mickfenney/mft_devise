@@ -12,6 +12,23 @@ class DocumentType < ActiveRecord::Base
   validates_length_of :name, :maximum => 255
   validates_length_of :description, :maximum => 255
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names
+      all.each do |item|
+        csv << item.attributes.values_at(*column_names)
+      end
+    end
+  end
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      document_type = find_by_id(row["id"]) || new
+      document_type.attributes = row.to_hash.slice(*accessible_attributes)
+      document_type.save!
+    end
+  end
+
   private
 
     def self.search(search)

@@ -13,6 +13,20 @@ class DocumentTypesController < ApplicationController
     render 'index'
   end    
 
+  def document_types
+    @document_types = DocumentType.search(params[:search]).order(sort_column + " " + sort_direction)
+    respond_to do |format|
+      format.csv { send_data @document_types.to_csv }
+    end
+  end  
+
+  def import
+    DocumentType.import(params[:file])
+    respond_to do |format|
+      format.html { redirect_to document_types_path, notice: 'Document Types Imported.' }
+    end
+  end
+
   # GET /document_types/1
   # GET /document_types/1.json
   def show

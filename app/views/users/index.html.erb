@@ -19,7 +19,7 @@
         </div>
         <% if current_user.has_role? :admin and params[:search] %>
           <div class='middle'> 
-            <b><%= link_to 'Generate CSV Report', users_path+'.csv?report=csv&direction='+params[:direction]+'&sort='+params[:sort]+'&search='+params[:search] %></b>
+            <b><%= link_to 'Download CSV', users_users_path+'.csv?direction='+params[:direction]+'&sort='+params[:sort]+'&search='+params[:search] %></b>
           </div> 
         <% end %>
       <% end %>
