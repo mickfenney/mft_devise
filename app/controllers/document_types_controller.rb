@@ -22,11 +22,10 @@ class DocumentTypesController < ApplicationController
 
   def import
     @document_types = DocumentType.import(params[:file])
-    #raise @document_types.count.to_yaml
     if request.post? && params[:file].present?
      if @document_types.any?
         respond_to do |format|
-          format.html { redirect_to document_types_path, notice: "#{@document_types.count} errors has prohibited this import from completing" }
+          format.html { redirect_to document_types_path, alert: @document_types.to_s.gsub!(/\\n/, "<br />").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
         end
      else
       respond_to do |format|

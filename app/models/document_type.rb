@@ -23,15 +23,18 @@ class DocumentType < ActiveRecord::Base
 
   def self.import(file)
     if file.present?
-      @errs = []
+      @errs = ["Errors have prohibited this import from completing\n"]
+      i=2
       CSV.foreach(file.path, headers: true) do |row|
         document_type = find_by_id(row["id"]) || new
         document_type.attributes = row.to_hash.slice(*accessible_attributes)
         if document_type.valid?
           document_type.save!
         else
-          @errs << row
+          @errs << "Line:<b>#{i}</b> - #{row}"
         end
+        i+=1
+        break if i >= 50
       end
       return @errs
     end
