@@ -22,10 +22,18 @@ class DocumentType < ActiveRecord::Base
   end
 
   def self.import(file)
-    CSV.foreach(file.path, headers: true) do |row|
-      document_type = find_by_id(row["id"]) || new
-      document_type.attributes = row.to_hash.slice(*accessible_attributes)
-      document_type.save!
+    if file.present?
+      @errs = []
+      CSV.foreach(file.path, headers: true) do |row|
+        document_type = find_by_id(row["id"]) || new
+        document_type.attributes = row.to_hash.slice(*accessible_attributes)
+        if document_type.valid?
+          document_type.save!
+        else
+          @errs << row
+        end
+      end
+      return @errs
     end
   end
 

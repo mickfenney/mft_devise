@@ -18,12 +18,25 @@ class DocumentTypesController < ApplicationController
     respond_to do |format|
       format.csv { send_data @document_types.to_csv }
     end
-  end  
+  end   
 
   def import
-    DocumentType.import(params[:file])
-    respond_to do |format|
-      format.html { redirect_to document_types_path, notice: 'Document Types Imported.' }
+    @document_types = DocumentType.import(params[:file])
+    #raise @document_types.count.to_yaml
+    if request.post? && params[:file].present?
+     if @document_types.any?
+        respond_to do |format|
+          format.html { redirect_to document_types_path, notice: "#{@document_types.count} errors has prohibited this import from completing" }
+        end
+     else
+      respond_to do |format|
+        format.html { redirect_to document_types_path, notice: 'Document Types Imported or Updated.' }
+      end
+     end
+    else  
+      respond_to do |format|
+        format.html { redirect_to document_types_path, alert: 'Select a valid csv file for import.' }
+      end
     end
   end
 

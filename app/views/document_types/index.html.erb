@@ -50,32 +50,9 @@
 
       <%= link_to 'Create Document Type', new_document_type_path, :class => 'btn btn-primary btn-mini' %>  
 
-      <hr>
-
-      <!-- %= #link_to "Import Document Types", new_document_type_import_path % -->
-
-      <h4>Import Document Types</h4>
-
-      <p>A CSV file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
-
-      <ul>
-        <% DocumentType.columns.each do |column| %>
-          <% if column.name.in? ["id", *DocumentType.accessible_attributes] %>
-            <li>
-              <strong><%= column.name %></strong> -
-              <%= column.type.to_s.titleize %> type
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-
-      <p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
-
-
-      <%= form_tag import_document_types_path, multipart: true do %>
-        <%= file_field_tag :file %>
-        <%= submit_tag "Import", :class => 'btn btn-primary btn-small' %>
-      <% end %>
+      <% if current_user.has_role? :admin %>
+        <%= render 'import' %>
+      <% end %> 
 
     </div>
   </div>

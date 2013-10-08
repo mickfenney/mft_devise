@@ -25,9 +25,7 @@ MftDevise::Application.routes.draw do
   resources :document_types do
     collection { post :import }
     collection { get :document_types }
-  end  
-
-  #resources :document_type_imports
+  end
 
   resources :galleries
   
