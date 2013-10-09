@@ -20,18 +20,30 @@ class DocumentTypesController < ApplicationController
     end
   end   
 
-  def import
-    @document_types = DocumentType.import(params[:file])
-    if request.post? && params[:file].present?
-     if @document_types.any?
-        respond_to do |format|
-          format.html { redirect_to document_types_path, alert: @document_types.to_s.gsub!(/\\n/, "<br />").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
-        end
-     else
+  def import 
+    org_file = 'NoFile'
+    org_file = params[:file].original_filename if params[:file].present?
+    if org_file !~ /csv$/i && params[:file].present?
       respond_to do |format|
-        format.html { redirect_to document_types_path, notice: 'Document Types Imported or Updated.' }
+        format.html { redirect_to document_types_path, alert: "This import file: <b>#{org_file}</b> is invalid, it needs to be a <b>csv</b> file.".html_safe }
       end
-     end
+    elsif request.post? && params[:file].present?
+      @document_types = DocumentType.import(params[:file])
+      if @document_types.to_s =~ /Line:/
+        respond_to do |format|
+          format.html { redirect_to document_types_path, alert: @document_types.to_s.gsub(/SUCCESS/, "").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+        end
+      else
+        if @document_types.to_s =~ /SUCCESS/
+          respond_to do |format|
+            format.html { redirect_to document_types_path, notice: 'Document Types Imported or Updated.' }
+          end
+        else
+          respond_to do |format|
+            format.html { redirect_to document_types_path, alert: "Errors have prohibited this import from completing:<br/>The file contains no data.".html_safe }
+          end        
+        end
+      end
     else  
       respond_to do |format|
         format.html { redirect_to document_types_path, alert: 'Select a valid csv file for import.' }
@@ -44,7 +56,6 @@ class DocumentTypesController < ApplicationController
   def show
     @page_title = 'Show Document Type'
     @document_type = DocumentType.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @document_type }
@@ -56,7 +67,6 @@ class DocumentTypesController < ApplicationController
   def new
     @page_title = 'Create Document Type'
     @document_type = DocumentType.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @document_type }
@@ -74,7 +84,6 @@ class DocumentTypesController < ApplicationController
   def create
     @document_type = DocumentType.new(params[:document_type])
     @document_type.user_id = current_user.id
-
     respond_to do |format|
       if @document_type.save
         format.html { redirect_to @document_type, notice: 'Document type was successfully created.' }
@@ -91,7 +100,6 @@ class DocumentTypesController < ApplicationController
   def update
     @document_type = DocumentType.find(params[:id])
     @document_type.updated_at = Time.now
-
     respond_to do |format|
       if @document_type.update_attributes(params[:document_type])
         format.html { redirect_to @document_type, notice: 'Document type was successfully updated.' }
@@ -108,7 +116,6 @@ class DocumentTypesController < ApplicationController
   def destroy
     @document_type = DocumentType.find(params[:id])
     @document_type.destroy
-
     respond_to do |format|
       format.html { redirect_to document_types_url }
       format.json { head :no_content }
