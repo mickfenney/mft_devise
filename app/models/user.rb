@@ -106,6 +106,32 @@ class User < ActiveRecord::Base
     end
   end  
 
+  def self.import(file)
+    if file.present?
+      @errs = ["<table class='table table-striped table-bordered table-condensed'><tr><td>Errors have prohibited this import from completing:</td></tr>"]
+      i=2
+      CSV.foreach(file.path, headers: true) do |row|
+        user = find_by_id(row["id"]) || new
+        user.attributes = row.to_hash.slice(*accessible_attributes)
+        unless user.id.present?
+          user.password = 'password'
+          user.password_confirmation = 'password'
+        end
+        if user.valid?
+          user.skip_confirmation!
+          user.save!
+          @errs << "<tr style='background-color:#99FF99; color:green;'><td>SUCCESS:<b>#{i}</b> - #{row}</td></tr>"
+        else
+          @errs << "<tr><td>Error Line:<b>#{i}</b> - #{row}</td></tr>"
+        end
+        i+=1
+        break if i >= 100
+      end
+      @errs << "</table>"
+      return @errs
+    end
+  end  
+
   protected
 
     def remove_id_directory

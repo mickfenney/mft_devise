@@ -47,6 +47,12 @@
 
       <%= will_paginate @users %>
 
+      <br />
+
+      <% if current_user.has_role? :admin %>
+        <%= render 'import' %>
+      <% end %> 
+
     </div>
   </div>
 </div>

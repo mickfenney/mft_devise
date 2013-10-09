@@ -17,6 +17,7 @@ MftDevise::Application.routes.draw do
   	                                   :invitations   => 'invitations' }
 
   resources :users do
+    collection { post :import }
     collection { get :users }
   end
 
