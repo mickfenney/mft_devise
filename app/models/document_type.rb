@@ -42,7 +42,7 @@ class DocumentType < ActiveRecord::Base
         document_type.attributes = row.to_hash.slice(*accessible_attributes)
         if document_type.valid?
           document_type.save!
-          @errs << "<tr style='background-color:#99FF99; color:green;'><td>SUCCESS:<b>#{i}</b> - #{row}</td></tr>"
+          @errs << "<tr style='background-color:#99FF99; color:green;'><td>***SUCCESS:***<b>#{i}</b> - #{row}</td></tr>"
         else
           @errs << "<tr><td>Error Line:<b>#{i}</b> - #{row}</td></tr>"
         end

@@ -31,12 +31,12 @@ class DocumentTypesController < ApplicationController
       @document_types = DocumentType.import(params[:file])
       if @document_types.to_s =~ /Error Line:/
         respond_to do |format|
-          format.html { redirect_to document_types_path, alert: @document_types.to_s.gsub(/SUCCESS:/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+          format.html { redirect_to document_types_path, alert: @document_types.to_s.gsub(/\*\*\*SUCCESS:\*\*\*/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
         end
       else
-        if @document_types.to_s =~ /SUCCESS:/
+        if @document_types.to_s =~ /\*\*\*SUCCESS:\*\*\*/
           respond_to do |format|
-            format.html { redirect_to document_types_path, notice: @document_types.to_s.gsub(/Errors have prohibited this import from completing:/, "").gsub(/SUCCESS:/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+            format.html { redirect_to document_types_path, notice: @document_types.to_s.gsub(/Errors have prohibited this import from completing:/, "The import file <b>#{org_file}</b> has successfully loaded").gsub(/\*\*\*SUCCESS:\*\*\*/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
           end
         else
           respond_to do |format|

@@ -120,7 +120,7 @@ class User < ActiveRecord::Base
         if user.valid?
           user.skip_confirmation!
           user.save!
-          @errs << "<tr style='background-color:#99FF99; color:green;'><td>SUCCESS:<b>#{i}</b> - #{row}</td></tr>"
+          @errs << "<tr style='background-color:#99FF99; color:green;'><td>***SUCCESS:***<b>#{i}</b> - #{row}</td></tr>"
         else
           @errs << "<tr><td>Error Line:<b>#{i}</b> - #{row}</td></tr>"
         end

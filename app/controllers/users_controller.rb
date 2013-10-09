@@ -34,12 +34,12 @@ class UsersController < ApplicationController
       @users = User.import(params[:file])
       if @users.to_s =~ /Error Line:/
         respond_to do |format|
-          format.html { redirect_to users_path, alert: @users.to_s.gsub(/SUCCESS:/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+          format.html { redirect_to users_path, alert: @users.to_s.gsub(/\*\*\*SUCCESS:\*\*\*/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
         end
       else
-        if @users.to_s =~ /SUCCESS:/
+        if @users.to_s =~ /\*\*\*SUCCESS:\*\*\*/
           respond_to do |format|
-            format.html { redirect_to users_path, notice: @users.to_s.gsub(/Errors have prohibited this import from completing:/, "").gsub(/SUCCESS:/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+            format.html { redirect_to users_path, notice: @users.to_s.gsub(/Errors have prohibited this import from completing:/, "The import file <b>#{org_file}</b> has successfully loaded").gsub(/\*\*\*SUCCESS:\*\*\*/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
           end
         else
           respond_to do |format|
