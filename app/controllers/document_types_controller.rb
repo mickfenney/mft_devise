@@ -23,20 +23,20 @@ class DocumentTypesController < ApplicationController
   def import 
     org_file = 'NoFile'
     org_file = params[:file].original_filename if params[:file].present?
-    if org_file !~ /csv$/i && params[:file].present?
+    if org_file !~ /csv$/i && org_file !~ /txt$/i && params[:file].present?
       respond_to do |format|
-        format.html { redirect_to document_types_path, alert: "This import file <b>#{org_file}</b> is invalid, it needs to be a <b>csv</b> file.".html_safe }
+        format.html { redirect_to document_types_path, alert: "This import file <b>#{org_file}</b> is invalid, it needs to be a <b>csv</b> or a comma delimited <b>txt</b> file.".html_safe }
       end
     elsif request.post? && params[:file].present?
       @document_types = DocumentType.import(params[:file])
       if @document_types.to_s =~ /Error Line:/
         respond_to do |format|
-          format.html { redirect_to document_types_path, alert: @document_types.to_s.gsub(/SUCCESS/, "Success Line").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+          format.html { redirect_to document_types_path, alert: @document_types.to_s.gsub(/SUCCESS:/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
         end
       else
-        if @document_types.to_s =~ /SUCCESS/
+        if @document_types.to_s =~ /SUCCESS:/
           respond_to do |format|
-            format.html { redirect_to document_types_path, notice: @document_types.to_s.gsub(/Errors have prohibited this import from completing:/, "").gsub(/SUCCESS/, "Success Line").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+            format.html { redirect_to document_types_path, notice: @document_types.to_s.gsub(/Errors have prohibited this import from completing:/, "").gsub(/SUCCESS:/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
           end
         else
           respond_to do |format|
