@@ -13,6 +13,44 @@ class DocumentsController < ApplicationController
     render 'index'
   end  
 
+  def documents
+    @documents = Document.search(params[:search]).order(sort_column + " " + sort_direction)
+    respond_to do |format|
+      format.csv { send_data @documents.to_csv }
+    end
+  end   
+
+  def import 
+    org_file = 'NoFile'
+    org_file = params[:file].original_filename if params[:file].present?
+    if org_file !~ /csv$/i && org_file !~ /txt$/i && params[:file].present?
+      respond_to do |format|
+        format.html { redirect_to documents_path, alert: "This import file <b>#{org_file}</b> is invalid, it needs to be a <b>csv</b> or a comma delimited <b>txt</b> file.".html_safe }
+      end
+    elsif request.post? && params[:file].present?
+      @document_types = Document.import(params[:file])
+      if @document_types.to_s =~ /Error Line:/
+        respond_to do |format|
+          format.html { redirect_to documents_path, alert: @document_types.to_s.gsub(/\*\*\*SUCCESS:\*\*\*/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+        end
+      else
+        if @document_types.to_s =~ /\*\*\*SUCCESS:\*\*\*/
+          respond_to do |format|
+            format.html { redirect_to documents_path, notice: @document_types.to_s.gsub(/Errors have prohibited this import from completing:/, "The import file <b>#{org_file}</b> has successfully loaded").gsub(/\*\*\*SUCCESS:\*\*\*/, "Success Line:").gsub(/\\n/, "").gsub(/", "/, "").gsub(/\["/, "").gsub(/"\]/, "").html_safe }
+          end
+        else
+          respond_to do |format|
+            format.html { redirect_to documents_path, alert: "Errors have prohibited this import from completing:<br/>The file contains no data.".html_safe }
+          end        
+        end
+      end
+    else  
+      respond_to do |format|
+        format.html { redirect_to documents_path, alert: 'Select a valid csv file for import.' }
+      end
+    end
+  end  
+
   # GET /documents/1
   # GET /documents/1.json
   def show

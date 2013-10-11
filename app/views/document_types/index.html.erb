@@ -16,13 +16,14 @@
         </div>
         <div class="form-actions">
           <%= f.button :submit, "Search", :name => nil, :class => 'btn btn-primary' %>
-        </div>  
-        <% if current_user.has_role? :admin and params[:search] %>
-          <div class='middle'> 
-            <b><%= link_to 'Download CSV', document_types_document_types_path+'.csv?direction='+params[:direction]+'&sort='+params[:sort]+'&search='+params[:search] %></b>
-          </div> 
-        <% end %>         
+        </div>         
       <% end %>
+
+      <% if current_user.has_role? :admin and params[:search] %>
+        <div class='middle'> 
+          <b><%= link_to 'Download CSV', document_types_document_types_path+'.csv?direction='+params[:direction]+'&sort='+params[:sort]+'&search='+params[:search] %></b>
+        </div> 
+      <% end %>        
       
       <% if @document_types.any? %>
         <section id="no-more-tables"> 

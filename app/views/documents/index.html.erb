@@ -18,6 +18,12 @@
           <%= f.button :submit, "Search", :name => nil, :class => 'btn btn-primary' %>
         </div>   
       <% end %>
+
+      <% if current_user.has_role? :admin and params[:search] %>
+        <div class='middle'> 
+          <b><%= link_to 'Download CSV', documents_documents_path+'.csv?direction='+params[:direction]+'&sort='+params[:sort]+'&search='+params[:search] %></b>
+        </div> 
+      <% end %>       
       
       <% if @documents.any? %>
         <section id="no-more-tables"> 
@@ -44,7 +50,11 @@
 
       <br />
 
-      <%= link_to 'Create Document', new_document_path, :class => 'btn btn-primary btn-mini' %>      
+      <%= link_to 'Create Document', new_document_path, :class => 'btn btn-primary btn-mini' %>
+
+      <% if current_user.has_role? :admin %>
+        <%= render 'import' %>
+      <% end %>      
 
     </div>
   </div>

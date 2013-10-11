@@ -21,7 +21,10 @@ MftDevise::Application.routes.draw do
     collection { get :users }
   end
 
-  resources :documents
+  resources :documents do
+    collection { post :import }
+    collection { get :documents }
+  end
 
   resources :document_types do
     collection { post :import }
