@@ -13,7 +13,12 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-              General Details<i class="icon-chevron-up pull-right"></i>
+              General Details
+              <% if params[:tab] == 'general'%>
+                <i class="icon-chevron-up pull-right"></i>
+              <% else %>
+                <i class="icon-chevron-down pull-right"></i>
+              <% end %>
             </a>
           </div>
           <div id="collapseOne" class="accordion-body collapse <%= is_active_accordion('general', params[:tab]) %>">
@@ -49,7 +54,12 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-              Profile Image<i class="icon-chevron-down pull-right"></i>
+              Profile Image
+              <% if params[:tab] == 'gravatar'%>
+                <i class="icon-chevron-up pull-right"></i>
+              <% else %>
+                <i class="icon-chevron-down pull-right"></i>
+              <% end %>
             </a>
           </div>
           <div id="collapseTwo" class="accordion-body collapse <%= is_active_accordion('gravatar', params[:tab]) %>">
@@ -88,7 +98,12 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-              Locations<i class="icon-chevron-down pull-right"></i>
+              Locations
+              <% if params[:tab] == 'locations'%>
+                <i class="icon-chevron-up pull-right"></i>
+              <% else %>
+                <i class="icon-chevron-down pull-right"></i>
+              <% end %>
             </a>
           </div>
           <div id="collapseThree" class="accordion-body collapse <%= is_active_accordion('locations', params[:tab]) %>">
@@ -114,7 +129,12 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-              Password<i class="icon-chevron-down pull-right"></i>
+              Password
+              <% if params[:tab] == 'password'%>
+                <i class="icon-chevron-up pull-right"></i>
+              <% else %>
+                <i class="icon-chevron-down pull-right"></i>
+              <% end %>
             </a>
           </div>
           <div id="collapseFour" class="accordion-body collapse <%= is_active_accordion('password', params[:tab]) %>">

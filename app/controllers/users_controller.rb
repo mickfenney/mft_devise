@@ -68,6 +68,10 @@ class UsersController < ApplicationController
   def update
     #authorize! :update, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
+    if params[:user] == nil
+      redirect_to "#{users_path}/#{@user.id}/edit", :alert => "Unable to update #{@user.name} user."
+      return
+    end    
     if @user.update_attributes(params[:user], :as => :admin)
       params[:user].each do |key, value|
         if key == 'password'
@@ -81,10 +85,10 @@ class UsersController < ApplicationController
     else
       params[:user].each do |key, value|
         if key == 'password'
-          redirect_to users_path, :alert => "Unable to update user #{@user.name} password."
+          redirect_to "#{users_path}/#{@user.id}/edit", :alert => "Unable to update user #{@user.name} password."
           break
         else
-          redirect_to users_path, :alert => "Unable to update #{@user.name} user."
+          redirect_to "#{users_path}/#{@user.id}/edit", :alert => "Unable to update #{@user.name} user."
           break
         end
       end
