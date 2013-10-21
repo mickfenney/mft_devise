@@ -13,7 +13,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-              General Details
+              General Details<i class="icon-chevron-up pull-right"></i>
             </a>
           </div>
           <div id="collapseOne" class="accordion-body collapse <%= is_active_accordion('general', params[:tab]) %>">
@@ -46,7 +46,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-              Locations
+              Locations<i class="icon-chevron-down pull-right"></i>
             </a>
           </div>
           <div id="collapseTwo" class="accordion-body collapse <%= is_active_accordion('locations', params[:tab]) %>">
@@ -69,7 +69,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-              Password
+              Password<i class="icon-chevron-down pull-right"></i>
             </a>
           </div>
           <div id="collapseThree" class="accordion-body collapse <%= is_active_accordion('password', params[:tab]) %>">
@@ -99,3 +99,9 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+    $('.accordion').on('show hide', function (n) {
+        $(n.target).siblings('.accordion-heading').find('.accordion-toggle i').toggleClass('icon-chevron-up icon-chevron-down');
+    });
+</script>

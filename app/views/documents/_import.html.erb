@@ -1,22 +1,38 @@
-<hr>
-<h4>Import Documents</h4>
+<hr />
 
-<p>A CSV file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
+<div class="accordion" id="accordion1">
 
-<ul>
-  <% Document.columns.each do |column| %>
-    <% if column.name.in? ["id", *Document.accessible_attributes] %>
-      <li>
-        <strong><%= column.name %></strong> -
-        <%= column.type.to_s.titleize %> type
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+        Import<i class="icon-chevron-down pull-right"></i>
+      </a>
+    </div>
+    <div id="collapse1" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <h4>Documents</h4>
 
-<p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+        <p>A CSV file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
 
-<%= form_tag import_documents_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Import", :class => 'btn btn-primary btn-small' %>
-<% end %>
+        <ul>
+          <% Document.columns.each do |column| %>
+            <% if column.name.in? ["id", *Document.accessible_attributes] %>
+              <li>
+                <strong><%= column.name %></strong> -
+                <%= column.type.to_s.titleize %> type
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+
+        <p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+
+        <%= form_tag import_documents_path, multipart: true do %>
+          <%= file_field_tag :file %>
+          <%= submit_tag "Import", :class => 'btn btn-primary btn-small' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
