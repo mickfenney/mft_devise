@@ -384,7 +384,7 @@ describe 'Update User Details' do
     fill_in "Phone", :with => '0000 333 555'
     select "Slate", :from => 'Theme'
     click_button "Update General"
-    page.should have_content("User a new name updated.")
+    page.should have_content("User was successfully updated.")
     u = User.find_by_id(@user.id)
     #raise u.to_yaml
     u.name.should == "a new name"

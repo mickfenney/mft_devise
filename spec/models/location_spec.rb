@@ -71,7 +71,7 @@ end
 
     it "should store full address when given a partial but valid address" do
       raw_address = 'Big Ben UK'
-      wanted_address = 'Big Ben, London, Greater London SW1A 0AA, UK'
+      wanted_address = 'Big Ben, Westminster, London SW1A 0AA, UK'
       location = FactoryGirl.create(:location, :address => raw_address)
       job = Delayed::Job.first
       job.invoke_job
