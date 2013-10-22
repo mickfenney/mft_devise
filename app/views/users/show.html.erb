@@ -10,7 +10,7 @@
       <p>User: <%= @user.name %></p>
       <p>Email: <%= @user.email %></p>
       <% if @user.phone? %><p>Phone: <%= @user.phone %></p><% end %>
-      <% if current_user.email == @user.email %>
+      <% if @user == current_user %>
         <%= link_to 'Edit', edit_user_registration_path %>
       <% else %>
         <%= link_to 'Edit', edit_user_path(@user) %>

@@ -59,6 +59,12 @@ class UsersController < ApplicationController
   def edit
     @page_title = 'Edit User'
     @user = User.find(params[:id])
+    if @user == current_user
+      respond_to do |format|
+        format.html { redirect_to edit_user_registration_path }
+        format.json { head :no_content }
+      end
+    end
   end
   
   def update
@@ -78,9 +84,15 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     unless user == current_user
       user.destroy
-      redirect_to users_path, notice: "User #{user.name} was successfully deleted."
+      respond_to do |format|
+        format.html { redirect_to users_path, notice: "User #{user.name} was successfully deleted." }
+        format.json { head :no_content }
+      end
     else
-      redirect_to users_path, notice: "Can't delete yourself."
+      respond_to do |format|
+        format.html { redirect_to users_path, notice: "Can't delete yourself." }
+        format.json { head :no_content }
+      end
     end
   end
 
