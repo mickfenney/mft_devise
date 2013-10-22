@@ -108,6 +108,25 @@
             </div>
           </div>
         </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
+              Delete User
+              <% if params[:tab] == 'remove'%>
+                <i class="icon-chevron-up pull-right"></i>
+              <% else %>
+                <i class="icon-chevron-down pull-right"></i>
+              <% end %>  
+            </a>
+          </div>
+          <div id="collapseFour" class="accordion-body collapse <%= is_active_accordion('remove', params[:tab]) %>">
+            <div class="accordion-inner">
+              <div class="form-actions">
+                <%= link_to("Delete user", user_path(@user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini btn-danger') unless @user == current_user %>
+            </div>
+            </div>
+          </div>
+        </div>        
 
       </div>
 

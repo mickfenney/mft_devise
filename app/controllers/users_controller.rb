@@ -2,13 +2,10 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource
 
-  #before_filter :authenticate_user!
-
   helper_method :sort_column, :sort_direction
 
   def index
     @page_title = 'Search User'
-    #authorize! :index, @user, :message => 'You are not authorized to access this page.'
     @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(per_page: 10, page: params[:page])
     unless  @users.any?
       flash.now[:info] = "Your search for '<b>#{params[:search]}</b>' did not return any results".html_safe
@@ -61,48 +58,29 @@ class UsersController < ApplicationController
 
   def edit
     @page_title = 'Edit User'
-    #authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @user = User.find(params[:id])
   end
   
   def update
-    #authorize! :update, @user, :message => 'Not authorized as an administrator.'
-    @user = User.find(params[:id])
-    if params[:user] == nil
-      redirect_to "#{users_path}/#{@user.id}/edit", :alert => "Unable to update #{@user.name} user."
-      return
-    end    
-    if @user.update_attributes(params[:user], :as => :admin)
-      params[:user].each do |key, value|
-        if key == 'password'
-          redirect_to users_path, :notice => "User #{@user.name} password updated."
-          break
-        else
-          redirect_to users_path, :notice => "User #{@user.name} updated."
-          break
-        end
-      end      
-    else
-      params[:user].each do |key, value|
-        if key == 'password'
-          redirect_to "#{users_path}/#{@user.id}/edit", :alert => "Unable to update user #{@user.name} password."
-          break
-        else
-          redirect_to "#{users_path}/#{@user.id}/edit", :alert => "Unable to update #{@user.name} user."
-          break
-        end
+    @user.skip_reconfirmation!
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
+    end    
   end
     
   def destroy
-    #authorize! :destroy, @user, :message => 'Not authorized as an administrator.'
     user = User.find(params[:id])
     unless user == current_user
       user.destroy
-      redirect_to users_path, :notice => "User deleted."
+      redirect_to users_path, notice: "User #{user.name} was successfully deleted."
     else
-      redirect_to users_path, :notice => "Can't delete yourself."
+      redirect_to users_path, notice: "Can't delete yourself."
     end
   end
 
