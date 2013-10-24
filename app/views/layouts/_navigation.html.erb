@@ -60,8 +60,10 @@
             <% if can? :all, Gallery %>
               <li><a href="<%= galleries_path %>"><i class="icon-search"></i> Picture Galleries</a></li>
             <% end %>
-            <% if can? :all, DocumentType %>
+            <% if can? :all, Gallery and can? :all, Video %>
               <li class="divider"></li>
+            <% end %> 
+            <% if can? :all, Video %>
               <li><a href="<%= videos_path %>"><i class="icon-search"></i> Videos</a></li>
             <% end %> 
           </ul>
