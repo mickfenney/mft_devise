@@ -5,7 +5,7 @@ unless RUBY_PLATFORM =~ /mingw/i
   gem 'libnotify'  
   gem "rmagick"
 end
-gem 'rails', '3.2.14'
+gem 'rails', '3.2.15'
 gem 'jquery-rails'
 gem "thin", ">= 1.5.1"
 gem "bootstrap-sass", ">= 2.3.0.0"
@@ -31,7 +31,7 @@ group :development do
   end
   gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
   gem 'guard-spork'
-  gem 'guard'
+  gem 'guard', '>=2.1.0'
   gem 'guard-rspec'
   gem 'growl'
   gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
