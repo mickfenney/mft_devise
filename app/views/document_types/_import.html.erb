@@ -29,7 +29,7 @@
 
         <%= form_tag import_document_types_path, multipart: true do %>
           <%= file_field_tag :file %>
-          <%= submit_tag "Import", :class => 'btn btn-primary btn-small' %>
+          <%= submit_tag "Import", :class => 'btn btn-primary btn-small', :disable_with => "Importing..." %>
         <% end %>
       </div>
     </div>
