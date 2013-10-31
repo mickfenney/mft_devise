@@ -1,8 +1,8 @@
 <tr>
   <td data-title="Name" id="gal_hint"><%= link_to gallery.name, gallery, :title => 'Show '+gallery.name+' Pictures', :'data-placement' => 'right' %></td>
   <td data-title="Pictures"><%= gallery.pictures.size %></td>
-  <td><%= link_to 'Edit Gallery', edit_gallery_path(gallery), :class => 'btn btn-primary btn-mini' %></td>
-  <td><%= link_to 'Destroy Gallery', gallery, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td> 
+  <td><%= link_to 'Edit Gallery', edit_gallery_path(gallery), :class => 'btn btn-primary btn-mini', :disable_with => "Editing Gallery..." %></td>
+  <td><%= link_to 'Destroy Gallery', gallery, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger', :disable_with => "Destroying Gallery..." %></td> 
   <td data-title="User"><%= User.find_by_id(gallery.user_id).name %></td>
   <td data-title="Created"><%= gallery.created_at.to_s(:human_short) %></td>
 </tr>

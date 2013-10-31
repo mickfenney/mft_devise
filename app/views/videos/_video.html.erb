@@ -4,8 +4,8 @@
   <td data-title="Mobile"><%= link_to "mobile", "", :id => 'youtube_player1_'+video.code %></td>
   <td data-title="Tablet"><%= link_to "tablet", "", :id => 'youtube_player2_'+video.code %></td>
   <td data-title="Desktop"><%= link_to "desktop", "", :id => 'youtube_player3_'+video.code %></td>
-  <td><%= link_to 'Edit Video', edit_video_path(video), :class => 'btn btn-primary btn-mini' %></td>
-  <td><%= link_to 'Destroy Video', video, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %></td>
+  <td><%= link_to 'Edit Video', edit_video_path(video), :class => 'btn btn-primary btn-mini', :disable_with => "Editing Video..." %></td>
+  <td><%= link_to 'Destroy Video', video, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger', :disable_with => "Destroying Video..." %></td>
   <td data-title="User"><%= User.find_by_id(video.user_id).name %></td>
   <td data-title="Created"><%= video.created_at.to_s(:human_short) %></td>
 
