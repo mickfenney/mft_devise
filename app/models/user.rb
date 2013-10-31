@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :role_ids, :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :is_image, :image, :remote_image_url, :locations_attributes, :as => :admin
-  attr_accessible :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :is_image, :image, :remote_image_url, :locations_attributes
+  attr_accessible :role_ids, :name, :email, :phone, :password, :password_confirmation, :remember_me, :locations, :theme, :is_image, :image, :remote_image_url, :locations_attributes
 
   mount_uploader :image, GravatarUploader
 
