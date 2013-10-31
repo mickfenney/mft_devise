@@ -4,7 +4,7 @@ class PrepareNotification
 
     email_args = {
       subject: "#{ENV["SITE_NAME"]} Contact Us Message",
-      from: email_message.email,
+      from: "#{email_message.name} <#{email_message.email}>",
       to: "#{ENV["SITE_NAME"]} <#{ENV["SITE_EMAIL"]}>"
     }
 
