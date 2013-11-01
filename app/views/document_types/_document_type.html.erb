@@ -1,7 +1,7 @@
 <tr>
   <td data-title="Name" id="dt_hint"><%= link_to document_type.name, document_type, :title => 'Description: '+document_type.description, :'data-placement' => 'right' %></td>
   <td data-title="Description"><%= document_type.description %></td>
-  <td><%= link_to 'Edit Document Type', edit_document_type_path(document_type), :class => 'btn btn-primary btn-mini', :disable_with => "Editing Document Type..." %></td>
+  <td><%= link_to 'Edit Document Type', edit_document_type_path(document_type), :class => 'btn btn-primary btn-mini' %></td>
   <td><%= link_to 'Destroy Document Type', document_type, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger', :disable_with => "Destroying Document Type..." %></td>
   <td data-title="User"><%= User.find_by_id(document_type.user_id).name %></td>
   <td data-title="Created"><%= document_type.created_at.to_s(:human_short) %></td>

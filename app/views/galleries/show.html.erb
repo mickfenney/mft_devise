@@ -35,7 +35,7 @@
       <p>
         <%= link_to "Refresh Images", @gallery %> |
         <%= link_to "Edit Gallery", edit_gallery_path %> | 
-        <%= link_to "Remove Gallery", @gallery, :confirm => 'Are you sure?', :method => :delete %> |
+        <%= link_to "Remove Gallery", @gallery, :confirm => 'Are you sure?', :method => :delete, :disable_with => "Removing Gallery..." %> |
         <%= link_to "View Galleries", galleries_path %>
       </p> 
 
