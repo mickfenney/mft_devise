@@ -35,7 +35,10 @@ MftDevise::Application.routes.draw do
   
   resources :pictures  
 
-  resources :videos
+  resources :videos do
+    collection { post :import }
+    collection { get :videos }
+  end
 
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 

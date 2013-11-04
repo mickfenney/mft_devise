@@ -1,0 +1,38 @@
+<hr />
+
+<div class="accordion" id="accordion1">
+
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+        Import<i class="icon-chevron-down pull-right"></i>
+      </a>
+    </div>
+    <div id="collapse1" class="accordion-body collapse">
+      <div class="accordion-inner">
+        <h4>Videos</h4>
+
+        <p>A CSV file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
+
+        <ul>
+          <% Video.columns.each do |column| %>
+            <% if column.name.in? ["id", *Video.accessible_attributes] %>
+              <li>
+                <strong><%= column.name %></strong> -
+                <%= column.type.to_s.titleize %> type
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+
+        <p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+
+        <%= form_tag import_videos_path, multipart: true do %>
+          <%= file_field_tag :file %>
+          <%= submit_tag "Import", :class => 'btn btn-primary btn-small', :disable_with => "Importing..." %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
