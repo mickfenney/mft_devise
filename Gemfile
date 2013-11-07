@@ -31,7 +31,7 @@ group :development do
   end
   gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
   gem 'guard-spork'
-  gem 'guard', '>=2.1.0'
+  gem 'guard', '>=2.2.3'
   gem 'guard-rspec'
   gem 'growl'
   gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
