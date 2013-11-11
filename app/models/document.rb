@@ -17,6 +17,7 @@ class Document < ActiveRecord::Base
 
   validates_presence_of :title, :body, :user_id
   validates_presence_of :document_type_ids, :message => "please select one"
+  validates_inclusion_of :is_private, :in => [true, false]
 
   belongs_to :user
 

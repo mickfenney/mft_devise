@@ -85,15 +85,25 @@ describe Document do
       d.should_not be_valid
     end  
 
-    it "should accept valid is private" do
-      d = FactoryGirl.build(:document, :is_private => false, :document_type_ids => [@dt.id])
-      d.should be_valid
+    it 'should not accept a blank is private flag' do
+      u = FactoryGirl.build(:document, :is_private => '', :document_type_ids => [@dt.id])
+      u.should_not be_valid
+    end
+
+    it 'should not accept a nil is private flag' do
+      u = FactoryGirl.build(:document, :is_private => nil, :document_type_ids => [@dt.id])
+      u.should_not be_valid
+    end    
+
+    it 'should accept a boolen is private flag' do
+      u = FactoryGirl.build(:document, :is_private => true, :document_type_ids => [@dt.id])
+      u.should be_valid
     end  
 
-    it 'should not accept a blank is private' do
-      d = FactoryGirl.build(:document, :user_id => '', :document_type_ids => [@dt.id])
-      d.should_not be_valid
-    end         
+    it 'should be the default is private flag of false if not set' do
+      u = FactoryGirl.build(:document, :document_type_ids => [@dt.id])
+      u.is_private.should == false
+    end       
 
   end
 end
