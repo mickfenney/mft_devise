@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 unless RUBY_PLATFORM =~ /mingw/i
-  ruby "2.0.0"
+  ruby "1.9.3"
   #gem 'therubyracer'
   gem 'libnotify'  
   gem "rmagick"
