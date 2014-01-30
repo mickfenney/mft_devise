@@ -30,20 +30,25 @@ end
       email_message.should_not be_valid
     end    
 
-    it "should not create a new instance given valid email attribute" do
+    it "should create a new instance given valid email attribute" do
       email_message = FactoryGirl.build(:email_message_presenter, :email => 'from@example.com')
       email_message.should be_valid
     end    
 
-    it "should create a new instance given nil content attribute" do
+    it "should not create a new instance given nil content attribute" do
       email_message = FactoryGirl.build(:email_message_presenter, :content => nil)
-      email_message.should be_valid
+      email_message.should_not be_valid
     end   
 
     it "should not create a new instance given content attribute more than 500 characters" do
       email_message = FactoryGirl.build(:email_message_presenter, :content => Array.new(501, "a").join)
       email_message.should_not be_valid
-    end      
+    end  
+
+    it "should create a new instance given valid content attribute" do
+      email_message = FactoryGirl.build(:email_message_presenter, :content => 'This is a test message')
+      email_message.should be_valid
+    end        
 
   end
 ################################################################################
