@@ -13,8 +13,9 @@ describe "Contact Us" do
     fill_in "Message", :with => nil
     click_button "Send Message"
     page.should have_content("Please review the problems below:")
-    page.should have_content("can't be blank")
-    page.should have_content("is invalid")
+    page.should have_content("Name can't be blank")
+    page.should have_content("Email can't be blank")
+    page.should have_content("Message can't be blank")
   end  
 
   it "should not email a contact us message with no name attribute" do
