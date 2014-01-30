@@ -32,5 +32,7 @@ guard 'rspec', cmd: 'rspec --color --format nested', all_on_start: false, all_af
 end
 
 unless RUBY_PLATFORM =~ /mingw/i
-  notification :libnotify, :timeout => 4, :transient => false, :append => true
+  if `hostname` =~ /asus/i
+     notification :libnotify, :timeout => 4, :transient => false, :append => true
+  end
 end

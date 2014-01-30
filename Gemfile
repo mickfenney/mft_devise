@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 unless RUBY_PLATFORM =~ /mingw/i
   ruby "1.9.3"
   #gem 'therubyracer'
-  gem 'libnotify'  
+  if `hostname` =~ /asus/i
+    gem 'libnotify'  
+  end
   gem "rmagick"
 end
 gem 'rails', '3.2.15'
