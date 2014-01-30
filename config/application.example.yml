@@ -12,13 +12,13 @@ GMAIL_PASSWORD: Your_Password
 MANDRILL_USERNAME: Your_Username
 MANDRILL_API_KEY: Your_Password
 DELAYED_JOB_ADMIN: password
-SITE_NAME: testSite
+SITE_NAME: mfTechnology
 SITE_EMAIL: site@example.com
 ADMIN_NAME: mick
 ADMIN_EMAIL: mick@example.com
 ADMIN_PASSWORD: password
 ADMIN_LOCATION1: big ben UK
-ADMIN_LOCATION2: big ben UK
+ADMIN_LOCATION2: golden gate bridge USA
 ADMIN_NAME2: test
 ADMIN_EMAIL2: test1@example.com
 ADMIN_PASSWORD2: password

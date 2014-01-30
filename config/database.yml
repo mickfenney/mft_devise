@@ -10,8 +10,8 @@ development:
   database: mft-devise-dev
   pool: 5
   username: root
-  password: password
-  host: localhost
+  password: 
+  host: 127.0.0.1
   timeout: 5000
 
   # adapter: sqlite3
@@ -29,8 +29,8 @@ test:
   database: mft-devise-test
   pool: 5
   username: root
-  password: password
-  host: localhost
+  password: 
+  host: 127.0.0.1
   timeout: 5000
 
   # adapter: sqlite3
@@ -56,8 +56,8 @@ production:
   database: mft-devise-dev
   pool: 5
   username: root
-  password: password
-  host: localhost
+  password: 
+  host: 127.0.0.1
   timeout: 5000
 
   # adapter: sqlite3
