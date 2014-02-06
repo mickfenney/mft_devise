@@ -8,7 +8,7 @@ Create a rails application on "Nitrous.IO":https://www.nitrous.io
 
 cd into the workspace directory and run this command
 
-	curl https://raw.github.com/mick-asoftware/mft_devise/master/nitrous_setup.sh | bash -
+ curl https://raw.github.com/mick-asoftware/mft_devise/master/nitrous_setup.sh | bash -
 
 h2. Diagnostics
 
