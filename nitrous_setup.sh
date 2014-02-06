@@ -99,4 +99,7 @@ rake db:test:prepare
 echo "+ Running rspec spec..."
 rspec spec
 
+echo "+ $APPNAME application configuration"
+cat $HOME/workspace/$APPNAME/config/application.yml
+
 echo "+ Completed the Nitrous Setup for $APPNAME"
