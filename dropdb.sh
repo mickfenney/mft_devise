@@ -6,6 +6,8 @@ echo "+ Removing tmp directory..."
 rm -r tmp
 echo "+ Removing public/uploads directory..."
 rm -r public/uploads
+echo "+ Removing public/assets directory..."
+rm -r public/assets
 
 echo "+ Dropping Database..."
 rake db:drop
