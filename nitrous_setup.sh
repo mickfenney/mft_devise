@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#####################################################
+###########################################################
 # Nitrous Setup Script
-# You may need to modifie these variables
-# APPNAME RUBY_V1 RUBY_V2
-# and re-run this script
-#####################################################
+# You may need to modify these variables
+# GIT_REPO APPNAME RUBY_V1 RUBY_V2
+###########################################################
 
+GIT_REPO="https://github.com/mick-asoftware/mft_devise.git"
 APPNAME="mft_devise"
 RUBY_V1="ruby-1.9.3-p448"
 RUBY_V2="ruby-2.0.0-p247"
@@ -27,7 +27,7 @@ else
 fi
 
 echo "+ Git Clone the $APPNAME repository..."
-git clone https://github.com/mick-asoftware/mft_devise.git
+git clone $GIT_REPO
 
 if [ -f $HOME/workspace/$APPNAME/config/application.yml ]; then
   echo "+ The $HOME/workspace/$APPNAME/config/application.yml already exists."
@@ -84,8 +84,17 @@ cd $HOME/workspace/$APPNAME/
 echo "+ Running parts start mysql..."
 parts start mysql
 
-echo "+ Running database creation and migration dropdb.sh file..."
-./dropdb.sh
+echo "+ Creating Database..."
+rake db:create
+
+echo "+ Migrating Database..."
+rake db:migrate
+
+echo "+ Seeding Database..."
+rake db:seed
+
+echo "+ Preparing test Database..."
+rake db:test:prepare
 
 echo "+ Running rspec spec..."
 rspec spec
