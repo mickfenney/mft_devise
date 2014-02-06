@@ -1,36 +1,55 @@
 #!/bin/bash
 
+#####################################################
+# Nitrous Setup Script
+# You may need to modifie these variables
+# APPNAME RUBY_V1 RUBY_V2
+# and re-run this script
+#####################################################
+
+APPNAME="mft_devise"
+RUBY_V1="ruby-1.9.3-p448"
+RUBY_V2="ruby-2.0.0-p247"
+
+echo "+ Starting the Nitrous Setup for $APPNAME"
+
 # Load RVM into a shell session *as a function*
 if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then
   # First try to load from a user install
   source "$HOME/.rvm/scripts/rvm"
+  echo "+ Sourcing the user RVM installation..."
 elif [[ -s "/usr/local/rvm/scripts/rvm" ]] ; then
   # Then try to load from a root install
   source "/usr/local/rvm/scripts/rvm"
+  echo "+ Sourcing the root RVM installation..."
 else
-  printf "ERROR: An RVM installation was not found.\n"
+  echo "- ERROR: An RVM installation was not found."
 fi
 
-echo "+ Git Clone the mft_divise repository..."
+echo "+ Git Clone the $APPNAME repository..."
 git clone https://github.com/mick-asoftware/mft_devise.git
 
-echo "+ Copy the application.yml file in place..."
-cp mft_devise/config/application.example.yml mft_devise/config/application.yml
+if [ -f $HOME/workspace/$APPNAME/config/application.yml ]; then
+  echo "+ The $HOME/workspace/$APPNAME/config/application.yml already exists."
+else
+  echo "+ Copying the application.yml file in place..."
+  cp $HOME/workspace/$APPNAME/config/application.example.yml $HOME/workspace/$APPNAME/config/application.yml  
+fi
 
-echo "+ Installing ruby-1.9.3-p448..."
-rvm install ruby-1.9.3-p448
+echo "+ Installing $RUBY_V1..."
+rvm install $RUBY_V1
 
-echo "+ Removing ruby-2.0.0-p247..."
-rvm remove ruby-2.0.0-p247
+echo "+ Removing $RUBY_V2..."
+rvm remove $RUBY_V2
 
 echo "+ cd into the $HOME/.rvm/gems directory..."
 cd $HOME/.rvm/gems
 
-echo "+ Remove the ruby-2.0.0-p247 directory..."
-rm -rf ruby-2.0.0-p247
+echo "+ Remove the $RUBY_V2 directory..."
+rm -rf $RUBY_V2
 
-echo "+ Remove the ruby-2.0.0-p247\@global directory..."
-rm -rf ruby-2.0.0-p247\@global
+echo "+ Remove the $RUBY_V2\@global directory..."
+rm -rf $RUBY_V2\@global
 
 echo "+ cd into the $HOME/.rvm/archives directory..."
 cd $HOME/.rvm/archives
@@ -38,8 +57,8 @@ cd $HOME/.rvm/archives
 echo "+ Removing any archive files"
 rm *
 
-echo "+ cd into the $HOME/workspace/mft_devise directory..."
-cd $HOME/workspace/mft_devise
+echo "+ cd into the $HOME/workspace/$APPNAME directory..."
+cd $HOME/workspace/$APPNAME
 
 echo "+ Running gem install bundler..."
 gem install bundler
@@ -56,11 +75,11 @@ parts install mysql
 echo "+ cd into the $HOME/.parts/archives directory..."
 cd $HOME/.parts/archives
 
-echo "+ Removing any archive files"
+echo "+ Removing any archive files..."
 rm *
 
-echo "+ cd into the $HOME/workspace/mft_devise/ directory..."
-cd $HOME/workspace/mft_devise/
+echo "+ cd into the $HOME/workspace/$APPNAME/ directory..."
+cd $HOME/workspace/$APPNAME/
 
 echo "+ Running parts start mysql..."
 parts start mysql
@@ -71,3 +90,4 @@ echo "+ Running database creation and migration dropdb.sh file..."
 echo "+ Running rspec spec..."
 rspec spec
 
+echo "+ Completed the Nitrous Setup for $APPNAME"
