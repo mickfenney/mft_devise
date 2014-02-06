@@ -6,8 +6,9 @@
 # GIT_REPO APPNAME RUBY_V1 RUBY_V2
 ###########################################################
 
-GIT_REPO="https://github.com/mick-asoftware/mft_devise.git"
 APPNAME="mft_devise"
+APPPATH="$HOME/workspace/$APPNAME"
+GIT_REPO="https://github.com/mick-asoftware/$APPNAME.git"
 RUBY_V1="ruby-1.9.3-p448"
 RUBY_V2="ruby-2.0.0-p247"
 
@@ -29,11 +30,11 @@ fi
 echo "+ Git Clone the $APPNAME repository..."
 git clone $GIT_REPO
 
-if [ -f $HOME/workspace/$APPNAME/config/application.yml ]; then
-  echo "+ The $HOME/workspace/$APPNAME/config/application.yml already exists."
+if [ -f $APPPATH/config/application.yml ]; then
+  echo "+ The $APPPATH/config/application.yml already exists."
 else
   echo "+ Copying the application.yml file in place..."
-  cp $HOME/workspace/$APPNAME/config/application.example.yml $HOME/workspace/$APPNAME/config/application.yml  
+  cp $APPPATH/config/application.example.yml $APPPATH/config/application.yml  
 fi
 
 echo "+ Installing $RUBY_V1..."
@@ -57,8 +58,8 @@ cd $HOME/.rvm/archives
 echo "+ Removing any archive files"
 rm *
 
-echo "+ cd into the $HOME/workspace/$APPNAME directory..."
-cd $HOME/workspace/$APPNAME
+echo "+ cd into the $APPPATH directory..."
+cd $APPPATH
 
 echo "+ Running gem install bundler..."
 gem install bundler
@@ -78,8 +79,8 @@ cd $HOME/.parts/archives
 echo "+ Removing any archive files..."
 rm *
 
-echo "+ cd into the $HOME/workspace/$APPNAME/ directory..."
-cd $HOME/workspace/$APPNAME/
+echo "+ cd into the $APPPATH/ directory..."
+cd $APPPATH
 
 echo "+ Running parts start mysql..."
 parts start mysql
@@ -100,6 +101,6 @@ echo "+ Running rspec spec..."
 rspec spec
 
 echo "+ $APPNAME application configuration"
-cat $HOME/workspace/$APPNAME/config/application.yml
+cat $APPPATH/config/application.yml
 
 echo "+ Completed the Nitrous Setup for $APPNAME"
