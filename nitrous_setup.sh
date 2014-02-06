@@ -3,7 +3,7 @@
 ###########################################################
 # Nitrous Setup Script
 # You may need to modify these variables
-# GIT_REPO APPNAME RUBY_V1 RUBY_V2
+# APPNAME APPPATH GIT_REPO RUBY_V1 RUBY_V2
 ###########################################################
 
 APPNAME="mft_devise"
