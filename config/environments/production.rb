@@ -36,6 +36,9 @@ MftDevise::Application.configure do
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
 
+  # Keep 20 logfiles of 1MB each.
+  config.logger = Logger.new("#{Rails.root}/log/production.log", 20, 1048576)
+
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
