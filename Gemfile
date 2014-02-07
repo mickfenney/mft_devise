@@ -18,62 +18,6 @@ gem "cancan", ">= 1.6.8"
 gem "rolify", ">= 3.2.0"
 gem "simple_form", ">= 2.0.4"
 gem "figaro", ">= 0.5.3"
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-  gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-fileupload-rails'
-end
-group :development do
-  gem 'sqlite3'
-  if RUBY_PLATFORM =~ /mingw/i
-    gem 'mysql2', '0.3.11' 
-  else 
-    gem 'mysql2'
-  end
-  gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
-  gem 'guard-spork'
-  gem 'guard', '>=2.2.3'
-  gem 'guard-rspec'
-  gem 'growl'
-  gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
-  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
-  gem "letter_opener", ">= 1.1.0"
-  gem "quiet_assets", ">= 1.0.1"
-  #gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
-  gem "rspec-rails", ">= 2.12.2"
-  gem "factory_girl_rails", ">= 4.2.0"
-  gem 'faker'
-end
-group :test do
-  gem 'sqlite3'
-  if RUBY_PLATFORM =~ /mingw/i
-    gem 'mysql2', '0.3.11' 
-  else 
-    gem 'mysql2'
-  end
-  gem 'rspec'
-  gem 'growl'
-  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
-  gem 'spork-rails'
-  gem 'guard-spork'
-  gem 'guard-rspec'
-  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
-  gem "capybara", ">= 2.0.2"
-  gem "database_cleaner", ">= 0.9.1"
-  gem "email_spec", ">= 1.4.0"
-  gem "rspec-rails", ">= 2.12.2"
-  gem "factory_girl_rails", ">= 4.2.0"
-  gem 'faker'
-end
-group :production do
-  #gem 'pg'
-  if RUBY_PLATFORM =~ /mingw/i
-    gem 'mysql2', '0.3.11' 
-  else 
-    gem 'mysql2'
-  end
-end
 gem 'will_paginate', '> 3.0'
 gem "strip_attributes", ">= 1.2"
 gem 'geocoder'
@@ -89,3 +33,42 @@ gem 'tinymce-rails'
 gem "carrierwave"
 gem 'lazybox'
 gem 'bourbon'
+if RUBY_PLATFORM =~ /mingw/i
+  gem 'mysql2', '0.3.11' 
+else 
+  gem 'mysql2'
+end
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
+  gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-fileupload-rails'
+end
+group :production do
+  #gem 'pg'
+  #gem "workless", "~> 1.1.3"
+end
+group :test, :development do
+  gem 'sqlite3'
+  gem 'rspec'
+  gem "rspec-rails", ">= 2.12.2"
+  gem "capybara", ">= 2.0.2"
+  gem "database_cleaner", ">= 0.9.1"
+  gem "email_spec", ">= 1.4.0"
+  gem "factory_girl_rails", ">= 4.2.0"
+  gem 'guard', '>=2.2.3'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'spork-rails'
+  gem 'growl'
+  #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
+  gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
+  gem 'faker'
+end
+group :development do
+  gem "quiet_assets", ">= 1.0.1"
+  gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
+  #gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
+  gem "letter_opener", ">= 1.1.0"
+end
