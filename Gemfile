@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 unless RUBY_PLATFORM =~ /mingw/i
   ruby "1.9.3"
   #gem 'therubyracer'
@@ -7,6 +8,7 @@ unless RUBY_PLATFORM =~ /mingw/i
   end
   gem "rmagick"
 end
+
 gem 'rails', '3.2.15'
 gem 'jquery-rails'
 gem "thin", ">= 1.5.1"
@@ -33,21 +35,25 @@ gem 'tinymce-rails'
 gem "carrierwave"
 gem 'lazybox'
 gem 'bourbon'
+gem 'jquery-fileupload-rails'
+
 if RUBY_PLATFORM =~ /mingw/i
   gem 'mysql2', '0.3.11' 
 else 
   gem 'mysql2'
 end
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-fileupload-rails'
 end
+
 group :production do
   #gem 'pg'
   #gem "workless", "~> 1.1.3"
 end
+
 group :test, :development do
   gem 'sqlite3'
   gem 'rspec'
@@ -58,14 +64,15 @@ group :test, :development do
   gem "factory_girl_rails", ">= 4.2.0"
   gem 'guard', '>=2.2.3'
   gem 'guard-rspec'
-  gem 'guard-spork'
-  gem 'spork-rails'
+  #gem 'guard-spork'
+  #gem 'spork-rails'
   gem 'growl'
   #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
   gem 'faker'
 end
+
 group :development do
   gem "quiet_assets", ">= 1.0.1"
   gem "better_errors", ">= 0.6.0" unless `hostname`.strip.downcase.match(/^rav/)
