@@ -65,7 +65,7 @@ group :test, :development do
   gem 'guard', '>=2.2.3'
   gem 'guard-rspec'
   #gem 'guard-spork'
-  #gem 'spork-rails'
+  gem 'spork-rails'
   gem 'growl'
   #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
