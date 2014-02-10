@@ -38,6 +38,7 @@ MftDevise::Application.configure do
 
   # Keep 20 logfiles of 1MB each.
   config.logger = Logger.new("#{Rails.root}/log/production.log", 20, 1048576)
+  config.logger.level = Logger::WARN
 
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
