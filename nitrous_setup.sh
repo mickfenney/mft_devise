@@ -37,6 +37,9 @@ else
   cp $APPPATH/config/application.example.yml $APPPATH/config/application.yml  
 fi
 
+echo "+ Upgrading the rvm..."
+rvm get stable
+
 echo "+ Installing $RUBY_V1..."
 rvm install $RUBY_V1
 
