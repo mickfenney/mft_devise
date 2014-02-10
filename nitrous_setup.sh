@@ -6,9 +6,9 @@
 # APPNAME APPPATH GIT_REPO RUBY_V1 RUBY_V2
 ###########################################################
 
-APPNAME="mft-devise"
+APPNAME="mft_devise"
 APPPATH="$HOME/workspace/$APPNAME"
-GIT_REPO="https://github.com/mick-asoftware/$APPNAME.git mft-devise"
+GIT_REPO="https://github.com/mick-asoftware/$APPNAME.git"
 RUBY_V1="ruby-1.9.3-p448"
 RUBY_V2="ruby-2.0.0-p247"
 
