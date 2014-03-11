@@ -78,7 +78,7 @@ describe Video do
     end           
 
     it 'should reject a description that is too long' do
-      v = FactoryGirl.build(:video, :description => Array.new(401, "a").join)
+      v = FactoryGirl.build(:video, :description => Array.new(2001, "a").join)
       v.should_not be_valid
     end
 

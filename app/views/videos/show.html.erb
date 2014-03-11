@@ -18,7 +18,7 @@
 
 			<p>
 			  <b>Description:</b>
-			  <%= @video.description %>
+			  <%= @video.description.gsub("\n", "<br />").html_safe %>
 			</p>				
 
 			<p>

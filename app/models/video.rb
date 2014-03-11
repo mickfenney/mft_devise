@@ -23,7 +23,7 @@ class Video < ActiveRecord::Base
   validates_uniqueness_of :code
   validates_length_of :name, :maximum => 255
   validates_length_of :code, :maximum => 50
-  validates_length_of :description, :maximum => 400
+  validates_length_of :description, :maximum => 2000
 
   def self.to_csv
     CSV.generate do |csv|
