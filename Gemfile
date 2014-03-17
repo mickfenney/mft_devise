@@ -7,11 +7,18 @@ unless RUBY_PLATFORM =~ /mingw/i
     gem 'libnotify'  
   end
   gem "rmagick"
+  gem 'mysql2'
+  #gem 'puma'
+  gem 'unicorn'
+else  
+  gem 'mysql2', '0.3.11' 
+  gem "thin", ">= 1.5.1"  
 end
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.17'
+gem 'rack', '~> 1.4.5'
+
 gem 'jquery-rails'
-gem "thin", ">= 1.5.1"
 gem "bootstrap-sass", "2.3.2.2"
 gem "bootstrap-switch-rails", "1.8.1"
 gem "devise", "2.2.4"
@@ -35,12 +42,6 @@ gem "carrierwave"
 gem 'lazybox'
 gem 'bourbon'
 gem 'jquery-fileupload-rails'
-
-if RUBY_PLATFORM =~ /mingw/i
-  gem 'mysql2', '0.3.11' 
-else 
-  gem 'mysql2'
-end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
