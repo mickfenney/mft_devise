@@ -42,6 +42,7 @@ gem "carrierwave"
 gem 'lazybox'
 gem 'bourbon'
 gem 'jquery-fileupload-rails'
+gem 'rack-timeout'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
