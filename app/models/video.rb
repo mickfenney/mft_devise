@@ -60,7 +60,7 @@ class Video < ActiveRecord::Base
     def self.search(search)
       if search
         select('DISTINCT videos.*') 
-        .where('videos.name LIKE ? or videos.code LIKE ? or videos.description LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+        .where('UPPER(videos.name) LIKE UPPER(?) or UPPER(videos.code) LIKE UPPER(?) or UPPER(videos.description) LIKE UPPER(?)', "%#{search}%", "%#{search}%", "%#{search}%")
       else
         scoped
       end

@@ -154,7 +154,7 @@ class User < ActiveRecord::Base
       if search
         select('DISTINCT users.*')
         .joins("LEFT JOIN locations ON locations.locatable_id = users.id AND locations.locatable_type = 'User'")
-        .where('users.name LIKE ? or users.email LIKE ? or locations.address LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+        .where('UPPER(users.name) LIKE UPPER(?) or UPPER(users.email) LIKE UPPER(?) or UPPER(locations.address) LIKE UPPER(?)', "%#{search}%", "%#{search}%", "%#{search}%")
       else
         scoped
       end

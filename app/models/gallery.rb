@@ -39,7 +39,7 @@ class Gallery < ActiveRecord::Base
     def self.search(search)
       if search
         select('DISTINCT galleries.*')
-        .where('galleries.name LIKE ?', "%#{search}%")
+        .where('UPPER(galleries.name) LIKE UPPER(?)', "%#{search}%")
       else
         scoped
       end

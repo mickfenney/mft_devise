@@ -80,7 +80,7 @@ class Document < ActiveRecord::Base
       if search
         select('DISTINCT d.*')
         .from('documents d, document_types_documents dtd, document_types dt')
-        .where('d.id = dtd.document_id and dtd.document_type_id = dt.id and (d.title LIKE ? or dt.name LIKE ? or d.body LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%")
+        .where('d.id = dtd.document_id and dtd.document_type_id = dt.id and (UPPER(d.title) LIKE UPPER(?) or UPPER(dt.name) LIKE UPPER(?) or UPPER(d.body) LIKE UPPER(?)', "%#{search}%", "%#{search}%", "%#{search}%")
       else
         scoped
       end
