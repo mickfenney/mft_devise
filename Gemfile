@@ -8,8 +8,8 @@ unless RUBY_PLATFORM =~ /mingw/i
   end
   gem "rmagick"
   gem 'mysql2'
-  #gem 'puma'
-  gem 'unicorn'
+  gem 'puma'
+  #gem 'unicorn'
 else  
   gem 'mysql2', '0.3.11' 
   gem "thin", ">= 1.5.1"  
