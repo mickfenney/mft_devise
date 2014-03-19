@@ -59,7 +59,7 @@ class DocumentType < ActiveRecord::Base
     def self.search(search)
       if search 
         select('DISTINCT document_types.*')
-        .where('document_types.name LIKE ? or document_types.description LIKE ?', "%#{search}%", "%#{search}%")
+        .where('UPPER(document_types.name) LIKE UPPER(?) or UPPER(document_types.description) LIKE UPPER(?)', "%#{search}%", "%#{search}%")
       else
         scoped
       end

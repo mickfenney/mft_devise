@@ -7,7 +7,8 @@ unless RUBY_PLATFORM =~ /mingw/i
     gem 'libnotify'  
   end
   gem "rmagick"
-  gem 'mysql2'
+  #gem 'mysql2'
+  gem 'pg'
   gem 'puma'
   #gem 'unicorn'
 else  

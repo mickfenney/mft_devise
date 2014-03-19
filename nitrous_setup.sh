@@ -73,8 +73,8 @@ gem install rake
 echo "+ Running bundle -j 4..."
 bundle install -j 4
 
-echo "+ Running parts install mysql..."
-parts install mysql
+echo "+ Running parts install postgresql..."
+parts install postgresql
 
 echo "+ cd into the $HOME/.parts/archives directory..."
 cd $HOME/.parts/archives
@@ -85,8 +85,8 @@ rm *
 echo "+ cd into the $APPPATH/ directory..."
 cd $APPPATH
 
-echo "+ Running parts start mysql..."
-parts start mysql
+echo "+ Running parts start postgresql..."
+parts start postgresql
 
 echo "+ Creating Database..."
 rake db:create
