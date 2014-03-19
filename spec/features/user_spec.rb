@@ -371,10 +371,11 @@ describe 'Update User Details' do
     fill_in "general password", :with => @admin_user.password
     click_button "Update General"
     page.should have_content("You updated your account successfully.")
-    #raise User.first.to_yaml
-    User.first.name.should == "new name"
-    User.first.phone.should == "0000222444"
-    User.first.theme.should == "slate"   
+    u = User.find_by_id(@admin_user.id)
+    #raise u.to_yaml
+    u.name.should == "new name"
+    u.phone.should == "0000222444"
+    u.theme.should == "slate"    
   end  
 
    it 'should allow an admin user to update a users General details' do
