@@ -70,4 +70,11 @@ if DocumentType.count == 0
   )
   puts '+ doc type: ' << dt.name   
 
+  dt = DocumentType.create(
+    :name => 'PostgreSQL',
+    :description => 'PostgreSQL, often simply "Postgres", is an open-source object-relational database management system (ORDBMS)',
+    :user_id => 1,
+  )
+  puts '+ doc type: ' << dt.name
+
 end
