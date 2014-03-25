@@ -3,14 +3,19 @@ source 'https://rubygems.org'
 unless RUBY_PLATFORM =~ /mingw/i
   ruby "1.9.3"
   #gem 'therubyracer'
-  if `hostname` =~ /asus/i
+  if `hostname` =~ /asus/i # my lappy
     gem 'libnotify'  
   end
   gem "rmagick"
   #gem 'mysql2'
   gem 'pg'
-  gem 'puma'
-  #gem 'unicorn'
+  gem 'pg'
+  if `hostname` =~ /mft/i # nitrous.IO
+    gem "thin", ">= 1.5.1" 
+  else
+    gem 'puma'
+    #gem 'unicorn'
+  end
 else  
   gem 'mysql2', '0.3.11' 
   gem "thin", ">= 1.5.1"  
