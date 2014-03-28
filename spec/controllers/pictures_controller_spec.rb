@@ -28,7 +28,7 @@ describe PicturesController, :vcr do
   end
 
   describe "GET edit" do
-    it "assigns the requested picture as @picture", :focus do
+    it "assigns the requested picture as @picture" do
       picture = Picture.create! valid_attributes
       get :edit, {:id => picture.to_param}, valid_session
       assigns(:picture).should eq(picture)

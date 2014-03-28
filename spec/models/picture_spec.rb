@@ -13,7 +13,7 @@
 
 require 'spec_helper'
 
-describe Picture, :vcr  do
+describe Picture do
 
   it { should respond_to(:name) }
   it { should respond_to(:image) }
@@ -27,7 +27,7 @@ describe Picture, :vcr  do
 
 ################################################################################
   describe "Class Instantiation:" do
-    it "should create a new instance given valid attributes" do
+    it "should create a new instance given valid attributes", :vcr  do
       p = FactoryGirl.create(:picture)
       p.should be_valid
       FileUtils.remove_dir("#{Rails.root.to_s}/public/uploads/picture/image/#{p.id}", :force => true)
@@ -41,17 +41,17 @@ describe Picture, :vcr  do
       p.should_not be_valid
     end
 
-    it 'should not accept a blank name' do
+    it 'should not accept a blank name', :vcr do
       p = FactoryGirl.build(:picture, :name => '')
-      p.should_not be_valid
+      p.should be_valid
     end  
 
-    it "should not create a new instance given a nil 'name' attribute" do
+    it "should not create a new instance given a nil 'name' attribute", :vcr do
       p = FactoryGirl.build(:picture, :name => nil)
-      p.should_not be_valid
+      p.should be_valid
     end           
 
-    it "should accept valid user id" do
+    it "should accept valid user id", :vcr do
       p = FactoryGirl.build(:picture)
       p.should be_valid
     end  
