@@ -27,6 +27,11 @@ else
   echo "- ERROR: An RVM installation was not found."
 fi
 
+echo "+ Setup git globals"
+git config --global user.email "mick@asoftware.net.au"
+git config --global user.name "mick-asoftware"
+git config --global push.default simple
+
 echo "+ Git Clone the $APPNAME repository..."
 git clone $GIT_REPO
 
