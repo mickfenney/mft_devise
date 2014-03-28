@@ -43,7 +43,7 @@ end
       location.should_not be_valid
     end
 
-    it "should populate the latitude field when given a valid address" do
+    it "should populate the latitude field when given a valid address", :vcr do
       location = FactoryGirl.create(:location)
       job = Delayed::Job.first
       job.invoke_job
@@ -51,7 +51,7 @@ end
       location.latitude.should == @micks_house.latitude  
     end
 
-    it "should populate the longitude field when given a valid address" do
+    it "should populate the longitude field when given a valid address", :vcr do
       location = FactoryGirl.create(:location)
       job = Delayed::Job.first
       job.invoke_job
@@ -69,7 +69,7 @@ end
       location.longitude.should be_nil
     end 
 
-    it "should store full address when given a partial but valid address" do
+    it "should store full address when given a partial but valid address", :vcr do
       raw_address = 'Big Ben UK'
       wanted_address = 'Big Ben, Westminster, London SW1A 0AA, UK'
       location = FactoryGirl.create(:location, :address => raw_address)
@@ -79,7 +79,7 @@ end
       Location.first.address.should == wanted_address
     end
 
-    it "should store the correct latitude when given a partial but valid address" do
+    it "should store the correct latitude when given a partial but valid address", :vcr do
       location = FactoryGirl.create(:location, :address => @micks_house.address, :latitude => nil)
       job = Delayed::Job.first
       job.invoke_job
@@ -87,7 +87,7 @@ end
       Location.first.latitude.should == @micks_house.latitude
     end
 
-    it "should store the correct longitude when given a partial but valid address" do
+    it "should store the correct longitude when given a partial but valid address", :vcr do
       location = FactoryGirl.create(:location, :address => @micks_house.address, :longitude => nil)
       job = Delayed::Job.first
       job.invoke_job
@@ -95,7 +95,7 @@ end
       Location.first.longitude.should == @micks_house.longitude
     end        
 
-    it "should reset the address, latitude and longitude fields to nil when updating an existing record with an invalid address" do
+    it "should reset the address, latitude and longitude fields to nil when updating an existing record with an invalid address", :vcr do
       invalid_address = 'Not a valid address'
       # insert mick factory into db (valid)
       FactoryGirl.create(:location, :latitude => nil, :longitude => nil)

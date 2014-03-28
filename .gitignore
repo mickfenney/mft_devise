@@ -25,9 +25,9 @@ Gemfile.lock
 **.war
 *.rbc
 *.sassc
-.rspec
 .redcar/
 .sass-cache
+/spec/vcr_cassettes
 /db/schema.rb
 /config/config.yml
 /coverage.data

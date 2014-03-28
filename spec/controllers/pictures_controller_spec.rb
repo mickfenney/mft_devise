@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PicturesController do
+describe PicturesController, :vcr do
 
   # This should return the minimal set of attributes required to create a valid
   # Picture. As you add validations to Picture, be sure to
@@ -28,7 +28,7 @@ describe PicturesController do
   end
 
   describe "GET edit" do
-    it "assigns the requested picture as @picture" do
+    it "assigns the requested picture as @picture", :focus do
       picture = Picture.create! valid_attributes
       get :edit, {:id => picture.to_param}, valid_session
       assigns(:picture).should eq(picture)

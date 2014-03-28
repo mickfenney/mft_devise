@@ -13,7 +13,7 @@
 
 require 'spec_helper'
 
-describe Picture do
+describe Picture, :vcr  do
 
   it { should respond_to(:name) }
   it { should respond_to(:image) }
@@ -43,12 +43,12 @@ describe Picture do
 
     it 'should not accept a blank name' do
       p = FactoryGirl.build(:picture, :name => '')
-      p.should be_valid
+      p.should_not be_valid
     end  
 
     it "should not create a new instance given a nil 'name' attribute" do
       p = FactoryGirl.build(:picture, :name => nil)
-      p.should be_valid
+      p.should_not be_valid
     end           
 
     it "should accept valid user id" do
