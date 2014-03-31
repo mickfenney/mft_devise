@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 unless RUBY_PLATFORM =~ /mingw/i
-  ruby "1.9.3"
+  ruby "2.1.0"
   #gem 'therubyracer'
   if `hostname` =~ /asus/i # my lappy
     gem 'libnotify'  
@@ -44,7 +44,7 @@ gem 'devise-async'
 gem 'mandrill-rails'
 gem 'tinymce-rails'
 gem "carrierwave"
-gem 'lazybox'
+gem 'lazybox', '0.2.6'
 gem 'bourbon'
 gem 'jquery-fileupload-rails'
 gem 'rack-timeout'

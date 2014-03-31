@@ -9,7 +9,7 @@
 APPNAME="mft_devise"
 APPPATH="$HOME/workspace/$APPNAME"
 GIT_REPO="https://github.com/mick-asoftware/$APPNAME.git"
-RUBY_V1="ruby-1.9.3-p448"
+RUBY_V1="ruby-2.1.0"
 RUBY_V2="ruby-2.0.0-p247"
 
 echo "+ Starting the Nitrous Setup for $APPNAME"
@@ -27,7 +27,7 @@ else
   echo "- ERROR: An RVM installation was not found."
 fi
 
-echo "+ Setup git globals"
+echo "+ Setup git globals..."
 git config --global user.email "mick@asoftware.net.au"
 git config --global user.name "mick-asoftware"
 git config --global push.default simple
