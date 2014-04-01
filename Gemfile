@@ -7,8 +7,6 @@ unless RUBY_PLATFORM =~ /mingw/i
     gem 'libnotify'  
   end
   gem "rmagick"
-  #gem 'mysql2'
-  gem 'pg'
   #gem "thin", ">= 1.5.1" 
   gem 'unicorn'
 else  
@@ -52,27 +50,17 @@ group :assets do
 end
 
 group :production do
-  #gem 'pg'
+  #gem 'mysql2'
+  gem 'pg'
   #gem "workless", "~> 1.1.3"
 end
 
 group :test, :development do
-  gem 'sqlite3'
-  gem 'rspec'
-  gem "rspec-rails", ">= 2.12.2"
-  gem "capybara", ">= 2.0.2"
-  gem "database_cleaner", ">= 0.9.1"
-  gem "email_spec", ">= 1.4.0"
-  gem "factory_girl_rails", ">= 4.2.0"
-  gem 'guard', '>=2.2.3'
-  gem 'guard-rspec'
-  gem 'growl'
+  #gem 'sqlite3'
   #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
   gem 'faker'
-  gem 'webmock'
-  gem 'vcr'
 end
 
 group :development do
@@ -81,4 +69,18 @@ group :development do
   #gem "binding_of_caller", ">= 0.7.1", :platforms => [:mri_19, :rbx]
   gem "letter_opener", ">= 1.1.0"
   #gem 'rack-mini-profiler'
+end
+
+group :test do
+  gem 'rspec'
+  gem "rspec-rails", ">= 2.12.2"
+  gem "capybara", ">= 2.0.2"
+  gem "email_spec", ">= 1.4.0"
+  gem "factory_girl_rails", ">= 4.2.0"
+  gem 'guard', '>=2.2.3'
+  gem 'guard-rspec'
+  gem 'growl'
+  gem "database_cleaner", ">= 0.9.1"
+  gem 'webmock'
+  gem 'vcr'  
 end
