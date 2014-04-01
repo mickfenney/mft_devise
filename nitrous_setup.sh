@@ -8,7 +8,9 @@
 
 APPNAME="mft_devise"
 APPPATH="$HOME/workspace/$APPNAME"
-GIT_REPO="https://github.com/mick-asoftware/$APPNAME.git"
+#GIT_REPO="https://github.com/mick-asoftware/$APPNAME.git"
+# Make sure you set up your ssh key in github
+GIT_REPO="git@github.com:mick-asoftware/$APPNAME.git"
 RUBY_V1="ruby-2.1.0"
 RUBY_V2="ruby-2.0.0-p247"
 

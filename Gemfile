@@ -9,12 +9,8 @@ unless RUBY_PLATFORM =~ /mingw/i
   gem "rmagick"
   #gem 'mysql2'
   gem 'pg'
-  if `hostname` =~ /mft/i # nitrous.IO
-    gem "thin", ">= 1.5.1" 
-  else
-    gem 'puma'
-    #gem 'unicorn'
-  end
+  #gem "thin", ">= 1.5.1" 
+  gem 'unicorn'
 else  
   gem 'mysql2', '0.3.11' 
   gem "thin", ">= 1.5.1"  
