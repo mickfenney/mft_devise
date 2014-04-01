@@ -2,13 +2,13 @@ source 'https://rubygems.org'
 
 unless RUBY_PLATFORM =~ /mingw/i
   ruby "2.1.0"
+  gem 'pg'
+  gem 'unicorn'
   #gem 'therubyracer'
   if `hostname` =~ /asus/i # my lappy
     gem 'libnotify'  
   end
-  gem "rmagick"
-  #gem "thin", ">= 1.5.1" 
-  gem 'unicorn'
+  gem "rmagick" 
 else  
   gem 'mysql2', '0.3.11' 
   gem "thin", ">= 1.5.1"  
@@ -50,13 +50,10 @@ group :assets do
 end
 
 group :production do
-  #gem 'mysql2'
-  gem 'pg'
-  #gem "workless", "~> 1.1.3"
+  gem "workless", "~> 1.1.3"
 end
 
 group :test, :development do
-  #gem 'sqlite3'
   #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
   gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i

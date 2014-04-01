@@ -43,30 +43,21 @@ test:
   # timeout: 5000
 
 production:
-  # adapter: mysql2
-  # encoding: utf8
-  # database: <%=ENV['OPENSHIFT_APP_NAME']%>
-  # pool: 5
-  # timeout: 5000
-  # host: <%=ENV['OPENSHIFT_MYSQL_DB_HOST']%>
-  # port: <%=ENV['OPENSHIFT_MYSQL_DB_PORT']%>
-  # username: <%=ENV['OPENSHIFT_MYSQL_DB_USERNAME']%>
-  # password: <%=ENV['OPENSHIFT_MYSQL_DB_PASSWORD']%>
-  # socket: <%=ENV['OPENSHIFT_MYSQL_DB_SOCKET']%>
-
-  # adapter: mysql2
   adapter: postgresql
   encoding: utf8
   reconnect: false
-  database: mft-devise-dev
-  pool: 5
-  # username: root
-  username: action
-  password: 
-  host: 127.0.0.1
-  timeout: 5000
-
-  # adapter: sqlite3
-  # database: db/production.sqlite3
-  # pool: 5
-  # timeout: 5000
+  pool: 10
+  timeout: 10000
+  database: mft-devise
+  
+#  # adapter: mysql2
+#  adapter: postgresql
+#  encoding: utf8
+#  reconnect: false
+#  database: mft-devise-dev
+#  pool: 5
+#  # username: root
+#  username: action
+#  password: 
+#  host: 127.0.0.1
+#  timeout: 5000  
