@@ -51,6 +51,7 @@ end
 
 group :production do
   gem "workless", "~> 1.1.3"
+  gem 'rails_12factor'
 end
 
 group :test, :development do
