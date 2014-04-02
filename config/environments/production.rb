@@ -5,7 +5,7 @@ MftDevise::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -36,10 +36,6 @@ MftDevise::Application.configure do
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
 
-  # Keep 20 logfiles of 1MB each.
-  config.logger = Logger.new("#{Rails.root}/log/production.log", 20, 1048576)
-  config.logger.level = Logger::WARN
-
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
@@ -65,30 +61,35 @@ MftDevise::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'example.com' }
+  config.action_mailer.default_url_options = { :host => 'mft-asoftware.herokuapp.com' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.default :charset => 'utf-8'
+  
+#  config.action_mailer.smtp_settings = {
+#    address: "smtp.gmail.com",
+#   port: 587,
+#    domain: "example.com",
+#    authentication: "plain",
+#    enable_starttls_auto: true,
+#    user_name: ENV["GMAIL_USERNAME"],
+#    password: ENV["GMAIL_PASSWORD"]
+#  }  
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "example.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+      :address => "smtp.mandrillapp.com",
+      :port => 587,
+      :user_name => ENV["MANDRILL_USERNAME"],
+      :password => ENV["MANDRILL_API_KEY"]
   }
 
-  # config.action_mailer.smtp_settings = {
-  #   :address   => "smtp.mandrillapp.com",
-  #   :port      => 587,
-  #   :user_name => ENV["MANDRILL_USERNAME"],
-  #   :password  => ENV["MANDRILL_API_KEY"]
-  # }
+  # From: https://github.com/lostboy/workless
+  config.after_initialize do
+    Delayed::Job.scaler = :heroku_cedar
+  end
 
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
