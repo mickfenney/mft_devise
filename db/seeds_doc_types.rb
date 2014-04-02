@@ -76,5 +76,12 @@ if DocumentType.count == 0
     :user_id => 1,
   )
   puts '+ doc type: ' << dt.name
+  
+  dt = DocumentType.create(
+    :name => 'Shell Script',
+    :description => 'A shell script is a computer program designed to be run by the Unix shell, a command line interpreter',
+    :user_id => 1,
+  )
+  puts '+ doc type: ' << dt.name  
 
 end
