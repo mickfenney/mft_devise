@@ -306,7 +306,7 @@ DEPENDENCIES
   daemons
   database_cleaner (>= 0.9.1)
   delayed_job_active_record
-  delayed_job_web (= 1.2.2)
+  delayed_job_web
   devise (= 2.2.4)
   devise-async
   devise_invitable (>= 1.1.5)
