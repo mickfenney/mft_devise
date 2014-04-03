@@ -5,9 +5,6 @@ unless RUBY_PLATFORM =~ /mingw/i
   gem 'pg'
   gem 'unicorn'
   #gem 'therubyracer'
-  if `hostname` =~ /asus/i # my lappy
-    gem 'libnotify'  
-  end
   gem "rmagick" 
 else  
   gem 'mysql2', '0.3.11' 
