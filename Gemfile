@@ -5,7 +5,6 @@ unless RUBY_PLATFORM =~ /mingw/i
   gem 'pg'
   gem 'unicorn'
   #gem 'therubyracer'
-  gem 'libnotify'
   gem "rmagick"
 else
   gem 'mysql2', '0.3.11'
