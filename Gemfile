@@ -5,10 +5,11 @@ unless RUBY_PLATFORM =~ /mingw/i
   gem 'pg'
   gem 'unicorn'
   #gem 'therubyracer'
-  gem "rmagick" 
-else  
-  gem 'mysql2', '0.3.11' 
-  gem "thin", ">= 1.5.1"  
+  gem 'libnotify'
+  gem "rmagick"
+else
+  gem 'mysql2', '0.3.11'
+  gem "thin", ">= 1.5.1"
 end
 
 gem 'rails', '3.2.17'
@@ -41,7 +42,7 @@ gem 'jquery-fileupload-rails'
 gem 'rack-timeout'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
@@ -77,5 +78,5 @@ group :test do
   gem 'growl'
   gem "database_cleaner", ">= 0.9.1"
   gem 'webmock'
-  gem 'vcr'  
+  gem 'vcr'
 end
