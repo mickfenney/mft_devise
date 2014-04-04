@@ -1,15 +1,17 @@
 ########################################################################################################################
 namespace :prod do
+  if Rails.env != 'development'
+    puts '!! Will not dump the production db in anything other than development mode. Quitting.'
+    return
+  end
+  @latest_file = "#{Rails.root.to_s}/tmp/latest_heroku.dump"
+########################################################################################################################  
   desc "Load the production db (dump the production db and load it to the development db)"
   task 'db:2dev' => :environment do
     prod_db2dev
   end
 
   def prod_db2dev
-    if Rails.env != 'development'
-      puts '!! Will not dump the production db in anything other than development mode. Quitting.'
-      return
-    end
     db_backup
     db_pull
     db_load
@@ -35,7 +37,7 @@ namespace :prod do
   end
   
   def db_pull
-    cmd = 'curl -o tmp/latest_heroku.dump `heroku pgbackups:url`'
+    cmd = "curl -o #{@latest_file} `heroku pgbackups:url`"
     begin
       system(cmd)
     rescue
@@ -49,7 +51,7 @@ namespace :prod do
   end
 
   def db_load
-    cmd = 'pg_restore --verbose --clean --no-acl --no-owner -h localhost -U action -d mft-devise-dev tmp/latest_heroku.dump'
+    cmd = "pg_restore --verbose --clean --no-acl --no-owner -h localhost -U action -d mft-devise-dev #{@latest_file}"
     begin
       system(cmd)
     rescue
