@@ -74,8 +74,8 @@ cd $APPPATH
 echo "+ Running gem install bundler..."
 gem install bundler
 
-echo "+ Running gem install rake..."
-gem install rake
+echo "+ Running gem install annotate..."
+gem install annotate
 
 echo "+ Running bundle -j 4..."
 bundle install -j 4
