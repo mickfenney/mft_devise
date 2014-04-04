@@ -67,6 +67,7 @@ group :development do
 end
 
 group :test do
+  #gem 'libnotify'
   gem 'rspec'
   gem "rspec-rails", ">= 2.12.2"
   gem "capybara", ">= 2.0.2"
