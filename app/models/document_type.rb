@@ -40,6 +40,9 @@ class DocumentType < ActiveRecord::Base
       CSV.foreach(file.path, headers: true) do |row|
         document_type = find_by_id(row["id"]) || new
         document_type.attributes = row.to_hash.slice(*accessible_attributes)
+        unless document_type.user_id.present?
+          document_type.user_id = 1
+        end
         if document_type.valid?
           document_type.save!
           @errs << "<tr style='background-color:#99FF99; color:green;'><td>***SUCCESS:***<b>#{i}</b> - #{row}</td></tr>"

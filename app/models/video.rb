@@ -41,6 +41,9 @@ class Video < ActiveRecord::Base
       CSV.foreach(file.path, headers: true) do |row|
         video = find_by_id(row["id"]) || new
         video.attributes = row.to_hash.slice(*accessible_attributes)
+        unless video.user_id.present?
+          video.user_id = 1
+        end
         if video.valid?
           video.save!
           @errs << "<tr style='background-color:#99FF99; color:green;'><td>***SUCCESS:***<b>#{i}</b> - #{row}</td></tr>"

@@ -57,8 +57,11 @@ class Document < ActiveRecord::Base
       CSV.foreach(file.path, headers: true) do |row|
         document = find_by_id(row["id"]) || new
         document.attributes = row.to_hash.slice(*accessible_attributes)
-        unless document.id.present?
+        unless document.document_type_ids.present?
           document.document_type_ids = [1]
+        end
+        unless document.user_id.present?
+          document.user_id = 1
         end
         if document.valid?
           document.save!
