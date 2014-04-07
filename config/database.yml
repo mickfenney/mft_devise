@@ -49,7 +49,7 @@ production:
   pool: 10
   timeout: 10000
   database: mft-devise
-  
+
 #  # adapter: mysql2
 #  adapter: postgresql
 #  encoding: utf8
