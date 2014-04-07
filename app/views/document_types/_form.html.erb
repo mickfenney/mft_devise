@@ -7,7 +7,7 @@
      <span class="add-on"><i class="icon-pencil"></i></span><%= f.input_field :name, :required => true, :size => '' %>
     <% end %>
     <%= f.input :description, :wrapper => :prepend do %>
-     <span class="add-on"><i class="icon-pencil"></i></span><%= f.input_field :description, :required => true, :size => '' %>
+     <span class="add-on"><i class="icon-pencil"></i></span><%= f.text_area :description, :rows => 5 %>
     <% end %>
   </div>
 

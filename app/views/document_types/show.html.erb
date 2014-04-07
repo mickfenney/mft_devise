@@ -13,7 +13,7 @@
 
 			<p>
 			  <b>Description:</b>
-			  <%= @document_type.description %>
+			  <%= @document_type.description.gsub("\n", "<br />").html_safe %>
 			</p>	
 
 			<p>
