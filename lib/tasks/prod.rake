@@ -1,7 +1,12 @@
 ########################################################################################################################
+# These rake tasks will only run in development mode
+########################################################################################################################
 namespace :prod do
-  @latest_file = "#{Rails.root.to_s}/tmp/latest_heroku.dump"
-  @heroku_bin = `which heroku`.chomp
+  @heroku_bin       = `which heroku`.chomp
+  @prod_db_name     = 'mft-devise-dev'
+  @prod_db_user     = 'action'
+  @prod_db_host     = 'localhost'
+  @prod_latest_file = "#{Rails.root.to_s}/tmp/latest_heroku.dump"
 ######################################################################################################################## 
   desc "Load the production db (dump the production db and load it to the development db)"
   task 'db:2dev' => :environment do
@@ -9,22 +14,23 @@ namespace :prod do
   end
 
   def prod_db2dev
-    dev_only
-    db_backup
-    db_pull
-    db_load
+    prod_exit_unless_dev
+    prod_db_backup
+    prod_db_pull
+    prod_db_load
   end 
 ########################################################################################################################
   desc "Backup the prod db (backup the production database in heroku)"
   task 'db:backup' => :environment do
-    db_backup
+    prod_db_backup
   end
  
-  def db_backup
-    dev_only
+  def prod_db_backup
+    prod_exit_unless_dev
     cmd = "ruby #{@heroku_bin} pgbackups:capture"
     begin
       system(cmd)
+      puts "Backing up the production database in heroku"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
@@ -32,14 +38,15 @@ namespace :prod do
 ########################################################################################################################
   desc "Pull the prod db (pull the production database from heroku)"
   task 'db:pull' => :environment do
-    db_pull
+    prod_db_pull
   end
  
-  def db_pull
-    dev_only
+  def prod_db_pull
+    prod_exit_unless_dev
     cmd = "curl -o #{@latest_file} `ruby #{@heroku_bin} pgbackups:url`"
     begin
       system(cmd)
+      puts "Pull the production database from heroku to [#{@prod_latest_file}]"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
@@ -47,14 +54,15 @@ namespace :prod do
 ######################################################################################################################## 
   desc "Load the prod db (load the production database into devlopment)"
   task 'db:load' => :environment do
-    db_load
+    prod_db_load
   end
 
-  def db_load
-    dev_only
-    cmd = "pg_restore --verbose --clean --no-acl --no-owner -h localhost -U action -d mft-devise-dev #{@latest_file}"
+  def prod_db_load
+    prod_exit_unless_dev
+    cmd = "pg_restore --verbose --clean --no-acl --no-owner -h #{@prod_db_host} -U #{@prod_db_user} -d #{@prod_db_name} #{@prod_latest_file}"
     begin
       system(cmd)
+      puts "Loaded the devlopment database from the [#{@prod_latest_file}]"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end   
@@ -62,9 +70,9 @@ namespace :prod do
 ########################################################################################################################
   private
 ########################################################################################################################
-  def dev_only
+  def prod_exit_unless_dev
     if Rails.env != 'development'
-      puts '!! Will not dump the production db in anything other than development mode. Quitting.'
+      puts '!! Will not dump or load the production db in anything other than development mode. Quitting.'
       exit
     end
   end
