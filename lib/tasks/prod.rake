@@ -43,10 +43,10 @@ namespace :prod do
  
   def prod_db_pull
     prod_exit_unless_dev
-    cmd = "curl -o #{@latest_file} `ruby #{@heroku_bin} pgbackups:url`"
+    cmd = "curl -o #{@prod_latest_file} `ruby #{@heroku_bin} pgbackups:url`"
     begin
       system(cmd)
-      puts "Pull the production database from heroku to [#{@prod_latest_file}]"
+      puts "Pulled the production database from heroku to [#{@prod_latest_file}]"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
