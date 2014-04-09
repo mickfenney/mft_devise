@@ -1,17 +1,17 @@
+require 'fileutils'
+
 class ProdDev
 
-  @@dev_db_name      = 'mft-devise-dev'
-  @@dev_db_user      = 'action'
-  @@dev_db_host      = 'localhost'
-  @@dev_latest_file  = "#{Rails.root.to_s}/tmp/latest_dev.dump"
-  @@heroku_bin       = `which heroku`.chomp
-  @@prod_db_name     = 'mft-devise-dev'
-  @@prod_db_user     = 'action'
-  @@prod_db_host     = 'localhost'
-  @@prod_latest_file = "#{Rails.root.to_s}/tmp/latest_heroku.dump"
-  
+  def initialize
+    @db_name          = 'mft-devise-dev'
+    @db_user          = 'action'
+    @db_host          = 'localhost'
+    @heroku_bin       = `which heroku`.chomp
+    @dev_latest_file  = "#{Rails.root.to_s}/tmp/latest_dev.dump"
+    @prod_latest_file = "#{Rails.root.to_s}/tmp/latest_heroku.dump"
+  end 
 ########################################################################################################################
-  # Development
+# Development Tasks
 ########################################################################################################################  
   def app_rebuild
     exit_unless_dev
@@ -31,10 +31,10 @@ class ProdDev
 ########################################################################################################################   
   def dev_db_backup
     exit_unless_dev
-    cmd = "pg_dump -Fc --no-acl --no-owner -h #{@@dev_db_host} -U #{@@dev_db_user} #{@@dev_db_name} > #{@@dev_latest_file}"
+    cmd = "pg_dump -Fc --no-acl --no-owner -h #{@db_host} -U #{@db_user} #{@db_name} > #{@dev_latest_file}"
     begin
       system(cmd)
-      puts "Backing up the development database [#{@@dev_db_name}] to [#{@@dev_latest_file}]"
+      puts "Backing up the development database [#{@db_name}] to [#{@dev_latest_file}]"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
@@ -42,16 +42,16 @@ class ProdDev
 ########################################################################################################################  
   def dev_db_load
     exit_unless_dev
-    cmd = "pg_restore --verbose --clean --no-acl --no-owner -h #{@@dev_db_host} -U #{@@dev_db_user} -d #{@@dev_db_name} #{@@dev_latest_file}"
+    cmd = "pg_restore --verbose --clean --no-acl --no-owner -h #{@db_host} -U #{@db_user} -d #{@db_name} #{@dev_latest_file}"
     begin
       system(cmd)
-      puts "Loaded the devlopment database from [#{@@dev_latest_file}]"
+      puts "Loaded the devlopment database from [#{@dev_latest_file}]"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end   
   end      
 ########################################################################################################################
-  # Production  
+# Production to Deveoepment Database Load
 ######################################################################################################################## 
   def prod_db2dev
     exit_unless_dev
@@ -62,7 +62,7 @@ class ProdDev
 ########################################################################################################################  
   def prod_db_backup
     exit_unless_dev
-    cmd = "ruby #{@@heroku_bin} pgbackups:capture"
+    cmd = "ruby #{@heroku_bin} pgbackups:capture"
     begin
       system(cmd)
       puts "Backing up the production database in heroku"
@@ -73,10 +73,10 @@ class ProdDev
 ########################################################################################################################    
   def prod_db_pull
     exit_unless_dev
-    cmd = "curl -o #{@@prod_latest_file} `ruby #{@@heroku_bin} pgbackups:url`"
+    cmd = "curl -o #{@prod_latest_file} `ruby #{@heroku_bin} pgbackups:url`"
     begin
       system(cmd)
-      puts "Pulled the production database from heroku to [#{@@prod_latest_file}]"
+      puts "Pulled the production database from heroku to [#{@prod_latest_file}]"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
@@ -84,10 +84,10 @@ class ProdDev
 ########################################################################################################################  
   def prod_db_load
     exit_unless_dev
-    cmd = "pg_restore --verbose --clean --no-acl --no-owner -h #{@@prod_db_host} -U #{@@prod_db_user} -d #{@@prod_db_name} #{@@prod_latest_file}"
+    cmd = "pg_restore --verbose --clean --no-acl --no-owner -h #{@db_host} -U #{@db_user} -d #{@db_name} #{@prod_latest_file}"
     begin
       system(cmd)
-      puts "Loaded the devlopment database from the [#{@@prod_latest_file}]"
+      puts "Loaded the devlopment database from the [#{@prod_latest_file}]"
     rescue
       puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end   
@@ -96,7 +96,7 @@ class ProdDev
   private
 ########################################################################################################################
   def exit_unless_dev
-    if Rails.env != 'development'
+    if Rails.env == 'production'
       puts '!! Will not run rake task in anything other than development mode. Quitting.'
       exit
     end
