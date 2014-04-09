@@ -3,7 +3,7 @@ require 'spec_helper'
 $LOAD_PATH << "#{Rails.root.to_s}/lib/tasks"
 require 'prod_dev'
 
-describe ProdDev do
+describe ProdDev, focus: true do
 
 	before(:each) do
 	  @pd = ProdDev.new
@@ -12,9 +12,9 @@ describe ProdDev do
 ################################################################################
   describe "Class Instantiation without Constructor Parameter:" do
     describe "#new" do
-        it "no parameters and returns a ProdDev object" do
-            @pd.should be_an_instance_of ProdDev
-        end
+      it "no parameters and returns a ProdDev object" do
+        @pd.should be_an_instance_of ProdDev
+      end
     end  
   end
 ################################################################################  	
