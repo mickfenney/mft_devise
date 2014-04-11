@@ -7,6 +7,9 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'fileutils'
+$LOAD_PATH << "#{Rails.root.to_s}/lib/tasks"
+require 'application_environment_utility'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

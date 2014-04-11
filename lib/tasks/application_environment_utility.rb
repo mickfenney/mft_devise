@@ -1,20 +1,27 @@
 require 'fileutils'
 
-class ProdDev
+class ApplicationEnvironmentUtility
 
   def initialize
-    @db_name          = 'mft-devise-dev'
-    @db_user          = 'action'
-    @db_host          = 'localhost'
-    @heroku_bin       = `which heroku`.chomp
-    @dev_latest_file  = "#{Rails.root.to_s}/tmp/latest_dev.dump"
-    @prod_latest_file = "#{Rails.root.to_s}/tmp/latest_heroku.dump"
+    if Rails.env == 'development'
+      @db_name          = 'mft-devise-dev'
+      @dev_latest_file  = "#{Rails.root.to_s}/tmp/latest_dev.dump"
+      @prod_latest_file = "#{Rails.root.to_s}/tmp/latest_heroku.dump"      
+    end
+    if Rails.env == 'test'
+      @db_name          = 'mft-devise-test'
+      @dev_latest_file  = "#{Rails.root.to_s}/tmp/latest_test.dump"
+      @prod_latest_file = "#{Rails.root.to_s}/tmp/latest_heroku_test.dump"      
+    end    
+    @db_user    = 'action'
+    @db_host    = 'localhost'
+    @heroku_bin = `which heroku`.chomp
   end 
 ########################################################################################################################
 # Development Tasks
 ########################################################################################################################  
   def app_rebuild
-    exit_unless_dev
+    exit_unless_test_dev
     Rake::Task['db:drop'].execute
     Rake::Task['db:create'].execute
     Rake::Task['db:migrate'].execute
@@ -24,78 +31,80 @@ class ProdDev
   end  
 ########################################################################################################################  
   def test_rebuild
-    exit_unless_dev
+    exit_unless_test_dev
     Rake::Task['db:test:prepare'].execute
     clean_dirs ['spec/vcr_cassettes']
   end  
 ########################################################################################################################   
   def dev_db_backup
-    exit_unless_dev
+    exit_unless_test_dev
     cmd = "pg_dump -Fc --no-acl --no-owner -h #{@db_host} -U #{@db_user} #{@db_name} > #{@dev_latest_file}"
     begin
-      system(cmd)
       puts "Backing up the development database [#{@db_name}] to [#{@dev_latest_file}]"
+      system(cmd)
     rescue
-      puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
+      fail "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
   end 
 ########################################################################################################################  
   def dev_db_load
-    exit_unless_dev
+    exit_unless_test_dev
+    raise "PG dump file does not exist: #{@dev_latest_file}, do you need to 'rake dev:db:backup ' first?" unless File.exist?(@dev_latest_file)
     cmd = "pg_restore --verbose --clean --no-acl --no-owner -h #{@db_host} -U #{@db_user} -d #{@db_name} #{@dev_latest_file}"
     begin
       system(cmd)
       puts "Loaded the devlopment database from [#{@dev_latest_file}]"
     rescue
-      puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
+      fail "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end   
   end      
 ########################################################################################################################
 # Production to Deveoepment Database Load
 ######################################################################################################################## 
   def prod_db2dev
-    exit_unless_dev
+    exit_unless_test_dev
     prod_db_backup
     prod_db_pull
     prod_db_load
   end 
 ########################################################################################################################  
   def prod_db_backup
-    exit_unless_dev
+    exit_unless_test_dev
     cmd = "ruby #{@heroku_bin} pgbackups:capture"
     begin
+      puts "Backing up the production database on heroku"
       system(cmd)
-      puts "Backing up the production database in heroku"
     rescue
-      puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
+      fail "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
   end
 ########################################################################################################################    
   def prod_db_pull
-    exit_unless_dev
+    exit_unless_test_dev
     cmd = "curl -o #{@prod_latest_file} `ruby #{@heroku_bin} pgbackups:url`"
     begin
       system(cmd)
       puts "Pulled the production database from heroku to [#{@prod_latest_file}]"
     rescue
-      puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
+      fail "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end
   end   
 ########################################################################################################################  
   def prod_db_load
-    exit_unless_dev
+    exit_unless_test_dev
+    raise "PG dump file does not exist: #{@prod_latest_file}, do you need to 'rake prod:db:pull ' first?" unless File.exist?(@prod_latest_file)
     cmd = "pg_restore --verbose --clean --no-acl --no-owner -h #{@db_host} -U #{@db_user} -d #{@db_name} #{@prod_latest_file}"
     begin
-      system(cmd)
+     system(cmd)
       puts "Loaded the devlopment database from the [#{@prod_latest_file}]"
     rescue
-      puts "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
+      fail "Failed to execute system command: #{cmd}\nCause: #{$!.message}"
     end   
   end 
 ########################################################################################################################
   private
 ########################################################################################################################
-  def exit_unless_dev
+  def exit_unless_test_dev
     if Rails.env == 'production'
       puts '!! Will not run rake task in anything other than development mode. Quitting.'
       exit
