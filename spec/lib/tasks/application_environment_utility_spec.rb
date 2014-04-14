@@ -1,15 +1,33 @@
 require 'spec_helper'
 
-describe ApplicationEnvironmentUtility, :slow do
+describe ApplicationEnvironmentUtility do
 
 	before(:all) do
+    system('rake db:create RAILS_ENV=testrake')
+    ActiveRecord::Base.establish_connection(
+      :adapter  => "postgresql",
+      :host     => "127.0.0.1",
+      :username => "action",
+      :database => "mft-devise-testrake"
+    )
     @aeu = ApplicationEnvironmentUtility.new
     @dev_latest_file  = "#{Rails.root.to_s}/tmp/latest_test.dump"
     @prod_latest_file = "#{Rails.root.to_s}/tmp/latest_heroku_test.dump"
 	end
   
   after(:all) do
-    system('rake db:test:prepare')
+    if File.exist?(@dev_latest_file)
+      FileUtils.remove_file(@dev_latest_file, :force => true)
+    end
+    if File.exist?(@prod_latest_file)
+      FileUtils.remove_file(@prod_latest_file, :force => true)
+    end
+    ActiveRecord::Base.establish_connection(
+      :adapter  => "postgresql",
+      :host     => "127.0.0.1",
+      :username => "action",
+      :database => "mft-devise-test"
+    )
   end  
   
 ################################################################################

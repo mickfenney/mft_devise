@@ -41,6 +41,24 @@ test:
   # database: db/test.sqlite3
   # pool: 5
   # timeout: 5000
+  
+testrake:
+  # adapter: mysql2
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: mft-devise-testrake
+  pool: 5
+  # username: root
+  username: action
+  password: 
+  host: 127.0.0.1
+  timeout: 5000
+
+  # adapter: sqlite3
+  # database: db/testrake.sqlite3
+  # pool: 5
+  # timeout: 5000  
 
 production:
   adapter: postgresql
