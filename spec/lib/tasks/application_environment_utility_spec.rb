@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApplicationEnvironmentUtility do
+describe ApplicationEnvironmentUtility, :slow do
 
 	before(:all) do
     system('rake db:create RAILS_ENV=testrake')
