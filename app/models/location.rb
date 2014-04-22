@@ -6,8 +6,8 @@
 #  name           :string(255)
 #  address        :string(255)
 #  is_map         :boolean          default(TRUE)
-#  latitude       :float
-#  longitude      :float
+#  latitude       :decimal(20, 15)
+#  longitude      :decimal(20, 15)
 #  locatable_id   :integer
 #  locatable_type :string(255)
 #  created_at     :datetime         not null
