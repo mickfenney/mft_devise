@@ -72,7 +72,7 @@ class ApplicationEnvironmentUtility
 ########################################################################################################################  
   def prod_db_backup
     exit_if_production
-    cmd = "ruby #{@heroku_bin} pgbackups:capture"
+    cmd = "ruby #{@heroku_bin} pgbackups:capture --app mft-asoftware"
     begin
       puts "Backing up the production database on heroku"
       system(cmd)
@@ -83,7 +83,7 @@ class ApplicationEnvironmentUtility
 ########################################################################################################################    
   def prod_db_pull
     exit_if_production
-    cmd = "curl -o #{@prod_latest_file} `ruby #{@heroku_bin} pgbackups:url`"
+    cmd = "curl -o #{@prod_latest_file} `ruby #{@heroku_bin} pgbackups:url --app mft-asoftware`"
     begin
       system(cmd)
       puts "Pulled the production database from heroku to [#{@prod_latest_file}]"
