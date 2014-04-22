@@ -54,7 +54,7 @@ end
 group :test, :development do
   #gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'wdm', :require => false unless RUBY_PLATFORM =~ /darwin/i
-  gem 'ruby_gntp' if RUBY_PLATFORM =~ /mingw/i
+  gem 'ruby_gntp'
   gem 'faker'
 end
 

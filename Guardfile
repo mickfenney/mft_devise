@@ -34,8 +34,8 @@ guard :rspec, cmd: 'rspec --color --format nested ', all_on_start: false, all_af
 
 end
 
-unless RUBY_PLATFORM =~ /mingw/i
-  if `hostname` =~ /asus/i
-     notification :libnotify, :timeout => 4, :transient => false, :append => true
-  end
-end
+#unless RUBY_PLATFORM =~ /mingw/i
+#  if `hostname` =~ /asus/i
+#     notification :libnotify, :timeout => 4, :transient => false, :append => true
+#  end
+#end
