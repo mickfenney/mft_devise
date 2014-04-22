@@ -54,7 +54,7 @@ describe DocumentType do
     end          
 
     it 'should reject a description that is too long' do
-      dt = FactoryGirl.build(:document_type, :description => Array.new(256, "a").join)
+      dt = FactoryGirl.build(:document_type, :description => Array.new(2001, "a").join)
       dt.should_not be_valid
     end
 

@@ -22,7 +22,7 @@ class DocumentType < ActiveRecord::Base
 
   validates_uniqueness_of :name
   validates_length_of :name, :maximum => 255
-  validates_length_of :description, :maximum => 255
+  validates_length_of :description, :maximum => 2000
 
   def self.to_csv
     CSV.generate do |csv|
