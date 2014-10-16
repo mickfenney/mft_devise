@@ -12,7 +12,7 @@ APPPATH="$HOME/workspace/$APPNAME"
 # Make sure you set up your ssh key in github
 GIT_REPO="git@github.com:mick-asoftware/$APPNAME.git"
 RUBY_V1="ruby-2.1.0"
-RUBY_V2="ruby-2.0.0-p247"
+RUBY_V2="ruby-2.1.1-p76"
 
 echo "+ Starting the Nitrous Setup for $APPNAME"
 
