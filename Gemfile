@@ -5,7 +5,7 @@ unless RUBY_PLATFORM =~ /mingw/i
   gem 'pg'
   gem 'unicorn'
   #gem 'therubyracer'
-  gem "rmagick"
+  gem "rmagick", require: false
 else
   gem 'mysql2', '0.3.11'
   gem "thin", ">= 1.5.1"
